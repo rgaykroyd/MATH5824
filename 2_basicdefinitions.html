@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./3_interpolating.html" rel="next">
 <link href="./1_introduction.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -113,6 +114,11 @@ ul.task-list li input[type="checkbox"] {
   <a href="./2_basicdefinitions.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_interpolating.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -123,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#basic-definitions" id="toc-basic-definitions" class="nav-link active" data-scroll-target="#basic-definitions"><span class="toc-section-number">2.1</span>  Basic definitions</a></li>
-  <li><a href="#sec-exercises1" id="toc-sec-exercises1" class="nav-link" data-scroll-target="#sec-exercises1"><span class="toc-section-number">2.2</span>  Exercises</a></li>
+  <li><a href="#sec-exercises2" id="toc-sec-exercises2" class="nav-link" data-scroll-target="#sec-exercises2"><span class="toc-section-number">2.2</span>  Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -132,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></h1>
+<h1 class="title"><span id="sec-basicdefinitions" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></h1>
 </div>
 
 
@@ -219,13 +225,26 @@ t_m \le t &lt; t_{m+1}
 <p>These degrees of freedom provide the necessary flexibility in the spline.</p>
 <p>Note that <span class="math inline">\(f\)</span> is infinitely differentiable everywhere, except at the knots where it is <span class="math inline">\(p-1\)</span> times differentiable. In particular, for <span class="math inline">\(p=1\)</span>, <span class="math inline">\(f\)</span> is a linear spline comprising linear pieces constrained to be continuous at the knots, although the slope of <span class="math inline">\(f\)</span> is discontinuous at the knots. Also, for <span class="math inline">\(p=3\)</span>, <span class="math inline">\(f\)</span> is a cubic spline comprising cubic polynomial pieces continuous at the knots; where the first and second derivatives of <span class="math inline">\(f\)</span> are also continuous, but the third derivative is discontinuous at the knots.</p>
 </section>
-<section id="sec-exercises1" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="sec-exercises1"><span class="header-section-number">2.2</span> Exercises</h2>
+<section id="sec-exercises2" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-exercises2"><span class="header-section-number">2.2</span> Exercises</h2>
 <div class="exercises">
 <p>2.1 Why is it not sensible to define a smooth function made-up of constant components? Similarly, why is not sensible to create a differentiable function from linear splines?</p>
 <p>2.2 In the situation illustrated in <a href="#fig-piecewise-cubic-2">Figure&nbsp;<span>2.2 (b)</span></a>, where <span class="math inline">\(p=3\)</span> and <span class="math inline">\(m=2\)</span>, clearly identify the <span class="math inline">\((p+1)\times (m+1)=12\)</span> model parameters and the <span class="math inline">\(pm=6\)</span> smoothness constraints in terms of the cubic polynomials and their derivatives.</p>
 <p>2.3 Further consider the situation illustrated in <a href="#fig-piecewise-cubic-2">Figure&nbsp;<span>2.2 (b)</span></a>. Suppose now that we require the splines to pass through specified coordinates <span class="math inline">\((t_1, f(t_1))\)</span> and <span class="math inline">\((t_2, f(t_2))\)</span>. What is the degrees of freedom for this model? How many such cubic splines would satisfy these constraints? Discuss potential additional constraints which would lead to a unique fitted model. Do you think having a unique solution is a positive or negative property?</p>
 <p>2.4 For a general problem, what would be the effect of requiring additional constraints of the form of <a href="#eq-smoothcons">Equation&nbsp;<span>2.2</span></a> but with <span class="math inline">\(\ell = p\)</span>? Would this lead to an acceptable fitted cubic spline model? Justify your answer.</p>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://rgaykroyd.github.io/MATH5824/Exercises/Exercises_2.2.html">Exercise 2.2 Solutions can be found here.</a></p>
+</div>
 </div>
 
 
@@ -372,6 +391,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./3_interpolating.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
