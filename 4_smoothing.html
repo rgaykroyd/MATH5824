@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Robert G Aykroyd">
-<meta name="dcterms.date" content="2023-02-23">
 
-<title>MATH5824 Generalized Linear and Additive Models</title>
+<title>MATH5824 Generalized Linear and Additive Models - 4&nbsp; Smoothing Splines</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./0_preface.html" rel="next">
+<link href="./3_interpolating.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -72,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">MATH5824 Generalized Linear and Additive Models</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -97,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Weekly schedule</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Weekly schedule</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -122,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></a>
+  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></a>
   </div>
 </li>
     </ul>
@@ -134,7 +132,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#weekly-schedule" id="toc-weekly-schedule" class="nav-link active" data-scroll-target="#weekly-schedule">Weekly schedule</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">4.1</span>  Overview</a></li>
+  <li><a href="#the-penalized-least-squares-criterion" id="toc-the-penalized-least-squares-criterion" class="nav-link" data-scroll-target="#the-penalized-least-squares-criterion"><span class="toc-section-number">4.2</span>  The penalized least-squares criterion</a></li>
   </ul>
 </nav>
     </div>
@@ -143,26 +142,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">MATH5824 Generalized Linear and Additive Models</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Robert G Aykroyd </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">February 23, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -175,105 +162,88 @@ ul.task-list li input[type="checkbox"] {
 \def\b#1{\mathbf{#1}}
 \]</span></p>
 </div>
-<section id="weekly-schedule" class="level1 unnumbered">
-<h1 class="unnumbered">Weekly schedule</h1>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Week 4 (20 - 24 February)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Before next Lecture:</strong> Be confident with all material up to, and including, <em>Section 3.4 Moments of exponential-family distributions</em>.<br>
-</li>
-<li><strong>Lecture on Tuesday:</strong> <em>Chapter 3: Sections 3.5 &amp; 3.6</em></li>
-<li><strong>Lecture on Thursday:</strong> Start Chapter 4 by covering <em>Section 4.1</em>.</li>
-<li><strong>Lecture on Friday:</strong> Finish MATH5824 <em>Chapter 4: Interpolating Splines</em>, and then start MATH5824 <em>Chapter 4: Smoothing Splines</em> by looking at <em>Sections 4.1 &amp; 4.2</em>.</li>
-<li><strong>Weekly feedback:</strong> Complete Exercises in MATH3823 <em>Chapter 3</em>.</li>
-</ul>
-</div>
-</div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Week 3 (13 - 17 February)
+<section id="overview" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> Overview</h2>
+<p>In <a href="1_introduction.html#sec-genmodelling"><span>Section&nbsp;1.2</span></a> we described a general statistical model with a response variable <span class="math inline">\(y\)</span> and an explanatory variable <span class="math inline">\(x\)</span>. We observe <span class="math inline">\(y_i\)</span> at each location <span class="math inline">\(x_i,\)</span> for <span class="math inline">\(i=1,\ldots, n\)</span>. We imagined that the <span class="math inline">\(y\)</span>’s are noisy versions of a smooth function of <span class="math inline">\(x\)</span>, say <span class="math inline">\(f(\cdot)\)</span> where the errors follow a normal distribution with constant variance. That is <span class="math display">\[
+y_i = f(t_i) + \epsilon_i, \quad
+\epsilon_i \sim \mathrm{N}(0,\sigma^2),
+\]</span> for <span class="math inline">\(i=1,\ldots,n\)</span>, where <span class="math inline">\(f\)</span> is smooth, the <span class="math inline">\(\epsilon_i\)</span> are i.i.d., and <span class="math inline">\(f\)</span> and <span class="math inline">\(\sigma^2\)</span> are unknown.<br>
+The log-likelihood for this situation is: <span id="eq-loglik"><span class="math display">\[
+l(f; \mathbf{y})
+= -\frac{1}{2\sigma^2} \sum_{i=1}^n \left(y_i - f(t_i)\right)^2 - n \log \sigma
+\tag{4.1}\]</span></span> and we wish to estimate <span class="math inline">\(f\)</span> for a given data set <span class="math inline">\(\mathbf{y}=\{y_1,\dots, y_n\}\)</span>. With no constraints on <span class="math inline">\(f\)</span>, the log-likelihood would be maximized by setting <span class="math inline">\(f(t_i)=y_i\)</span> for all <span class="math inline">\(i\)</span>, and we would estimate the noise variance as <span class="math inline">\(\hat{\sigma}^2=0\)</span>. This takes no account of randomness in the data and <span class="math inline">\(f\)</span> would in general need to be quite wiggly to achieve this fit.</p>
+<p><a href="#fig-interpsmooth-1">Figure&nbsp;<span>4.1 (a)</span></a> shows such an interpolation of noisy data. This would be of little use for explanation, interpolation or prediction.</p>
+<div id="fig-interpsmooth" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-interpsmooth-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="4_smoothing_files/figure-html/fig-interpsmooth-1.png" class="img-fluid figure-img" data-ref-parent="fig-interpsmooth" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) Interpolating spline</figcaption><p></p>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Before next Lecture:</strong> Be confident with material in MATH3823 <em>Chapter 2: Essentials of Normal Linear Models</em>.</li>
-<li><strong>Lecture on Tuesday:</strong> Cancelled due to UCU strike. Instead, self-study MATH3823 <em>Chapter 3: Sections 3.1 &amp; 3.2</em>.</li>
-<li><strong>Lecture on Thursday:</strong> Cancelled due to UCU strike. Instead, self-study MATH3823 <em>Chapter 3: Sections 3.3 &amp; 3.4</em>.</li>
-<li><strong>Before next Lecture:</strong> Be confident with material in MATH3823 <em>Chapter 2: Essentials of Normal Linear Models</em> and MATH5824 <em>Chapter 2: Introducing Splines</em> (this Chapter is self-study only).</li>
-<li><strong>Lecture on Friday:</strong> We will then start <em>MATH5824 Chapter 3: Interpolating Splines</em>.</li>
-<li><strong>Weekly feedback:</strong> Complete and check solutions (including videos) for all Exercises so far and re-read lecture notes corresponding to Friday’s lecture.</li>
-</ul>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-interpsmooth-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="4_smoothing_files/figure-html/fig-interpsmooth-2.png" class="img-fluid figure-img" data-ref-parent="fig-interpsmooth" width="672"></p>
+<p></p><figcaption class="figure-caption">(b) Smoothing spline</figcaption><p></p>
+</figure>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Week 2 (6 - 10 February)
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Comparison of interpolating and smoothing methods applied to a noisy dat set.</figcaption><p></p>
+</figure>
 </div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Before next Lecture:</strong> Please re-read MATH3823 <em>Section 2.1: Overview</em> and read MATH3823 <em>Section 2.2: Types of normal linear model</em>.</li>
-<li><strong>Lecture on Tuesday:</strong> We will briefly cover all remaining material in MATH3823 <em>Chapter 2: Essentials of Normal Linear Models</em>.</li>
-<li><strong>Lecture on Thursday:</strong> Cancelled due to UCU strike.</li>
-<li><strong>Lecture on Friday:</strong> Cancelled due to UCU strike.</li>
-<li><strong>Before next Lecture:</strong> Please re-read MATH3823 <em>Chapter 2</em> carefully.</li>
-<li><strong>Before next Lecture:</strong> Please self-study MATH5824 <em>Chapter 2: Introducing Splines</em>.</li>
-<li><strong>Weekly feedback:</strong> Self-study the Exercises in MATH3823 <em>Section 2.6</em> and MATH5824 <em>Section 2.2</em> – solutions to be posted by the end of Week 3.</li>
-</ul>
-</div>
-</div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Week 1 (30 January - 3 February)
+<p>We do not expect, or even want, the fitted function <span class="math inline">\(f\)</span> to pass exactly through the data points <span class="math inline">\(\{(t_i,y_i)\}\)</span>, but merely to lie close to them. We would rather trade-off goodness-of-fit against smoothness of <span class="math inline">\(f\)</span>. <a href="#fig-interpsmooth-2">Figure&nbsp;<span>4.1 (b)</span></a> shows a smoothing spline fit to the same data. This is much better as there is a clear explanation of the relationship, it could be used reasonably well for interpolation and prediction.</p>
+</section>
+<section id="the-penalized-least-squares-criterion" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="the-penalized-least-squares-criterion"><span class="header-section-number">4.2</span> The penalized least-squares criterion</h2>
+<p>Noting that maximizing <a href="#eq-loglik">Equation&nbsp;<span>4.1</span></a> is equivalent to minimizing the residual sum of squares: <span class="math inline">\(\sum_{i=1}^n \left(y_i - f(t_i)\right)^2\)</span>, we can achieve this trade-off by minimizing a <em>penalized</em> sum of squared residuals: <span id="eq-Rlambdaf"><span class="math display">\[
+R_\nu(f,\lambda) = \sum_{i=1}^n \left(y_i - f(t_i)\right)^2 + \lambda J_\nu(f),
+\tag{4.2}\]</span></span> where <span class="math inline">\(J_\nu(f)\)</span>, as first defined in <a href="3_interpolating.html#eq-Jnuf">Equation&nbsp;<span>3.8</span></a>, penalizes the roughness of <span class="math inline">\(f\)</span>. The <em>smoothing parameter</em> <span class="math inline">\(\lambda\geq 0\)</span> controls the severity of this penalty. For now we will assume <span class="math inline">\(\lambda\)</span>, which absorbs the <span class="math inline">\(\sigma^2\)</span> in <a href="#eq-loglik">Equation&nbsp;<span>4.1</span></a>, is known.</p>
+<p><a href="#fig-smoothlambda">Figure&nbsp;<span>4.2</span></a> shows example smoothing spline fits using a range of smoothing parameters, <span class="math inline">\(\lambda\)</span>. In <a href="#fig-smoothlambda-1">Figure&nbsp;<span>4.2 (a)</span></a> the fit is essentially a straight line, perhaps <a href="#fig-smoothlambda-2">Figure&nbsp;<span>4.2 (b)</span></a> and <a href="#fig-smoothlambda-3">Figure&nbsp;<span>4.2 (c)</span></a> show acceptable fits. <a href="#fig-smoothlambda-4">Figure&nbsp;<span>4.2 (d)</span></a>, with a very small <span class="math inline">\(\lambda\)</span> value is close to an interpolating spline fit and is clearly unacceptable.</p>
+<div id="fig-smoothlambda" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-smoothlambda-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="4_smoothing_files/figure-html/fig-smoothlambda-1.png" class="img-fluid figure-img" data-ref-parent="fig-smoothlambda" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) Very strong smoothing</figcaption><p></p>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Before next Lecture:</strong> Please read MATH3823 <em>Overview</em>.</li>
-<li><strong>Lecture on Tuesday:</strong> We will briefly cover all material in MATH3823 <em>Chapter 1: Introduction</em>.</li>
-<li><strong>Before next Lecture:</strong> Please re-read MATH3823 <em>Chapter 1</em> carefully.</li>
-<li><strong>Lecture on Thursday:</strong> Start MATH3823 <em>Chapter 2: Essentials of Normal Linear Models</em> with <em>Section 2.1: Overview</em>.</li>
-<li><strong>Before next Lecture:</strong> Please read MATH5824 <em>Overview</em>.</li>
-<li><strong>Lecture on Friday:</strong> Start MATH5824 by briefly considering <em>Chapter 1: Introduction to Non-parametric Modelling</em>.</li>
-<li><strong>Weekly feedback:</strong> Self-study the Exercises in MATH3823 <em>Section 1.5</em> – solutions to be posted during Week 1.</li>
-</ul>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-smoothlambda-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="4_smoothing_files/figure-html/fig-smoothlambda-2.png" class="img-fluid figure-img" data-ref-parent="fig-smoothlambda" width="672"></p>
+<p></p><figcaption class="figure-caption">(b) Moderate smoothing</figcaption><p></p>
+</figure>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Coursework Practical Sessions (20 - 24 March)
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-smoothlambda-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="4_smoothing_files/figure-html/fig-smoothlambda-3.png" class="img-fluid figure-img" data-ref-parent="fig-smoothlambda" width="672"></p>
+<p></p><figcaption class="figure-caption">(c) Weak smoothing</figcaption><p></p>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<ul>
-<li>Coursework for this module involves a single written report worth 20% of the module grade. This will mainly involve investigating different models using R and interpreting the results.</li>
-<li>Tasks are expected to be handed out before 16 March with hand-in deadline expect to be after 28 March. Further details to follow in early March.</li>
-</ul>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-smoothlambda-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="4_smoothing_files/figure-html/fig-smoothlambda-4.png" class="img-fluid figure-img" data-ref-parent="fig-smoothlambda" width="672"></p>
+<p></p><figcaption class="figure-caption">(d) Very weak smoothing</figcaption><p></p>
+</figure>
 </div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Comparison of interpolating and smoothing methods applied to a noisy dat set.</figcaption><p></p>
+</figure>
 </div>
 
 
@@ -415,11 +385,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./3_interpolating.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./0_preface.html" class="pagination-link">
-        <span class="nav-page-text">Overview</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
