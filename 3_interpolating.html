@@ -199,8 +199,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">3.1</span>  Overview</a></li>
   <li><a href="#natural-splines" id="toc-natural-splines" class="nav-link" data-scroll-target="#natural-splines"><span class="toc-section-number">3.2</span>  Natural splines</a></li>
   <li><a href="#properties-of-natural-splines" id="toc-properties-of-natural-splines" class="nav-link" data-scroll-target="#properties-of-natural-splines"><span class="toc-section-number">3.3</span>  Properties of natural splines</a></li>
-  <li><a href="#roughness-penalties" id="toc-roughness-penalties" class="nav-link" data-scroll-target="#roughness-penalties"><span class="toc-section-number">3.4</span>  Roughness penalties</a></li>
+  <li><a href="#roughness-penalties" id="toc-roughness-penalties" class="nav-link" data-scroll-target="#roughness-penalties"><span class="toc-section-number">3.4</span>  Roughness penalties</a>
+  <ul class="collapse">
   <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments">Comments</a></li>
+  </ul></li>
   <li><a href="#fitting-interpolating-splines-in-r" id="toc-fitting-interpolating-splines-in-r" class="nav-link" data-scroll-target="#fitting-interpolating-splines-in-r"><span class="toc-section-number">3.5</span>  Fitting interpolating splines in R</a></li>
   <li><a href="#sec-exercises2" id="toc-sec-exercises2" class="nav-link" data-scroll-target="#sec-exercises2"><span class="toc-section-number">3.6</span>  Exercises</a></li>
   </ul>
@@ -324,9 +326,8 @@ J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 <p><span class="theorem-title"><strong>Proposition 3.2 </strong></span>The optimal interpolating function is a <span class="math inline">\(p\)</span>th-order natural spline, where <span class="math inline">\(p = 2ν − 1\)</span>. That is, the natural spline <span class="math inline">\(f\)</span> is the unique minimizer of <span class="math inline">\(J_\nu(f)\)</span>.</p>
 </div>
 <p><strong>Proof</strong>: Not covered here (but may be included later in the module if time allows).</p>
-</section>
-<section id="comments" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="comments">Comments</h2>
+<section id="comments" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="comments">Comments</h3>
 <ul>
 <li>Linear and cubic interpolating splines are also of interest in numerical analysis, for example to interpolate tables of numbers.</li>
 <li>The linear interpolating spline is simply the piecewise-linear path connecting the data points.</li>
@@ -334,6 +335,7 @@ J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 <li>But, in the cubic spline case, knots points are invisible to the naked eye. Hence, in general, there is little motivation to use higher-order splines.</li>
 <li>Numerical considerations: the interpolating spline solutions involve matrix inversion. The inversion of an <span class="math inline">\(n \times n\)</span> matrix involves <span class="math inline">\(O(n^3)\)</span> operations – hence it is time consuming if <span class="math inline">\(n\)</span> is large (for example, <span class="math inline">\(n=1000\)</span> or <span class="math inline">\(10000\)</span>). Fortunately there are tricks to reduce the computation to <span class="math inline">\(O(n)\)</span>.</li>
 </ul>
+</section>
 </section>
 <section id="fitting-interpolating-splines-in-r" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="fitting-interpolating-splines-in-r"><span class="header-section-number">3.5</span> Fitting interpolating splines in R</h2>
@@ -417,7 +419,13 @@ $y
 <section id="sec-exercises2" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-exercises2"><span class="header-section-number">3.6</span> Exercises</h2>
 <div class="exercises">
-<p>A few questions will be added later.</p>
+<p><strong>Further questions will be added later.</strong></p>
+<p>3.1 For the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1\)</span>, write-down the linear functions for the three intervals and clearly identify all the <span class="math inline">\(6\)</span> model parameters. Next, write down the constraints required to make the functions pass through the <span class="math inline">\(m=2\)</span> data points, and the two constraints which impose continuity of function. What additional constraints are needed to fix the first derivative at zero for the outer two intervals?</p>
+<p>3.2 Continuing the problem described in Exercise 3.1, write the constraints as a system of 6 linear equations in the 6 unknown model parameters. How might you solve this system to give the parameter values which solve the interpolation problem?</p>
+<p>3.3 Continuing the linear system described in Exercise 3.2, create a synthetic problem by choosing two data response values. Then solve the system in {R}, or otherwise, and plot the fitted spline interpolating function.</p>
+<p>3.4 Again, considering the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1\)</span>. Using the alternative representation in <a href="#eq-naturalSplineLinear">Equation&nbsp;<span>3.6</span></a>, write down two constraints involving the data points and the additional constraint on the <span class="math inline">\(b_i\)</span> parameters. Write this linear system of 3 equations in three unknowns in matrix form.</p>
+<p>3.5 Continuing the linear system described in Exercise 3.4, using the same points created in Exercise 3.4, calculate the parameter values in this new parameterization. Check that your two fitted interpolating spline give the same answers. Which approach do you prefer? Justify you answer.</p>
+<p>3.6 Create you own version of the R code used to produce <a href="#fig-spline-commands">Figure&nbsp;<span>3.3</span></a> and experiment with the two alternative spline fitting commands. Remove the <span class="math inline">\(\texttt{set.seed(15342)}\)</span> command so that you produce different data each time.</p>
 </div>
 
 
