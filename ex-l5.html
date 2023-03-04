@@ -12,7 +12,7 @@
 <meta name="author" content="Dr Stuart Barber" />
 
 
-<title>MATH3823 weekly exercises</title>
+<title>MATH5824 weekly exercises</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1505,9 +1505,9 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><strong>MATH3823 weekly exercises</strong></h1>
+<h1 class="title toc-ignore"><strong>MATH5824 weekly exercises</strong></h1>
 <h4 class="author">Dr Stuart Barber</h4>
-<h4 class="date">March 2022</h4>
+<h4 class="date">April 2022</h4>
 
 </div>
 
@@ -1516,194 +1516,41 @@ div.tocify {
 <div id="week-2" class="section level1">
 <h1>Week 2</h1>
 <ol style="list-style-type: decimal">
-<li><p>Verify that if <span class="math inline">\(q = 1/(1+e^{-x})\)</span> then <span class="math inline">\(x = \log(q/(1-q))\)</span>.</p></li>
-<li><p>For the birthweight data example in section 1.2:</p>
-<ul>
-<li><p>What obvious model have we not listed in the notes? Looking at the data plots in Figure 1.2, comment on whether you think this model is likely to be worth considering</p></li>
-<li><p>Test whether the <code>age * sex</code> interaction term is statistically significant for these data and comment on the resulting model.</p></li>
-</ul></li>
-</ol>
-</div>
-<div id="week-3" class="section level1">
-<h1>Week 3</h1>
-<ol start="3" style="list-style-type: decimal">
-<li><p>Express each of the following distributions as an exponential family distribution, possibly with a scale parameter. Use the properties of exponential families to find the expectation and variance of each distribution</p>
-<ul>
-<li><p>The geometric distribution with probability mass function <span class="math display">\[\begin{equation*}
-f(y) = (1 - p)^{y-1} p; \hspace{1cm} y = 1, 2, 3 \ldots
-\end{equation*}\]</span> where <span class="math inline">\(0 &lt; p &lt; 1\)</span>.</p></li>
-<li><p>The gamma distribution with probability density function <span class="math display">\[\begin{equation*}
-f(y) = \Gamma(\alpha)^{-1} \lambda^\alpha y^{\alpha-1} e^{- \lambda y}
-\hspace{1cm} y \geqslant 0,
-\end{equation*}\]</span> where <span class="math inline">\(\alpha, \lambda &gt; 0\)</span>. (Hint: Treat <span class="math inline">\(1/\alpha\)</span> as a scale parameter and let <span class="math inline">\(\theta\)</span> be a suitable function of <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\alpha\)</span>.)</p></li>
-</ul></li>
+<li>In section 2.1 of the notes, what are <span class="math inline">\(f^{(p)}(t_i-)\)</span> and <span class="math inline">\(f^{(p)}(t_i+)\)</span> in terms of the coefficients <span class="math inline">\(\{a_{ij}\}\)</span>? What would happen if we specified additional constraints <span class="math inline">\(f^{(p)}(t_i-) = f^{(p)}(t_i+)\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span>?</li>
 </ol>
 </div>
 <div id="week-4" class="section level1">
 <h1>Week 4</h1>
-<ol start="4" style="list-style-type: decimal">
-<li>Find the canonical link functions for the geometric and gamma distributions.</li>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Give a self-contained definition of a natural spline.</p></li>
+<li><p>Let <span class="math display">\[\begin{equation*}
+  f(t) = 3 + 2t + 4|t|^3 + |t-1|^3.
+\end{equation*}\]</span> Write <span class="math inline">\(f\)</span> as a cubic polynomial in each of the intervals <span class="math inline">\((-\infty,0)\)</span>, <span class="math inline">\((0,1)\)</span> and <span class="math inline">\((1, \infty)\)</span>. Verify that <span class="math inline">\(f\)</span> and its first two derivatives are continuous at the knots.</p>
+<p>Is <span class="math inline">\(f\)</span> a spline? Is <span class="math inline">\(f\)</span> a natural spline?</p></li>
+<li><p>Let <span class="math display">\[\begin{equation*}
+  f(t) = 3 + |t| - |t-2|.
+\end{equation*}\]</span></p>
+<p>Show by direct calculation that <span class="math display">\[\begin{equation*}
+  \int_{-\infty}^{\infty} \{f&#39;(t)\}^2 \, dt = 8.
+\end{equation*}\]</span></p>
+<p>Show that this integral can also be written in the form <span class="math inline">\(-2 \mathbf b^T K \mathbf b\)</span>, where you should define <span class="math inline">\(\mathbf b\)</span> and <span class="math inline">\(K\)</span>.</p></li>
 </ol>
 </div>
 <div id="week-5" class="section level1">
 <h1>Week 5</h1>
 <ol start="5" style="list-style-type: decimal">
-<li><p>Check that you can derive the formulae given for deviance of normal, binomial, and Poisson models just after equation (2.63) in the lecture notes.</p></li>
-<li><p>(After reading section 2.6 of the notes) Go back to the birthweight example and consider how the deviance tests from section 2.6 relate to the tests we used to choose which model was the best fit to the data.</p></li>
-</ol>
-</div>
-<div id="week-6" class="section level1">
-<h1>Week 6</h1>
-<ol start="7" style="list-style-type: decimal">
-<li><p>Complete the exercises in the <em>R</em> script from lecture 4:</p>
-<ul>
-<li><p>Check the two different ways of fitting a Poisson GLM to the toy data give the same result;</p></li>
-<li><p>Check whether a smaller model is adequate for the carbohydrate uptake in diabetes data set;</p></li>
-<li><p>Fit alternative link functions to the beetle data and plot the results.</p></li>
-</ul></li>
-<li><p>Use the fitted logisitic regression model to predict what dose of gaseous carbon disulphide would kill 90% of beetles.</p></li>
+<li><p>Check that equation (28) in the notes can recover the coefficients of the linear spline in the <span class="math inline">\(R\)</span> script from lecture 2. That is, if a natural linear spline <span class="math inline">\(f(t)\)</span> takes values <span class="math inline">\(4, -1, 1\)</span> at knots <span class="math inline">\(1, 2, 3\)</span>, show that <span class="math inline">\(f(t) = 2.5 - 2.5 |t - 1| + 3.5 |t - 2| - |t - 3|\)</span>.</p></li>
+<li><p>(Harder: Use <span class="math inline">\(R\)</span> try to find natural linear and cubic splines which interpolate the beetle data.)</p></li>
 </ol>
 </div>
 <div id="week-8" class="section level1">
 <h1>Week 8</h1>
-<ol start="9" style="list-style-type: decimal">
-<li><p>Analyse the colon cancer data available in Minerva. Specifically, use a logistic regression model to investigate whether the genetic mutation and/or the environmental exposure affect the incidence of colon cancer.</p>
-<p><em>R</em> hints:</p>
-<ul>
-<li><p>encode ‘agecat’ as a factor, as shown in the `data’ folder on Minreva.</p></li>
-<li><p>Note that the response variable for a binomial glm in <em>R</em> can be a vector (not a matrix) in the special case of <span class="math inline">\(m=1\)</span>, so a formula of the form ‘case ~ ….’ will work for this data set.</p></li>
-</ul></li>
-</ol>
-</div>
-<div id="week-11" class="section level1">
-<h1>Week 11</h1>
-<ol start="10" style="list-style-type: decimal">
-<li><p>Overdispersion is an occasional problem when fitting generalised linear models with a known scale parameter in situations where there is unexplained variation. In this exercise we illustrate the problem in Poisson regression. The starting point is the observation that if <span class="math inline">\(Y \sim P(\lambda)\)</span>, then <span class="math inline">\(E(Y) = \lambda\)</span> and <span class="math inline">\(\operatorname{var}(Y) = \lambda\)</span>.</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>Consider joint random variables <span class="math inline">\((X,Y)\)</span> where <span class="math inline">\(X\)</span> takes two possible values with equal probabilities, <span class="math inline">\(\Pr(X=1) = \Pr(X=2) = 1/2\)</span>. Suppose the conditional distribution of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> is Poisson, <span class="math display">\[\begin{equation*} \label{eq:pmix}
-Y|X=1 \sim P(\lambda_1), \quad Y|X=2 \sim P(\lambda_2), \quad \quad \quad (*)
-\end{equation*}\]</span> where <span class="math inline">\(\lambda_1 &lt; \lambda_2\)</span>. Let <span class="math inline">\(\lambda = (\lambda_1 + \lambda_2)/2\)</span> denote the average value. Thus the marginal distribution of <span class="math inline">\(Y\)</span> is a mixture of two Poisson distributions. Show that <span class="math display">\[\begin{equation*}
-E(Y) = \lambda, \quad \operatorname{var}(Y) = \lambda + (\lambda_1 - \lambda_2)^2/4,
-\end{equation*}\]</span> that is, although the mean of <span class="math inline">\(Y\)</span> is the same under the mixture (or conditional Poisson) model as under the Poisson model, the variance is larger.</p></li>
-<li><p>This phenomenon might be observed in data as follows. Let <span class="math inline">\(n=60\)</span> and let an explanatory variable <span class="math inline">\(x_i\)</span> take the value <span class="math inline">\(x_i=1\)</span> for <span class="math inline">\(i=1, \ldots, 30\)</span> and <span class="math inline">\(x_i=2\)</span> for <span class="math inline">\(i=31, \ldots, 60\)</span>. Suppose that the observations <span class="math inline">\(y_i | x_i\)</span> come from the above conditional Poisson model <span class="math inline">\((*)\)</span>.</p>
-<p>Consider fitting the following two models in R with Poisson errors and a log link function: <span class="math display">\[\begin{equation*}
-\text{(i)} ~~ y \sim 1, \quad \quad \text{(ii)} ~~ y \sim x.
-\end{equation*}\]</span></p>
-<p>Since model (ii) is the correct model, it should yield a good fit to the data. But if the experimenter does not know about the variable <span class="math inline">\(x\)</span>, it will only be feasible to fit model (i). Let <span class="math inline">\(\overline{Y}\)</span> and <span class="math inline">\(S^2\)</span> denote the sample mean and variance of the <span class="math inline">\(\{Y_i\}, \ i=1,\ldots,60\)</span>. Show that <span class="math display">\[\begin{equation*}
-E(\overline{Y}) = \lambda, \quad E(S^2) = \lambda + 
-\frac{60}{59}(\lambda_1 - \lambda_2)^2/4.
-\end{equation*}\]</span></p>
-<p>Hence show that the <span class="math inline">\(\chi^2\)</span> goodness of fit statistic for model (i) will indicate a poorly fitting model if <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span> are far apart.</p></li>
-<li><p>This example is very simple, but overdispersion can occur much more widely. Why is overdisperson not a problem for genereralised linear models in which the response distribution includes a scale parameter?</p></li>
-</ol></li>
-<li><p>(Based on Dobson &amp; Barnett, pp 144–145). Suppose there are 2 groups of people: the first group is exposed to some pollutant and the second group is not. In a prospective study, each group is followed for several years and categorized according to the presence or absence of some disease. Let <span class="math inline">\(\pi_i\)</span> denote the probability that a person in group <span class="math inline">\(i\)</span> contracts the disease, <span class="math inline">\(i=1,2\)</span>. The following <span class="math inline">\(2 \times 2\)</span> table summarizes the different possibilites.</p>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>Diseased</th>
-<th>Not diseased</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Exposed</td>
-<td><span class="math inline">\(\pi_1\)</span></td>
-<td><span class="math inline">\(1-\pi_1\)</span></td>
-</tr>
-<tr class="even">
-<td>Not exposed</td>
-<td><span class="math inline">\(\pi_2\)</span></td>
-<td><span class="math inline">\(1-\pi_2\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>Note that the sum of each row is 1. For each <span class="math inline">\(i=1,2\)</span>, the  of contracting the disease is defined by <span class="math display">\[
-O_i = \pi_i/(1-\pi_i),
-\]</span> and a comparision between these two probabilities is given by the  <span class="math display">\[
-\phi = \frac{O_1}{O_2} = \frac{\pi_1(1-\pi_2)}{\pi_2(1-\pi_1)}.
-\]</span></p>
-<ol style="list-style-type: lower-alpha">
-<li><p>Show that <span class="math inline">\(\phi=1\)</span> if and only if there is no difference between the control and exposed groups. What does it mean if <span class="math inline">\(\phi &gt; 1\)</span>?</p></li>
-<li><p>Consider now <span class="math inline">\(m\)</span> <span class="math inline">\(2 \times 2\)</span> tables of this form, <span class="math inline">\(j=1,\ldots,m\)</span>, with probabilities <span class="math inline">\(\pi_{ij}\)</span> represented by a logistic model <span class="math display">\[
-\text{logit}(\pi_{ij}) = \alpha_i + \beta_i x_j, \ i=1,2,\
-j=1,\ldots,m,
-\]</span> where <span class="math inline">\(x_j\)</span> is some specified quantitative explanatory variable. Interpret the parameters <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(\beta_j\)</span>, and give their effect on the log odds ratio <span class="math inline">\(\log \phi_j\)</span>, say, for each table. Show that <span class="math inline">\(\log \phi_j\)</span> is constant across the <span class="math inline">\(m\)</span> tables if <span class="math inline">\(\beta_1 = \beta_2\)</span>.</p></li>
-<li><p>Give a practical example where such a model might be appropriate.</p></li>
-<li><p>How would you express this model in the R computer language?</p></li>
-</ol></li>
-<li><p>Consider a <span class="math inline">\(2 \times m\)</span> contingency table with entries <span class="math inline">\(y_{ij}, \ i=1,2,\ j=1,\ldots,m\)</span>. The rows label STATUS ( = 1,2 for alive/dead) and the columns label AGE groups ( = 1,,m). Consider a Poisson model <span class="math inline">\(P(\lambda_{ij})\)</span> with <span class="math display">\[
-\log(\lambda_{ij}) = \delta + \alpha_i+ \beta_j + \gamma_i j
-\]</span> and discuss suitable aliasing conditions on the parameters (note that <span class="math inline">\(j\)</span> is treated as a quantitative variable in the last term). Show that this model, conditioned on the column totals <span class="math inline">\(y_{+j}\)</span>, reduces to a product binomial model <span class="math inline">\(B(y_{+j},\pi_j), \ j=1,\ldots,m\)</span>, and find the form of <span class="math inline">\(\pi_j\)</span>. Which parameters are estimable under the binomial model.</p></li>
-<li><p>(From Dobson &amp; Barnett, p 163) This question should be done in a computer package such as R. You should think carefully about which variables, if any, to condition on in your analysis: HOME = 1,2,3, CONTACT = 1,2, or SATISFACTION = 1,2,3.</p>
-<p>The data relate to an investigation into satisfaction with housing conditions in Copenhagen. Residents of selected areas living in rented houses built between 1960 and 1968 were questioned about their satisfaction and their degree of contact with other residents. The data were tabulated by type of housing. Investigate the associations between satisfaction, contact with other residents and type of housing.</p>
-<p></p>
-<table>
-<thead>
-<tr class="header">
-<th>Satisfaction:</th>
-<th>Low</th>
-<th>Medium</th>
-<th>High</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Tower blocks</td>
-<td>65</td>
-<td>54</td>
-<td>100</td>
-</tr>
-<tr class="even">
-<td>Apartments</td>
-<td>130</td>
-<td>76</td>
-<td>111</td>
-</tr>
-<tr class="odd">
-<td>Houses</td>
-<td>67</td>
-<td>48</td>
-<td>62</td>
-</tr>
-</tbody>
-</table>
-<p></p>
-<table>
-<thead>
-<tr class="header">
-<th>Satisfaction:</th>
-<th>Low</th>
-<th>Medium</th>
-<th>High</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Tower blocks</td>
-<td>34</td>
-<td>47</td>
-<td>100</td>
-</tr>
-<tr class="even">
-<td>Apartments</td>
-<td>141</td>
-<td>116</td>
-<td>191</td>
-</tr>
-<tr class="odd">
-<td>Houses</td>
-<td>130</td>
-<td>105</td>
-<td>104</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: lower-alpha">
-<li>Produce appropriate tables of percentages to gain initial insights into the data; for example, percentages in each contact level by type of housing and level of satisfaction, or percentages in each level of statisfaction by contact and type of housing.</li>
-<li>Using e.g. R, fit various log-linear models to investigate interactions between the variables.</li>
-<li>For some model that fits (at least moderately) well, calculate the Pearson residuals and use them to find where the largest discrepencies are between the observed and expected values.</li>
-</ol></li>
+<ol start="7" style="list-style-type: decimal">
+<li><p>Consider the ‘Old Faithful’ data set on geyser eruptions available in R. Use the following commands to learn more about and visualise the data:</p>
+<p><code>data(faithful)</code><br />
+<code>help(faithful)</code><br />
+<code>plot(faithful)</code></p>
+<p>Fit a cubic smoothing spline to these data, using a range of values for the smoothing parameter <span class="math inline">\(\lambda\)</span>. By eye, suggest a suitable value for <span class="math inline">\(\lambda\)</span>.</p></li>
 </ol>
 </div>
 
