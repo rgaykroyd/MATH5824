@@ -135,8 +135,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">4.1</span>  Overview</a></li>
   <li><a href="#the-penalized-least-squares-criterion" id="toc-the-penalized-least-squares-criterion" class="nav-link" data-scroll-target="#the-penalized-least-squares-criterion"><span class="toc-section-number">4.2</span>  The penalized least-squares criterion</a></li>
   <li><a href="#sec:relationto" id="toc-sec:relationto" class="nav-link" data-scroll-target="#sec\:relationto"><span class="toc-section-number">4.3</span>  Relation to interpolating splines</a></li>
-  <li><a href="#sec-smoothingmatrix" id="toc-sec-smoothingmatrix" class="nav-link" data-scroll-target="#sec-smoothingmatrix"><span class="toc-section-number">4.4</span>  The smoothing problem expressed in matrix notation</a></li>
-  <li><a href="#sec-smoothingsolution" id="toc-sec-smoothingsolution" class="nav-link" data-scroll-target="#sec-smoothingsolution"><span class="toc-section-number">4.5</span>  Solution of the smoothing spline</a></li>
+  <li><a href="#sec-smoothingmatrix" id="toc-sec-smoothingmatrix" class="nav-link" data-scroll-target="#sec-smoothingmatrix"><span class="toc-section-number">4.4</span>  The smoothing problem in matrix notation</a></li>
+  <li><a href="#smoothing-splines-in-r" id="toc-smoothing-splines-in-r" class="nav-link" data-scroll-target="#smoothing-splines-in-r"><span class="toc-section-number">4.5</span>  Smoothing splines in R</a></li>
+  <li><a href="#exercies" id="toc-exercies" class="nav-link" data-scroll-target="#exercies"><span class="toc-section-number">4.6</span>  Exercies</a></li>
   </ul>
 </nav>
     </div>
@@ -292,7 +293,7 @@ J_\nu({\hat{f}^\star}) &lt; J_\nu(\hat{f})
 <p>We have shown that <span class="math inline">\(\hat{f}\)</span> is the optimal interpolant of the fitted values <span class="math inline">\(\hat{y}_i,\ i=1,\dots,n,\)</span> so it follows from <a href="#prp-optimalinterpolant">Proposition&nbsp;<span>4.1</span></a> that <span class="math inline">\(\hat{f}\)</span> is a natural spline of order <span class="math inline">\(p=2\nu-1\)</span>.</p>
 </section>
 <section id="sec-smoothingmatrix" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="sec-smoothingmatrix"><span class="header-section-number">4.4</span> The smoothing problem expressed in matrix notation</h2>
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-smoothingmatrix"><span class="header-section-number">4.4</span> The smoothing problem in matrix notation</h2>
 <p>We have just proved that the function <span class="math inline">\(\hat{f}\)</span> that minimises <span class="math inline">\(R_\nu (f, \lambda)\)</span> must be a natural spline (linear if <span class="math inline">\(\nu=1\)</span>, cubic if <span class="math inline">\(\nu=2\)</span>) with knots at <span class="math inline">\(\{t_i,\,i=1,\ldots,n\}.\)</span> That is, as in <a href="3_interpolating.html#prp-naturalSpline">Proposition&nbsp;<span>3.1</span></a>, we can write:</p>
 <p><span id="eq-fhat"><span class="math display">\[
 \hat{f}(t) = \sum_{i=1}^n b_i\left|t-t_i\right|^p +
@@ -327,7 +328,7 @@ K_\nu
 \end{bmatrix}
 \]</span></p>
 </div>
-<p><strong>Proof:</strong></p>
+<p><strong>Proof:</strong> To be covered later if there is sufficient time.</p>
 <p>From <a href="#prp-roughness">Proposition&nbsp;<span>4.2</span></a> the roughness penalty satisfies: <span class="math display">\[\begin{align}
 J_\nu  (\hat{f}) = c_\nu   \, {\mathbf b}^T K_\nu   {\mathbf b} \label{eq:Jnufhat}
 \end{align}\]</span> where <span class="math inline">\(c_1=-2\)</span>; <span class="math inline">\(c_2= 12\)</span>; <span class="math inline">\({\mathbf b}=(b_1,\ldots,b_n)^T\)</span>; and <span class="math inline">\(K_\nu\)</span> is the <span class="math inline">\(n \times n\)</span> matrix whose <span class="math inline">\((i,k)\)</span>th element is <span class="math inline">\(\left|t_i-t_k\right|^p\)</span>.</p>
@@ -363,26 +364,31 @@ R_\nu(f, \lambda) = (\mathbf{y} - K_\nu  \, {\mathbf b} - L_\nu   \, \mathbf{a})
 \tag{4.10}\]</span></span> subject to <span id="eq-Lnubmat"><span class="math display">\[
 L_\nu^T\,{\mathbf b} = 0,
 \tag{4.11}\]</span></span> where <span class="math inline">\(\mathbf{y} = (y_1,\ldots,y_n)^T\)</span>.</p>
-</section>
-<section id="sec-smoothingsolution" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="sec-smoothingsolution"><span class="header-section-number">4.5</span> Solution of the smoothing spline</h2>
-<p>To find the explicit values for <span class="math inline">\(\mathbf{b}\)</span> and <span class="math inline">\(\mathbf{a}\)</span>, we must minimize the quadratic function <a href="#eq-Rlambdafmat">Equation&nbsp;<span>4.10</span></a> subject to the linear constraints <a href="#eq-Lnubmat">Equation&nbsp;<span>4.11</span></a>. The solution is given as follows.</p>
+<p>To find the explicit values for <span class="math inline">\(\mathbf{b}\)</span> and <span class="math inline">\(\mathbf{a}\)</span>, we must minimize the quadratic function <a href="#eq-Rlambdafmat">Equation&nbsp;<span>4.10</span></a> subject to the linear constraints <a href="#eq-Lnubmat">Equation&nbsp;<span>4.11</span></a>.</p>
 <div id="prp-smoother" class="proposition theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4.3 </strong></span>The solution to the smoothing spline problem is given by <span id="eq-smoothsol1"><span class="math display">\[
 \begin{bmatrix}
-\hat{\mathbf b} \\ \hat{\mathbf a}
+\hat{\mathbf a} \\ \hat{\mathbf b}
 \end{bmatrix}
 =
 \begin{bmatrix}
-K_\nu+\lambda^* I_n &amp; L_\nu \\
-L_\nu^T &amp; 0
+0 &amp; L_\nu \\
+L_\nu^T &amp; K_\nu+\lambda^* I_n
 \end{bmatrix}^{-1}
 \begin{bmatrix}
-{\mathbf y} \\ {\mathbf 0}
-\end{bmatrix},
+{\mathbf 0} \\ {\mathbf y}
+\end{bmatrix}
 \tag{4.12}\]</span></span> and <span class="math inline">\(\lambda^* = c_\nu \lambda\)</span>.</p>
 </div>
-<p><strong>Proof:</strong> To follow.</p>
+<p><strong>Proof:</strong> Omitted.</p>
+</section>
+<section id="smoothing-splines-in-r" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="smoothing-splines-in-r"><span class="header-section-number">4.5</span> Smoothing splines in R</h2>
+<p><strong>Notes to be added</strong></p>
+</section>
+<section id="exercies" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="exercies"><span class="header-section-number">4.6</span> Exercies</h2>
+<p><strong>Questions will be added later</strong></p>
 
 
 </section>

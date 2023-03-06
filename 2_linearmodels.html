@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MATH3823 Generalized Linear Models - 2&nbsp; Essentials of Normal Linear Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./3_GLM-Theory.html" rel="next">
+<link href="./1_intro.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Essentials of Normal Linear Models</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MATH3823 Generalized Linear Models</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Weekly schedule</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0_preface.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_linearmodels.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Essentials of Normal Linear Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_GLM-Theory.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">GLM Theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_GLM-Fitting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GLM Estimation</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">2.1</span>  Overview</a></li>
+  <li><a href="#sec-typesnormalvariable" id="toc-sec-typesnormalvariable" class="nav-link" data-scroll-target="#sec-typesnormalvariable"><span class="toc-section-number">2.2</span>  Types of normal linear model</a></li>
+  <li><a href="#matrix-representation-of-linear-models" id="toc-matrix-representation-of-linear-models" class="nav-link" data-scroll-target="#matrix-representation-of-linear-models"><span class="toc-section-number">2.3</span>  Matrix representation of linear models</a></li>
+  <li><a href="#sec-designmatrix" id="toc-sec-designmatrix" class="nav-link" data-scroll-target="#sec-designmatrix"><span class="toc-section-number">2.4</span>  Construction of the design matrix</a>
+  <ul class="collapse">
+  <li><a href="#example-simple-linear-regression" id="toc-example-simple-linear-regression" class="nav-link" data-scroll-target="#example-simple-linear-regression"><span class="toc-section-number">2.4.1</span>  Example: Simple linear regression</a></li>
+  <li><a href="#example-one-way-anova" id="toc-example-one-way-anova" class="nav-link" data-scroll-target="#example-one-way-anova"><span class="toc-section-number">2.4.2</span>  Example: One-way ANOVA</a></li>
+  </ul></li>
+  <li><a href="#sec-shorthand" id="toc-sec-shorthand" class="nav-link" data-scroll-target="#sec-shorthand"><span class="toc-section-number">2.5</span>  Model shorthand notation</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">2.6</span>  Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Essentials of Normal Linear Models</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<div class="hidden">
+<p><span class="math display">\[
+\def\b#1{\mathbf{#1}}
+\]</span></p>
+</div>
+<section id="overview" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">2.1</span> Overview</h2>
+<p>In many fields of application, we might assume the response variable is normally distributed. For example: heights, weights, log prices, etc.</p>
+<p>The data<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in <a href="#tbl-birthweight">Table&nbsp;<span>2.1</span></a> record the birth weights of 12 girls and 12 boys and their gestational ages (time from conception to birth).</p>
+<div id="tbl-birthweight" class="tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Table&nbsp;2.1: Gestational ages (in weeks) and birth weights (in grams) for 24 babies (12 girls and 12 boys).</p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-birthweight-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-birthweight" style="flex-basis: 50.0%;justify-content: center;">
+<table class="table">
+<caption>(a) Girls</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Gestational Age</th>
+<th style="text-align: center;">Birth weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">3317</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">2729</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">2935</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">2754</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">3210</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">39</td>
+<td style="text-align: center;">2817</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">3126</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">2539</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">2412</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">2991</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">39</td>
+<td style="text-align: center;">2875</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">3231</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tbl-birthweight-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-birthweight" style="flex-basis: 50.0%;justify-content: center;">
+<table class="table">
+<caption>(b) Boys</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Gestational Age</th>
+<th style="text-align: center;">Birth weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">2968</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">2795</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">3163</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">2925</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">2625</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">2847</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">3292</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">3473</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">2628</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">3176</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">3421</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">3975</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>A key question is, can we predict the birth weight of a baby born at a given gestational age using these data. For this we will need to make assumptions about the relationship between birth weight and gestational age, and any associated natural variation – that is we require a model.</p>
+<p>First we should explore the data. <a href="#fig-birthweightA-1">Figure&nbsp;<span>2.1 (a)</span></a> shows a histogram of the birth weights indicating a spread around modal group 2800-3000 grams; <a href="#fig-birthweightA-2">Figure&nbsp;<span>2.1 (b)</span></a> indicates slightly higher birth weights for the boys than the girls; and <a href="#fig-birthweightA-3">Figure&nbsp;<span>2.1 (c)</span></a> shows an increasing relationship between weight and age. Together, these suggest that gestational age and sex are likely to be important for predicting weight.</p>
+<div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>birthweight <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"https://rgaykroyd.github.io/MATH3823/Datasets/birthwt-numeric.txt"</span>, <span class="at">header=</span>T)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">=</span> birthweight<span class="sc">$</span>weight</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> birthweight<span class="sc">$</span>age</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">=</span> birthweight<span class="sc">$</span>sex</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(weight, <span class="at">breaks=</span><span class="dv">6</span>, <span class="at">probability =</span> T, <span class="at">main =</span> <span class="st">""</span>, </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Birth weight (grams)"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(weight<span class="sc">~</span>sex, <span class="at">names=</span><span class="fu">c</span>(<span class="st">"Girl"</span>, <span class="st">"Boy"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, weight, <span class="at">pch=</span><span class="dv">16</span>, </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Gestational age (weeks)"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (grams)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-birthweightA" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-birthweightA-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_linearmodels_files/figure-html/fig-birthweightA-1.png" class="img-fluid figure-img" data-ref-parent="fig-birthweightA" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) Weight distribution</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-birthweightA-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_linearmodels_files/figure-html/fig-birthweightA-2.png" class="img-fluid figure-img" data-ref-parent="fig-birthweightA" width="672"></p>
+<p></p><figcaption class="figure-caption">(b) Weight sub-divided by Sex</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 100.0%;justify-content: center;">
+<div id="fig-birthweightA-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_linearmodels_files/figure-html/fig-birthweightA-3.png" class="img-fluid figure-img" data-ref-parent="fig-birthweightA" width="672"></p>
+<p></p><figcaption class="figure-caption">(c) Relationship beween variables</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.1: Birthweight and gestational age for 24 babies.</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>Before considering possible models, <a href="#fig-birthweightB">Figure&nbsp;<span>2.2</span></a> again shows the relationship between weight and age but this time with the points coloured according to the baby’s sex. This, perhaps, shows the boys to have generally higher weights across the age range than girls.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>birthweight <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"https://rgaykroyd.github.io/MATH3823/Datasets/birthwt-numeric.txt"</span>, <span class="at">header=</span>T)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">=</span> birthweight<span class="sc">$</span>weight</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> birthweight<span class="sc">$</span>age</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">=</span> birthweight<span class="sc">$</span>sex</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, weight, <span class="at">col=</span><span class="dv">2</span><span class="sc">-</span>sex, <span class="at">pch=</span><span class="dv">15</span><span class="sc">+</span>sex,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Gestational age (weeks)"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (grams)"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">41</span>,<span class="dv">2800</span>, <span class="fu">c</span>(<span class="st">"Girl"</span>,<span class="st">"Boy"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>), <span class="at">pch=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-birthweightB" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_linearmodels_files/figure-html/fig-birthweightB-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.2: Birthweight and gestational age for 12 girls (red squares) and 12 boys (black dots).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Of course, there are very many possible models, but here we will consider the following:</p>
+<table class="table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\texttt{Model 0}:\)</span></td>
+<td><span class="math inline">\(\texttt{Weight}=\alpha\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\texttt{Model 1}:\)</span></td>
+<td><span class="math inline">\(\texttt{Weight}=\alpha + \beta.\texttt{Age}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\texttt{Model 2}:\)</span></td>
+<td><span class="math inline">\(\texttt{Weight}=\alpha + \beta.\texttt{Age}+\gamma.\texttt{Sex}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\texttt{Model 3}:\)</span></td>
+<td><span class="math inline">\(\texttt{Weight}=\alpha + \beta.\texttt{Age}+\gamma.\texttt{Sex} + \delta.\texttt{Age}.\texttt{Sex}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>In these models, <span class="math inline">\(\texttt{Weight}\)</span> is called the <em>response</em> variable (sometimes called the <em>dependent</em> variable) and <span class="math inline">\(\texttt{Age}\)</span> and <span class="math inline">\(\texttt{Sex}\)</span> are called the <em>covariates</em> or <em>explanatory</em> variables (sometimes called the <em>predictor</em> or <em>independent</em> variables). Here, <span class="math inline">\(\texttt{Age}\)</span> is a continuous variable whereas <span class="math inline">\(\texttt{Sex}\)</span> is coded as a <em>dummy</em> variable taking the value 0 for girls and 1 for boys; it is an example of a <em>factor</em>, in this case with just two <em>levels</em>: Girl and Boy.</p>
+<p>Note that <span class="math inline">\(\texttt{Model 0}\)</span> is a special case of <span class="math inline">\(\texttt{Model 1}\)</span> (consider the situation when <span class="math inline">\(\beta=0\)</span>) and that <span class="math inline">\(\texttt{Model 1}\)</span> is a special case of <span class="math inline">\(\texttt{Model 2}\)</span> (consider the situation when <span class="math inline">\(\gamma=0\)</span>) and finally that <span class="math inline">\(\texttt{Model 2}\)</span> is a special case of <span class="math inline">\(\texttt{Model 3}\)</span> (consider the situation when <span class="math inline">\(\delta=0\)</span>) – such models are called <em>nested</em>.</p>
+<p>In these models, <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\delta\)</span> are <em>model parameters</em>. Parameter <span class="math inline">\(\alpha\)</span> is called the <em>intercept</em> term; <span class="math inline">\(\beta\)</span> is called the <em>main effect</em> of <span class="math inline">\(\texttt{Age}\)</span>; and is interpreted as the effect on birth weight <em>per week</em> of gestational age. Similarly, <span class="math inline">\(\gamma\)</span> is the main effect of <span class="math inline">\(\texttt{Sex}\)</span>, interpreted as the effect on birth weight of being a boy (because girl is the <em>baseline</em> category).</p>
+<p>Parameter <span class="math inline">\(\delta\)</span> is called the <em>interaction effect</em> between <span class="math inline">\(\texttt{Age}\)</span> and <span class="math inline">\(\texttt{Sex}\)</span>. <strong>Take care when interpreting an interaction effect.</strong> Here, it does not mean that age somehow affects sex, or vice-versa. It means that the effect of gestational age on birth weight depends on whether the baby is a boy or a girl.</p>
+<p>These models can be fitted to the data using (Ordinary) <em>Least Squares</em> to produce the results presented in <a href="#fig-birthweight-fitted">Figure&nbsp;<span>2.3</span></a>.</p>
+<p>Which model should we use?</p>
+<div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>birthweight <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"https://rgaykroyd.github.io/MATH3823/Datasets/birthwt-numeric.txt"</span>, <span class="at">header=</span>T)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">=</span> birthweight<span class="sc">$</span>weight</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>age <span class="ot">=</span> birthweight<span class="sc">$</span>age</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">=</span> birthweight<span class="sc">$</span>sex</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, weight, <span class="at">pch=</span><span class="dv">16</span>, </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Gestational age (weeks)"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (grams)"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(weight))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, weight, <span class="at">pch=</span><span class="dv">16</span>,  </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Gestational age (weeks)"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (grams)"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>M1.fit <span class="ot">=</span> <span class="fu">lm</span>(weight<span class="sc">~</span>age)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(M1.fit<span class="sc">$</span>coefficients[<span class="dv">1</span>],M1.fit<span class="sc">$</span>coefficients[<span class="dv">2</span>])</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, weight, <span class="at">pch=</span><span class="dv">15</span><span class="sc">+</span>sex, <span class="at">col=</span><span class="dv">2</span><span class="sc">-</span>sex, </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Gestational age (weeks)"</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (grams)"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">41</span>,<span class="dv">2800</span>, <span class="fu">c</span>(<span class="st">"Girl"</span>,<span class="st">"Boy"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>),<span class="at">pch=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">16</span>))</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>M2.fit <span class="ot">=</span> <span class="fu">lm</span>(weight<span class="sc">~</span>age<span class="sc">+</span>sex)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(M2.fit<span class="sc">$</span>coefficients[<span class="dv">1</span>],M2.fit<span class="sc">$</span>coefficients[<span class="dv">2</span>], <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(M2.fit<span class="sc">$</span>coefficients[<span class="dv">1</span>]<span class="sc">+</span>M2.fit<span class="sc">$</span>coefficients[<span class="dv">3</span>],M2.fit<span class="sc">$</span>coefficients[<span class="dv">2</span>], <span class="at">col=</span><span class="dv">1</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, weight, <span class="at">pch=</span><span class="dv">15</span><span class="sc">+</span>sex, <span class="at">col=</span><span class="dv">2</span><span class="sc">-</span>sex, </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Gestational age (weeks)"</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Birth weight (grams)"</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">41</span>,<span class="dv">2800</span>, <span class="fu">c</span>(<span class="st">"Girl"</span>,<span class="st">"Boy"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>), <span class="at">pch=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">16</span>))</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>M3.fit <span class="ot">=</span> <span class="fu">lm</span>(weight<span class="sc">~</span>age<span class="sc">+</span>sex<span class="sc">+</span>age<span class="sc">*</span>sex)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(M3.fit<span class="sc">$</span>coefficients[<span class="dv">1</span>],M3.fit<span class="sc">$</span>coefficients[<span class="dv">2</span>], <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(M3.fit<span class="sc">$</span>coefficients[<span class="dv">1</span>]<span class="sc">+</span>M3.fit<span class="sc">$</span>coefficients[<span class="dv">3</span>],M3.fit<span class="sc">$</span>coefficients[<span class="dv">2</span>]<span class="sc">+</span>M3.fit<span class="sc">$</span>coefficients[<span class="dv">4</span>], <span class="at">col=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-birthweight-fitted" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-birthweight-fitted-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_linearmodels_files/figure-html/fig-birthweight-fitted-1.png" class="img-fluid figure-img" data-ref-parent="fig-birthweight-fitted" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) Model 0</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-birthweight-fitted-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_linearmodels_files/figure-html/fig-birthweight-fitted-2.png" class="img-fluid figure-img" data-ref-parent="fig-birthweight-fitted" width="672"></p>
+<p></p><figcaption class="figure-caption">(b) Model 1</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-birthweight-fitted-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_linearmodels_files/figure-html/fig-birthweight-fitted-3.png" class="img-fluid figure-img" data-ref-parent="fig-birthweight-fitted" width="672"></p>
+<p></p><figcaption class="figure-caption">(c) Model 2</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-birthweight-fitted-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_linearmodels_files/figure-html/fig-birthweight-fitted-4.png" class="img-fluid figure-img" data-ref-parent="fig-birthweight-fitted" width="672"></p>
+<p></p><figcaption class="figure-caption">(d) Model 3</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.3: Birthweight and gestational age data with superimposed fitted regression lines from various competing models.</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>We know from previous modules that statistical tests can be used to check the importance of regression coefficients and model parameters, but it is also important to use the graphical results, as in <a href="#fig-birthweight-fitted">Figure&nbsp;<span>2.3</span></a>, to guide us.</p>
+<p><span class="math inline">\(\texttt{Model 0}\)</span> says that there is no change in birth weight with gestational age which means that we would use the average birth weight as the prediction whatever the gestational age – this makes no sense. As we can easily see from the scatter plot of the data, the fitted line in this case is clearly inappropriate.</p>
+<p><span class="math inline">\(\texttt{Model 1}\)</span> does not take into account whether the baby is a girl or a boy, but does model the relationship between birth weight and gestational age. This does seem to provide a good fit and might be adequate for many purposes. Recall from <a href="#fig-birthweightA-2">Figure&nbsp;<span>2.1 (b)</span></a> and <a href="#fig-birthweightB">Figure&nbsp;<span>2.2</span></a>, however, that for a given gestational age the boys seem to have a higher birth weight than the girls.</p>
+<p><span class="math inline">\(\texttt{Model 2}\)</span> does take the sex of the baby into account by allowing separate intercepts in the fitted lines – this means that the lines are parallel. By eye, there is a clear difference between these two lines but it might not be important.</p>
+<p><span class="math inline">\(\texttt{Model 3}\)</span> allows for separate slopes as well as intercepts. There is a slight difference in the slopes, with the birth weight of the girls gradually catching-up as the gestational age increases. It is difficult to see, however, if this will be a general pattern or if it is only true for this data set – especially given the relatively small sample size.</p>
+<p>Here, it is not clear by eye which of the fitted models will be the best and hence we should use a statistical test to help. In particular, we can choose between the models using F-tests.</p>
+<p>Let <span class="math inline">\(y_i\)</span> denote the value of the dependent variable <span class="math inline">\(\texttt{Weight}\)</span> for individual <span class="math inline">\(i=1,\dots,n\)</span>, and let the four models be indexed by <span class="math inline">\(k=0,1,2,3\)</span>.</p>
+<p>Let <span class="math inline">\(R_k\)</span> denote the <em>residual sum of squares</em> (RSS) for Model <span class="math inline">\(k:\)</span></p>
+<p><span id="eq-rss"><span class="math display">\[
+R_k = \sum_{i=1}^n (y_i - \hat{\mu}_{ki})^2,
+\tag{2.1}\]</span></span></p>
+<p>where <span class="math inline">\(\hat{\mu}_{ki}\)</span> is the fitted value for individual <span class="math inline">\(i\)</span> under <span class="math inline">\(\texttt{Model}\)</span> <span class="math inline">\(k\)</span>. Let <span class="math inline">\(r_k\)</span> denote the corresponding <em>residual degrees of freedom</em> for <span class="math inline">\(\texttt{Model}\)</span> <span class="math inline">\(k\)</span> (the number of observations minus the number of model parameters).</p>
+<p>Consider the following hypotheses: <span class="math display">\[
+H_0: \texttt{Model } 0 \text{ is true}; \hspace{5mm} H_1: \texttt{Model } 1 \text{ is true}.
+\]</span> Under the null hypothesis <span class="math inline">\(H_0\)</span>, the difference between <span class="math inline">\(R_0\)</span> and <span class="math inline">\(R_1\)</span> will be purely random, so the between-models mean-square <span class="math inline">\((R_0 - R_1)/(r_0 - r_1)\)</span> should be comparable to the residual mean-square <span class="math inline">\(R_1/r_1\)</span>. Thus our test statistic for comparing <span class="math inline">\(\texttt{Model } 1\)</span> to the simpler <span class="math inline">\(\texttt{Model } 0\)</span> is:</p>
+<p><span id="eq-F01"><span class="math display">\[
+F_{01} = \frac{(R_0 - R_1)/(r_0 - r_1)}{R_1/r_1}.
+\tag{2.2}\]</span></span></p>
+<p>It can be shown that, under the null hypothesis <span class="math inline">\(H_0\)</span>, the statistic <span class="math inline">\(F_{01}\)</span> will have an <span class="math inline">\(F\)</span>-distribution on <span class="math inline">\(r_0 - r_1\)</span> and <span class="math inline">\(r_1\)</span> degrees of freedom, which we write: <span class="math inline">\(F_{r_0-r_1, r_1}\)</span>. Under the alternative hypothesis <span class="math inline">\(H_1\)</span>, the difference <span class="math inline">\(R_0-R_1\)</span> will tend to be larger than expected under <span class="math inline">\(H_0\)</span>, and so the observed value <span class="math inline">\(F_{01}\)</span> will probably lie in the upper tail of the <span class="math inline">\(F_{r_0-r_1, r_1}\)</span> distribution.</p>
+<p>Returning to the birth weight data, we obtain the following output from <span class="math inline">\(\b{R}\)</span> when we fit <span class="math inline">\(\texttt{Model } 1\)</span>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read the data from file into a dataframe called ’birthweight’</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>birthweight <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"https://rgaykroyd.github.io/MATH3823/Datasets/birthwt.txt"</span>, <span class="at">header=</span>T)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># fit Model 1</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(weight <span class="sc">~</span> age, <span class="at">data=</span>birthweight)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print the parameter estimates from Model 1</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         age 
+ -1484.9846    115.5283 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># perform an analysis of variance of Model 1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: weight
+          Df  Sum Sq Mean Sq F value   Pr(&gt;F)    
+age        1 1013799 1013799   27.33 3.04e-05 ***
+Residuals 22  816074   37094                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Thus we have parameter estimates: <span class="math inline">\(\hat\alpha = -1484.98\)</span> and <span class="math inline">\(\hat\beta = 115.5\)</span>. The Analysis of Variance (ANOVA) table gives: <span class="math inline">\(R_0-R_1 = 1013799\)</span> with <span class="math inline">\(r_0-r_1 = 1\)</span> and <span class="math inline">\(R_1 = 816074\)</span> with <span class="math inline">\(r_1 = 22\)</span>.</p>
+<p>If we wanted <span class="math inline">\(R_0\)</span> and <span class="math inline">\(r_0\)</span> then we can either fit <span class="math inline">\(\texttt{Model 0}\)</span> or get them <em>by subtraction.</em></p>
+<p>The <span class="math inline">\(F_{01}\)</span> statistic, <a href="#eq-F01">Equation&nbsp;<span>2.2</span></a>, is then</p>
+<p><span class="math display">\[
+F_{01} = \frac{113799/1}{816074/22} = 27.33,
+\]</span> which can be read directly from the ANOVA table in the column headed ‘F value’.</p>
+<p>Is <span class="math inline">\(F_{01} = 27.33\)</span> in the upper tail of the <span class="math inline">\(F_{1,22}\)</span> distribution? (See <a href="#fig-F01-PDF">Figure&nbsp;<span>2.4</span></a> and note that 27.33 is very far to the right.) The final column of the ANOVA table tells us that the probability of observing <span class="math inline">\(F_{01} &gt; 27.33\)</span> is only <span class="math inline">\(3.04\times10^5\)</span> – this is called a p-value. The *** beside this p-value highlights that its value lies between 0 and 0.001. This indicates that we should reject <span class="math inline">\(H_0\)</span> in favour of <span class="math inline">\(H_1\)</span> – there is very strong evidence for the more complicated model. Thus we would conclude that the effect of gestational age is statistically significant in these data.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">df</span>(x,<span class="dv">1</span>,<span class="dv">22</span>), <span class="dv">0</span>,<span class="dv">30</span>, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab=</span><span class="fu">expression</span>(<span class="st">"PDF of "</span><span class="sc">*</span><span class="st">"F"</span>[<span class="dv">0</span>][<span class="dv">1</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-F01-PDF" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_linearmodels_files/figure-html/fig-F01-PDF-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.4: Probability density function of <span class="math inline">\(F_{01}\)</span> distribution.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Next, consider the following hypotheses:</p>
+<p><span class="math display">\[
+H_0: \texttt{Model } 1 \text{ is true}; \hspace{5mm} H_1: \texttt{Model } 2 \text{ is true}.
+\]</span></p>
+<p>Under the null hypothesis <span class="math inline">\(H_0\)</span>, the difference between <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> will be purely random, so the between-models mean-square <span class="math inline">\((R_1 - R_2)/(r_1 - r_2)\)</span> should be comparable to the residual mean-square <span class="math inline">\(R_2/r_2\)</span>. Thus our test statistic for comparing <span class="math inline">\(\texttt{Model } 2\)</span> to the simpler <span class="math inline">\(\texttt{Model } 1\)</span> is:</p>
+<p><span id="eq-F12"><span class="math display">\[
+F_{12} = \frac{(R_1 - R_2)/(r_1 - r_2)}{R_2/r_2}.
+\tag{2.3}\]</span></span></p>
+<p>Under the null hypothesis <span class="math inline">\(H_0\)</span>, the statistic <span class="math inline">\(F_{12}\)</span> will have an <span class="math inline">\(F\)</span>-distribution on <span class="math inline">\(r_1 - r_2\)</span> and <span class="math inline">\(r_2\)</span> degrees of freedom, which we write: <span class="math inline">\(F_{r_1-r_2, r_2}\)</span>. Under the alternative hypothesis <span class="math inline">\(H_1\)</span>, the difference <span class="math inline">\(R_1-R_2\)</span> will tend to be larger than expected under <span class="math inline">\(H_0\)</span>, and so the observed value <span class="math inline">\(F_{12}\)</span> will probably lie in the upper tail of the <span class="math inline">\(F_{r_1-r_2, r_2}\)</span> distribution.</p>
+<p>Returning to the birth weight data, we obtain the following output from <span class="math inline">\(\b{R}\)</span> (where <span class="math inline">\(\texttt{sexM}\)</span> denotes Boy):</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit Model 2</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(weight <span class="sc">~</span> age <span class="sc">+</span> sex, <span class="at">data=</span>birthweight)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print the parameter estimates from Model 2</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         age        sexM 
+ -1773.3218    120.8943    163.0393 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># perform an analysis of variance on the fitted model</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: weight
+          Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+age        1 1013799 1013799 32.3174 1.213e-05 ***
+sex        1  157304  157304  5.0145   0.03609 *  
+Residuals 21  658771   31370                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Thus we have parameter estimates: <span class="math inline">\(\hat \alpha = -1773.3\)</span>, <span class="math inline">\(\hat\beta = 120.9\)</span> and <span class="math inline">\(\hat\gamma = 163.0\)</span>, the latter being the effect of being a boy compared to the baseline category of being a girl.</p>
+<p>The Analysis of Variance (ANOVA) table gives: <span class="math inline">\(R_1-R_2 = 157304\)</span> with <span class="math inline">\(r_1-r_2=1\)</span>, and <span class="math inline">\(R_2=658771\)</span> with <span class="math inline">\(r_2=21\)</span>. The <span class="math inline">\(F_{12}\)</span> statistic, <a href="#eq-F12">Equation&nbsp;<span>2.3</span></a>, is then</p>
+<p><span class="math display">\[
+F_{12} = \frac{157304/1}{658771/21} = 5.0145,
+\]</span></p>
+<p>which can be read directly from the ANOVA table in the column headed ‘F value’. Is <span class="math inline">\(F_{12} = 5.01\)</span> in the upper tail of the <span class="math inline">\(F_{1,21}\)</span> distribution?</p>
+<p>The final column of the ANOVA table tells us that the probability of observing <span class="math inline">\(F_{12} &gt; 5.01\)</span> is only <span class="math inline">\(0.03609\)</span> – this is called a p-value. The * beside this p-value highlights that its value lies between 0.01 and 0.05. This indicates that we should reject <span class="math inline">\(H_0\)</span> in favour of <span class="math inline">\(H_1\)</span> – there is evidence for the more complicated model. Thus we would conclude that the effect of the sex of the baby, after controlling for gestational age, is statistically significant in these data.</p>
+<p>To complete the analysis, we should now compare <span class="math inline">\(\texttt{Model }2\)</span> with <span class="math inline">\(\texttt{Model }3\)</span> – see Exercises.</p>
+</section>
+<section id="sec-typesnormalvariable" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-typesnormalvariable"><span class="header-section-number">2.2</span> Types of normal linear model</h2>
+<p>Here we consider how normal linear models can be set up for different types of explanatory variable. The dependent variable <span class="math inline">\(y\)</span> is modelled as a linear combination of <span class="math inline">\(p\)</span> explanatory variables <span class="math inline">\(\b{x} =(x_1, x_2,\ldots, x_p)\)</span> plus a random error <span class="math inline">\(\epsilon \sim N(0, \sigma^2)\)</span>, where ‘~’ means ‘is distributed as’. Several models are of this kind, depending on the number and type of explanatory variables. <a href="#tbl-linear_models">Table&nbsp;<span>2.2</span></a> lists some types of normal linear models with their explanatory variable types.</p>
+<div id="tbl-linear_models" class="anchored">
+<table class="table">
+<caption>Table&nbsp;2.2: Types of normal linear model and their explanatory variable types where indicator function <span class="math inline">\(I(x=j)=1\)</span> if <span class="math inline">\(x=j\)</span> and <span class="math inline">\(0\)</span> otherwise.</caption>
+<colgroup>
+<col style="width: 26%">
+<col style="width: 27%">
+<col style="width: 45%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(p\)</span></td>
+<td><strong>Explanatory variables</strong></td>
+<td><strong>Model</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td>Quantitative</td>
+<td>Simple linear regression <span class="math inline">\(y=\alpha+\beta x+\epsilon\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">&gt;1</td>
+<td>Quantitative</td>
+<td>Multiple linear regression<span class="math inline">\(y=\alpha+\sum_{i=1}^p\beta_i x_i+\epsilon\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td>Dichotomous (<span class="math inline">\(x=1\)</span> or <span class="math inline">\(2\)</span>)</td>
+<td>Two-sample t-test <span class="math inline">\(y=\alpha+\delta ~ I(x=2)+\epsilon\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td>Polytomous, <span class="math inline">\(k\)</span> levels <span class="math inline">\((x=1,\ldots,k)\)</span></td>
+<td>One-way ANOVA<span class="math inline">\(y=\alpha+\sum_{j=1}^k \delta_j \ I(x=j)+\epsilon\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">&gt;1</td>
+<td>Qualitative</td>
+<td><span class="math inline">\(p\)</span>-way ANOVA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For the two-sample t-test model<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, observations in the two groups have means <span class="math inline">\(\alpha+\beta_1\)</span> and <span class="math inline">\(\alpha + \beta_2\)</span> . Notice, however, that we have three parameters with only two group sample means and hence parameter estimation is not possible. To avoid this identification problem, we either impose a ‘corner’ constraint: <span class="math inline">\(\beta_1=0\)</span> and then <span class="math inline">\(\beta_2\)</span> represents the difference in the Group 2 mean relative to a baseline of Group <span class="math inline">\(1\)</span>. Alternatively, we may impose a ‘sum-to-zero’ constraint: <span class="math inline">\(\beta_1+ \beta_2 =0\)</span>, the values <span class="math inline">\(\beta_1=-\beta_2\)</span> then give differences in the groups means relative to the overall mean. <a href="#tbl-ttest">Table&nbsp;<span>2.3</span></a> shows the effect of the parameter constraint on the group means.</p>
+<div id="tbl-ttest" class="anchored">
+<table class="table">
+<caption>Table&nbsp;2.3: Parameters in the two-sample t-test model after imposing parameter constraint to avoid the identification problem.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Constraint</th>
+<th style="text-align: center;">Group 1 mean</th>
+<th style="text-align: center;">Group 2 mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\beta_1=0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha+\beta_2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\beta_1+\beta_2=0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha-\beta_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha+\beta_2\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For the general one-way ANOVA model with <span class="math inline">\(k\)</span> groups, observations in Group <span class="math inline">\(j\)</span> have mean <span class="math inline">\(\alpha + \delta_j\)</span> , for <span class="math inline">\(j =1, \ldots, k\)</span> – that leads to <span class="math inline">\(k + 1\)</span> parameters describing <span class="math inline">\(k\)</span> group means. Again we can impose the ‘corner’ constraint: <span class="math inline">\(\delta_1 = 0\)</span> and then <span class="math inline">\(\delta_j\)</span> represents the difference in means between Group <span class="math inline">\(j\)</span> and the baseline Group <span class="math inline">\(1\)</span>. Alternatively, we may impose a ‘sum-to-zero’ constraint:<span class="math inline">\(\sum_{j=1}^k \delta_j =0\)</span> and again <span class="math inline">\((\delta_1, \delta_2,\dots,\delta_k)\)</span> then represents an individual group effect relative to the overall data mean.</p>
+</section>
+<section id="matrix-representation-of-linear-models" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="matrix-representation-of-linear-models"><span class="header-section-number">2.3</span> Matrix representation of linear models</h2>
+<p>All of the models in Table <a href="#tbl-linear_models">Table&nbsp;<span>2.2</span></a> can be fitted by least squares (OLS). To describe this, a matrix formulation will be most convenient:</p>
+<p><span id="eq-matrix-linear-model"><span class="math display">\[
+\mathbf{Y} = X\boldsymbol{\beta}+\boldsymbol{\epsilon}
+\tag{2.4}\]</span></span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(\mathbf{Y}\)</span> is an <span class="math inline">\(n\times 1\)</span> vector of observed response values with <span class="math inline">\(n\)</span> being the number of observations.</li>
+<li><span class="math inline">\(X\)</span> is an <span class="math inline">\(n\times p\)</span> <em>design</em> matrix, to be discussed below.</li>
+<li><span class="math inline">\(\boldsymbol{\beta}\)</span> is a <span class="math inline">\(p\times 1\)</span> vector of parameters or coefficients to be estimated.</li>
+<li><span class="math inline">\(\boldsymbol{\epsilon}\)</span> is an <span class="math inline">\(n\times 1\)</span> vector of independent and identically distributed (IID) random variables, which here <span class="math inline">\(\epsilon \sim N(0, \sigma^2)\)</span> and is called the “error” term.</li>
+</ul>
+</section>
+<section id="sec-designmatrix" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-designmatrix"><span class="header-section-number">2.4</span> Construction of the design matrix</h2>
+<p>Creating the design matrix is a key part of the modelling as it describes the important structure of investigation or experiment. The design matrix can be constructed by the following process.</p>
+<ol type="1">
+<li><p>Begin with an <span class="math inline">\(X\)</span> containing only one column: a vector of ones for the overall mean or intercept term (the <span class="math inline">\(\alpha\)</span> in <a href="#tbl-linear_models">Table&nbsp;<span>2.2</span></a>).</p></li>
+<li><p>For each explanatory variable <span class="math inline">\(x_j\)</span>, do the following:</p>
+<ol type="a">
+<li>If a variable <span class="math inline">\(x_j\)</span> is quantitative, add a column to <span class="math inline">\(X\)</span> containing the values of <span class="math inline">\(x_j.\)</span></li>
+<li>If <span class="math inline">\(x_j\)</span> is qualitative with <span class="math inline">\(k\)</span> levels, add <span class="math inline">\(k\)</span> “dummy” columns to <span class="math inline">\(X\)</span>, taking values 0 and 1, where a 1 in the <span class="math inline">\(\ell\)</span>th dummy column identifies that the corresponding observation is at level <span class="math inline">\(\ell\)</span> of factor <span class="math inline">\(x_j\)</span> . For example, suppose we have a factor <span class="math inline">\(\mathbf{x}_j = (M, M, F, M, F)\)</span> representing the sex of <span class="math inline">\(n = 5\)</span> individuals. This information can be coded into two dummy columns of <span class="math inline">\(X\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+\begin{matrix}
+\begin{matrix}
+F &amp; M
+\end{matrix}\\
+\begin{bmatrix}
+0 &amp; 1 \\
+0 &amp; 1 \\
+1 &amp; 0 \\
+0 &amp; 1 \\
+1 &amp; 0
+\end{bmatrix}
+\end{matrix}
+\]</span></p></li>
+<li><p>When qualitative variables are present, <span class="math inline">\(X\)</span> will be singular – that is, there will be linear dependencies between the columns of <span class="math inline">\(X\)</span>. For example, the sum of the two columns above is a vector of ones, the same as the intercept column. We resolve this identification problem by deleting some columns of <span class="math inline">\(X\)</span>. This is equivalent to applying the corner constraint <span class="math inline">\(\delta_1 = 0\)</span> in the one-way ANOVA.</p>
+<p>In the above example, after removing a column, we get:<br>
+<span class="math display">\[
+\mathbf{X}=\begin{bmatrix}
+1 &amp;  1 \\
+1 &amp;  1 \\
+1 &amp;  0 \\
+1 &amp;  1 \\
+1 &amp;  0
+\end{bmatrix}.
+\]</span></p></li>
+<li><p>Each column of <span class="math inline">\(X\)</span> represents either a quantitative variable, or a level of a qualitative variable. We will use <span class="math inline">\(i = 1, \ldots, n\)</span> to label the observations (rows of <span class="math inline">\(X\)</span>) and <span class="math inline">\(j = 1, \ldots, p\)</span> to label the columns of <span class="math inline">\(X\)</span>.</p></li>
+</ol>
+<section id="example-simple-linear-regression" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="example-simple-linear-regression"><span class="header-section-number">2.4.1</span> Example: Simple linear regression</h3>
+<p>Consider the simple linear regression model <span class="math inline">\(y=\alpha+\beta x+\epsilon\)</span> with <span class="math inline">\(\epsilon \sim N(0, \sigma^2)\)</span>. Given data on <span class="math inline">\(n\)</span> pairs <span class="math inline">\((x_i, y_i), i = 1, \ldots, n\)</span>, we write this as</p>
+<p><span id="eq-linear-data"><span class="math display">\[
+y_i = \alpha+\beta x_i+\epsilon_i, \quad \text{for } i=1,2,\dots,n,
+\tag{2.5}\]</span></span></p>
+<p>where the <span class="math inline">\(\epsilon_i\)</span> are IID <span class="math inline">\(N(0,\sigma^2)\)</span>. In matrix form, this becomes</p>
+<p><span id="eq-simple-linear"><span class="math display">\[
+\mathbf{Y}=X\boldsymbol{\beta}+\boldsymbol{\epsilon}
+\tag{2.6}\]</span></span> with <span class="math display">\[
+\mathbf{Y}=\begin{bmatrix}
+y_1\\
+\vdots\\
+y_n
+\end{bmatrix},
+%
+\hspace{5mm}
+%
+X=\begin{bmatrix}
+1 &amp; x_1\\
+\vdots &amp; \vdots\\
+1 &amp; x_n
+\end{bmatrix},
+%
+\hspace{5mm}
+%
+\boldsymbol{\beta}=
+\begin{bmatrix}
+\beta_1\\
+\beta_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+\alpha\\
+\beta
+\end{bmatrix},
+%
+\hspace{5mm}
+%
+\boldsymbol{\epsilon}=
+\begin{bmatrix}
+\epsilon_1\\
+\vdots\\
+\epsilon_n
+\end{bmatrix}.
+\]</span> The <span class="math inline">\(i\)</span>th row of <a href="#eq-simple-linear">Equation&nbsp;<span>2.6</span></a> has the same meaning as <a href="#eq-linear-data">Equation&nbsp;<span>2.5</span></a>: <span class="math display">\[
+y_i = 1\times \beta_1 + x_i\times \beta_2 +\epsilon_i = \alpha+\beta x_i +\epsilon_i,  \hspace{2mm} \text{for } i=1,2,\dots,n.
+\]</span></p>
+</section>
+<section id="example-one-way-anova" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="example-one-way-anova"><span class="header-section-number">2.4.2</span> Example: One-way ANOVA</h3>
+<p>For one-way ANOVA with <span class="math inline">\(k\)</span> levels, the model is <span class="math display">\[
+y_i =\alpha+\sum_{j=1}^k \delta_j \ I(x_i=j)+\epsilon_i, \quad \text{for } i=1, 2, \dots,n,
+\]</span> where <span class="math inline">\(x_i\)</span> denotes the group level of individual <span class="math inline">\(i\)</span>. So if <span class="math inline">\(y_i\)</span> is from the <span class="math inline">\(j\)</span>th group then <span class="math inline">\(y_i \sim N(\alpha+\delta_j, \sigma^2)\)</span>. Here <span class="math inline">\(\alpha\)</span> is the intercept and the <span class="math inline">\((\delta_1, \delta_2, \dots,\delta_k)\)</span> represent the “main effects”.</p>
+<p>We can store the information about the levels of <span class="math inline">\(g\)</span> in a dummy matrix <span class="math inline">\(X^* = (x^*_{ij})\)</span> where</p>
+<p><span class="math display">\[
+x^*_{ij} = \left\{
+\begin{array}{cl}
+1, &amp; g_i=j,\\
+0, &amp; \text{otherwise.}
+\end{array}
+\right.
+\]</span></p>
+<p>Then set <span class="math inline">\(X = [1, X^*]\)</span>, where <span class="math inline">\(1\)</span> is an <span class="math inline">\(n\)</span>-vector of <span class="math inline">\(1\)</span>’s. For the male–female example at (1.12), we have <span class="math inline">\(n = 5\)</span> and a sex factor:</p>
+<p><span class="math display">\[
+g=\begin{bmatrix}1\\ 1 \\2\\1\\2\end{bmatrix},
+%
+\hspace{5mm}
+%
+X=\begin{bmatrix}
+1 &amp; 1 &amp; 0\\
+1&amp;1&amp; 0 \\ 1&amp; 0 &amp; 1\\ 1&amp; 1 &amp; 0 \\ 1&amp; 0 &amp; 1
+\end{bmatrix},
+%
+\hspace{5mm}
+%
+\beta=\begin{bmatrix}\beta_1\\\beta_2\\\beta_3\end{bmatrix}
+=\begin{bmatrix}\alpha\\\delta_1 \\\delta_2\end{bmatrix}.
+\]</span></p>
+<p>Then the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(X\)</span> becomes <span class="math inline">\(\beta_1 + \beta_2 = \alpha + \delta_1\)</span> if <span class="math inline">\(g_i = 1\)</span> and <span class="math inline">\(\beta_1 + \beta_3 = \alpha + \delta_2\)</span> if <span class="math inline">\(g_i\)</span> = 2. That is, the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display">\[
+\alpha+\sum_{j=1}^2 \delta_j I(g_i=j)
+\]</span> so this model can be written <span class="math inline">\(Y=X\beta+\epsilon\)</span>. Here, <span class="math inline">\(X\)</span> is singular: its last two columns added together equal its first column. Statistically, the problem is that we are trying to estimate two means (the mean response for Boys and the mean response for Girls) with three parameters (<span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\delta_2\)</span> and <span class="math inline">\(\delta_2\)</span>).</p>
+<p>In practice, we often resolve this aliasing or identification problem by setting one of the parameters to be zero, that is <span class="math inline">\(\delta_1 = 0\)</span>, which corresponds to deleting the second column of <span class="math inline">\(X\)</span>).</p>
+</section>
+</section>
+<section id="sec-shorthand" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="sec-shorthand"><span class="header-section-number">2.5</span> Model shorthand notation</h2>
+<p>In R, a qualitative (categorical) variable is called a <em>factor</em>, and its categories are called <em>levels</em>. For example, variable <span class="math inline">\(\texttt{Sex}\)</span> in the birth weight data (above) has levels coded “M” for ‘Boy’ and “F” for ‘Girl’. It may not be obvious to R whether a variable is quantitative or qualitative. For example, a qualitative variable called <span class="math inline">\(\texttt{Grade}\)</span> might have categories 1, 2 and 3. If was included in a model, R would treat it as quantitative unless we declare it to be a factor, which we can do with the command:</p>
+<p><span class="math inline">\(\texttt{grade = as.factor(grade)}\)</span></p>
+<p>A convenient model-specification notation has been developed from which the design matrix <span class="math inline">\(X\)</span> can be constructed. Below, <span class="math inline">\(E, F, \ldots\)</span> denote generic quantitative (continuous) or qualitative (categorical) variables. Terms in this notation may take the following forms:</p>
+<ol type="a">
+<li><p><span class="math inline">\(1\)</span> : a column of 1’s to accommodate an intercept term (the <span class="math inline">\(\alpha\)</span>’s of <a href="#tbl-linear_models">Table&nbsp;<span>2.2</span></a> ). This is included in the model by default.</p></li>
+<li><p><span class="math inline">\(E\)</span> : variable <span class="math inline">\(E\)</span> is included in the model. The design matrix includes <span class="math inline">\(k_E\)</span> columns for <span class="math inline">\(E\)</span>. If <span class="math inline">\(E\)</span> is quantitative, <span class="math inline">\(k_E = 1\)</span>. If E is qualitative, <span class="math inline">\(k_E\)</span> is the number of levels of <span class="math inline">\(E\)</span> minus 1.</p></li>
+<li><p><span class="math inline">\(E +F\)</span> : both <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> are included the model. The design matrix includes <span class="math inline">\(k_E +k_F\)</span> columns accordingly.</p></li>
+<li><p><span class="math inline">\(E : F\)</span> (sometimes <span class="math inline">\(E \cdot F\)</span>) : the model includes an interaction between <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span>; each column that would be included for <span class="math inline">\(E\)</span> is multiplied by each column for <span class="math inline">\(F\)</span> in turn. The design matrix includes <span class="math inline">\(k_E \times k_F\)</span> columns accordingly.</p></li>
+<li><p><span class="math inline">\(E * F\)</span> : shorthand for <span class="math inline">\(1 + E + F + E : F\)</span>: useful for crossed models where <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> are different factors. For example, <span class="math inline">\(E\)</span> labels age groups; <span class="math inline">\(F\)</span> labels medical conditions.</p></li>
+<li><p><span class="math inline">\(E/F\)</span> : shorthand for <span class="math inline">\(1 + E + E : F\)</span>: useful for nested models where <span class="math inline">\(F\)</span> is a factor whose levels have meaning only within levels of factor <span class="math inline">\(E\)</span>. For example, <span class="math inline">\(E\)</span> labels different hospitals; <span class="math inline">\(F\)</span> labels wards within hospitals.</p></li>
+<li><p><span class="math inline">\(\text{poly}(E; \ell)\)</span> : shorthand for an orthogonal polynomial, wherein <span class="math inline">\(x\)</span> contains a set of mutually orthogonal columns containing polynomials in <span class="math inline">\(E\)</span> of increasing order, from order <span class="math inline">\(1\)</span> through order <span class="math inline">\(\ell\)</span>.</p></li>
+<li><p><span class="math inline">\(-E\)</span> : shorthand for removing a term from the model; for example <span class="math inline">\(E * F -E\)</span> is short for <span class="math inline">\(1 + F + E : F\)</span>.</p></li>
+<li><p><span class="math inline">\(I()\)</span> : shorthand for an arithmetical expression (not to be confused with the indicator function defined above). For example, <span class="math inline">\(I(E + F)\)</span> denotes a new quantitative variable constructed by adding together quantitative variables <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span>. This would cause an error if either <span class="math inline">\(E\)</span> or <span class="math inline">\(F\)</span> has been declared as a factor. What would happen in this example if we omitted the <span class="math inline">\(I(\cdot)\)</span> notation?</p></li>
+</ol>
+<p>The notation uses “~” as shorthand for “is modelled by” or “is regressed on”. For example,</p>
+<ul>
+<li><p>Weight is regressed on age-group and sex with no interaction between them: <span class="math display">\[
+\texttt{Weight} \sim \texttt{Age} + \texttt{Sex}
+\]</span> as for the birthweight data in Figure 1.2c.</p></li>
+<li><p>Well being is regressed on age-group and income-group, where income is thought to affect wellbeing differentially by age: <span class="math display">\[
+\texttt{Wellbeing} \sim \texttt{Age} * \texttt{Income}
+\]</span></p></li>
+<li><p>Class of degree is regressed on school of the university and on degree subject within the school: <span class="math display">\[
+\texttt{DegreeClass} \sim \texttt{School/Subject}
+\]</span></p></li>
+<li><p>Yield of wheat is regressed on seed-variety and annual rainfall: <span class="math display">\[
+\texttt{Yield} \sim \texttt{Variety} + \texttt{poly}(\texttt{Rainfall}, 2)
+\]</span></p></li>
+<li><p>Profit is regressed on amount invested: <span class="math display">\[
+\texttt{Profit}\sim \texttt{Investment}- 1
+\]</span> (no intercept term, that is a regression through the origin).</p></li>
+</ul>
+</section>
+<section id="exercises" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.6</span> Exercises</h2>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please note that these questions are currently unchecked. I aim to look at them very soon but a apologize is anything is incomplete or there are errors.</p>
+</div>
+</div>
+<p>2.1. An extra model which could have been considered for the Birth weight data example would be one that says that <span class="math inline">\(\texttt{Weight}\)</span> is different for girls and boys, but does not depend on gestational age.</p>
+<p>Write down the equation corresponding to this model. Then, load the birth weight data into RStudio and fit the model. How are the fitted model parameters related to the overall birth weight mean and the mean birth weights of the girls and boys? Is this a good fit to the data? Is Sex statistically significant?</p>
+<p>2.2. In an experiment to investigate Ohm’s Law, <span class="math inline">\(V=IR\)</span> where <span class="math inline">\(V\)</span> is Voltage, I is current and <span class="math inline">\(R\)</span> is resistance of the material, the following data<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> were recorded:</p>
+<div id="tbl-ohmslawdata" class="anchored">
+<table class="table">
+<caption>Table&nbsp;2.4: Experimental verification of Ohm’s Law</caption>
+<tbody>
+<tr class="odd">
+<td>Voltage (Volts)</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">24</td>
+</tr>
+<tr class="even">
+<td>Current (mAmps)</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">53</td>
+<td style="text-align: center;">58.5</td>
+<td style="text-align: center;">70</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Does this data support Ohm’s Law? What is the resistance of the material used?</p>
+<p>2.3 In an investigation<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> into the effect of eating on pulse rate, 6 men and 6 women were tested before and after a meal, with the following results:</p>
+<div id="tbl-pulserate" class="anchored">
+<table class="table">
+<caption>Table&nbsp;2.5: At rest pulse rate before and after a meal for men and women</caption>
+<tbody>
+<tr class="odd">
+<td>Men</td>
+<td>before</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">103</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">97</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>after</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">101</td>
+</tr>
+<tr class="odd">
+<td>Women</td>
+<td>before</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">77</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>after</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">81</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Suggest a suitable model for this situation and write down the corresponding design matrix. Calculate the parameter estimates using the matrix regression estimation equation.</p>
+<p>Perform an appropriate analysis in R to find out if there is evidence to suggest that the change in pulse rate due to a meal is the same for men and women.</p>
+<p>2.4 A laboratory experiment<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> was performed into the effect of seasonal floods on the growth of barley seedlings in a incubator, as measured by their height in mm. Three types of barley seed (Goldmarker, Midas, Igri) were used with two watering condition (Normal and Waterlogged). Further, each combination was repeated four times on different shelves in the laboratory incubator (Top, Second, Third and Bottom shelf). The data are available in the file barley.csv</p>
+<p>Suggest a suitable model for this situation. Identify the response and explanatory variables and list the levels for any qualitative variables. Write down the design matrix for each model you consider.</p>
+<p>Perform appropriate analyses to test if each of the following are important: (a) watering condition, (b) type of barley seed, and (c) shelf position.</p>
+<p>In the analysis, do not include any interactions involving shelf position. If you find a significant interaction between watering condition and type of barley seed, carefully interpret the parameter estimates.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Dobson and Barnett, 3rd edition, Table 2.3.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Notice that this is a special case of the one-way ANOVA when there are only two-groups.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Aykroyd, P.J. (1956). Unpublished.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Source unknown.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Source unknown.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./1_intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./3_GLM-Theory.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">GLM Theory</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
