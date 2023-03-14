@@ -364,13 +364,13 @@ L_2 =
 \right] .
 \]</span></p>
 <p>Thus, from <a href="#eq-constraints">Equation&nbsp;<span>4.4</span></a> – <a href="#eq-fhattkmat">Equation&nbsp;<span>4.9</span></a>, the penalized least-squares criterion <a href="#eq-Rlambdaf">Equation&nbsp;<span>4.2</span></a> reduces to a quadratic function of the parameters <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\({\mathbf b}\)</span>:</p>
-<p><span id="eq-Rlambdafmat"><span class="math display">\[
+<p><span id="eq-rlambdafmat"><span class="math display">\[
 R_\nu(f, \lambda) = (\mathbf{y} - K_\nu  \, {\mathbf b} - L_\nu   \, \mathbf{a})^T  (\mathbf{y} - K_\nu  \, {\mathbf b} - L_\nu   \, \mathbf{a})
                             + \lambda \,c_\nu  \,{\mathbf b}^T K_\nu   \,{\mathbf b}
 \tag{4.10}\]</span></span> subject to <span id="eq-Lnubmat"><span class="math display">\[
 L_\nu^T\,{\mathbf b} = 0,
 \tag{4.11}\]</span></span> where <span class="math inline">\(\mathbf{y} = (y_1,\ldots,y_n)^T\)</span>.</p>
-<p>To find the explicit values for <span class="math inline">\(\mathbf{b}\)</span> and <span class="math inline">\(\mathbf{a}\)</span>, we must minimize the quadratic function <a href="#eq-Rlambdafmat">Equation&nbsp;<span>4.10</span></a> subject to the linear constraints <a href="#eq-Lnubmat">Equation&nbsp;<span>4.11</span></a>.</p>
+<p>To find the explicit values for <span class="math inline">\(\mathbf{b}\)</span> and <span class="math inline">\(\mathbf{a}\)</span>, we must minimize the quadratic function <span class="quarto-unresolved-ref">?eq-Rlambdafmat</span> subject to the linear constraints <a href="#eq-Lnubmat">Equation&nbsp;<span>4.11</span></a>.</p>
 <div id="prp-smoother" class="proposition theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4.3 </strong></span>The solution to the smoothing spline problem is given by <span id="eq-smoothsol1"><span class="math display">\[
 \begin{bmatrix}

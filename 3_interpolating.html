@@ -187,6 +187,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -386,8 +391,7 @@ J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 </figure>
 </div>
 </div>
-<p>The following, illustrates the different ways to draw the spline and to calculated fitted values.</p>
-<div class="cell">
+<p>The following, illustrates the different ways to draw the spline and to calculated fitted values. ::: {.cell}</p>
 <details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15342</span>)</span>
@@ -398,7 +402,7 @@ J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mysplinefit1 <span class="ot">=</span> <span class="fu">spline</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">spline</span>(x, y, <span class="at">xout=</span><span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">7.5</span>), <span class="at">method=</span><span class="st">"natural"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>$x
 [1] 2.5 7.5
 
@@ -411,10 +415,10 @@ $y
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mysplinefit2 <span class="ot">=</span> <span class="fu">splinefun</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mysplinefit2</span>(<span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">7.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-stdout">
 <pre><code>[1]  0.08785792 -0.78655273</code></pre>
 </div>
-</div>
+<p>:::</p>
 </section>
 <section id="sec-exercises2" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-exercises2"><span class="header-section-number">3.6</span> Exercises</h2>
