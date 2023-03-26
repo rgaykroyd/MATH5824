@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./6_smoothinginpractice.html" rel="next">
 <link href="./4_smoothing.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -128,6 +129,11 @@ ul.task-list li input[type="checkbox"] {
   <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6_smoothinginpractice.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -138,11 +144,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">5.1</span>  Overview</a></li>
-  <li><a href="#testtraining-approach" id="toc-testtraining-approach" class="nav-link" data-scroll-target="#testtraining-approach"><span class="toc-section-number">5.2</span>  Test/training approach</a></li>
-  <li><a href="#sec-CV" id="toc-sec-CV" class="nav-link" data-scroll-target="#sec-CV"><span class="toc-section-number">5.3</span>  Cross-validation or <em>leave-one-out</em></a></li>
+  <li><a href="#trainingtest-approach" id="toc-trainingtest-approach" class="nav-link" data-scroll-target="#trainingtest-approach"><span class="toc-section-number">5.2</span>  Training/test approach</a></li>
+  <li><a href="#sec-cv" id="toc-sec-cv" class="nav-link" data-scroll-target="#sec-cv"><span class="toc-section-number">5.3</span>  Cross-validation or <em>leave-one-out</em></a></li>
   <li><a href="#the-smoothing-matrix" id="toc-the-smoothing-matrix" class="nav-link" data-scroll-target="#the-smoothing-matrix"><span class="toc-section-number">5.4</span>  The smoothing matrix</a></li>
   <li><a href="#sec-edf" id="toc-sec-edf" class="nav-link" data-scroll-target="#sec-edf"><span class="toc-section-number">5.5</span>  Effective degrees of freedom</a></li>
-  <li><a href="#sec-GCV" id="toc-sec-GCV" class="nav-link" data-scroll-target="#sec-GCV"><span class="toc-section-number">5.6</span>  Generalized Cross Validation</a></li>
+  <li><a href="#sec-gcv" id="toc-sec-gcv" class="nav-link" data-scroll-target="#sec-gcv"><span class="toc-section-number">5.6</span>  Generalized Cross Validation</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">5.7</span>  Exercises</a></li>
   </ul>
 </nav>
@@ -185,31 +191,31 @@ f_\infty(t) &amp;=
 \end{align*}\]</span> Here, <span class="math inline">\(\hat{a}_0=\bar{y}\)</span>, for the <span class="math inline">\(\nu=1, p=1\)</span> case, and <span class="math inline">\(\{\hat{a}_0,\ \hat{a}_1\}\)</span>, for the <span class="math inline">\(v=2, p=3\)</span> case, are the OLS linear regression parameters.<br>
 If the true <span class="math inline">\(f(t)\)</span> was constant or linear, this solution would be reasonable, but often we are interested in less regular functions.</p>
 </section>
-<section id="testtraining-approach" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="testtraining-approach"><span class="header-section-number">5.2</span> Test/training approach</h2>
-<p>One way to approach estimation of <span class="math inline">\(\lambda\)</span> is to partition the set of indices <span class="math inline">\(I= \{1,\dots,n\}\)</span> into two subsets <span class="math inline">\(I_1\)</span> and <span class="math inline">\(I_2\)</span>, where <span class="math inline">\(I_1\cup I_2 = S\)</span> and <span class="math inline">\(I_1 \cap I_2 = \phi\)</span>. Thus we obtain two datasets:</p>
+<section id="trainingtest-approach" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="trainingtest-approach"><span class="header-section-number">5.2</span> Training/test approach</h2>
+<p>One way to approach estimation of <span class="math inline">\(\lambda\)</span> is to partition the set of indices <span class="math inline">\(I= \{1,\dots,n\}\)</span> into two subsets <span class="math inline">\(I_1\)</span> and <span class="math inline">\(I_2\)</span>, where <span class="math inline">\(I_1\cup I_2 = I\)</span> and <span class="math inline">\(I_1 \cap I_2 = \phi\)</span>. Thus we obtain two datasets:</p>
 <ul>
 <li>Training dataset: <span class="math inline">\(D_1 = \{(t_{i},y_{i}),\ i\in I_1\}\)</span>,</li>
 <li>Test dataset: <span class="math inline">\(D_2 = \{(t_{i},y_{i}),\ i\in I_2\}\)</span>.</li>
 </ul>
-<p>We fit a smoothing spline <span class="math inline">\(\hat{f}_{\lambda,I_1}(t)\)</span> to the training dataset, and judge the quality of the fit using the test dataset: <span class="math display">\[\begin{align*}
-Q_{I_1:I_2}(\lambda) &amp;= \sum_{i\in I_2} \left(y_i - \hat{f}_{\lambda,I_1}(t_i)\right)^2.
-\end{align*}\]</span> We choose <span class="math inline">\(\lambda\)</span> to minimise <span class="math inline">\(Q_{I_1:I_2}(\lambda)\)</span>. Many algorithms exist for such minimisation, for example through evaluation on a fine grid of <span class="math inline">\(\lambda\)</span> values, although many more computationally efficient algorithms exist.</p>
+<p>We fit a smoothing spline <span class="math inline">\(\hat{f}_{\lambda,I_1}(t)\)</span> to the training dataset, and judge the quality of the fit using the test dataset: <span id="eq-cv"><span class="math display">\[
+Q_{I_1:I_2}(\lambda) = \sum_{i\in I_2} \left(y_i - \hat{f}_{\lambda,I_1}(t_i)\right)^2.
+\tag{5.2}\]</span></span> We choose <span class="math inline">\(\lambda\)</span> to minimize <span class="math inline">\(Q_{I_1:I_2}(\lambda)\)</span>. Many algorithms exist for such minimization, for example through evaluation on a fine grid of <span class="math inline">\(\lambda\)</span> values, although many more computationally efficient algorithms exist.</p>
 </section>
-<section id="sec-CV" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="sec-CV"><span class="header-section-number">5.3</span> Cross-validation or <em>leave-one-out</em></h2>
-<p>This is an extreme form of the above principle. The test dataset <span class="math inline">\(D_2\)</span> comprises a single observation, <span class="math inline">\((t_{j},y_{j})\)</span>, for a given value of <span class="math inline">\(j\)</span>. The training set <span class="math inline">\(D_1\)</span> is then <span class="math inline">\(D_{-j} = \{(t_{i},y_{i}),\ i \in I_{-j}\}\)</span>, where <span class="math inline">\(I_{-j}\)</span> denotes the full set <span class="math inline">\(S\)</span> excluding <span class="math inline">\(j\)</span>. Then in a slightly amended notation we can write <span class="math display">\[
+<section id="sec-cv" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-cv"><span class="header-section-number">5.3</span> Cross-validation or <em>leave-one-out</em></h2>
+<p>This is an extreme form of the above principle. The test dataset <span class="math inline">\(D_2\)</span> comprises a single observation, <span class="math inline">\((t_{j},y_{j})\)</span>, for a given value of <span class="math inline">\(j\)</span>. The training set <span class="math inline">\(D_1\)</span> is then <span class="math inline">\(D_{-j} = \{(t_{i},y_{i}),\ i \in I_{-j}\}\)</span>, where <span class="math inline">\(I_{-j}\)</span> denotes the full set <span class="math inline">\(I\)</span> excluding <span class="math inline">\(j\)</span>. Then in a slightly amended notation we can write <span class="math display">\[
 Q_{-j:j}(\lambda) = \left(y_j - \hat{f}_{\lambda,-j}(t_j)\right)^2
-\]</span> to assess the quality of fit. Of course, <span class="math inline">\(j\)</span> is arbitrary, so we repeat this process for each <span class="math inline">\(j\in\{1,\dots,n\}\)</span> then average the assessments to form the <em>ordinary cross-validation criterion</em>: <span id="eq-CV"><span class="math display">\[
+\]</span> to assess the quality of fit. Of course, <span class="math inline">\(j\)</span> is arbitrary, so we repeat this process for each <span class="math inline">\(j\in\{1,\dots,n\}\)</span> then average the assessments to form the <em>ordinary cross-validation criterion</em>: <span id="eq-ocv"><span class="math display">\[
 Q_{OCV}(\lambda) = \frac{1}{n} \sum_{j=1}^n \left(y_j - \hat{f}_{\lambda,-j}(t_j)\right)^2.
-\tag{5.2}\]</span></span></p>
+\tag{5.3}\]</span></span></p>
 <p>We then choose the value <span class="math inline">\(\hat{\lambda}\)</span> which minimizes <span class="math inline">\(Q_{OCV}(\lambda)\)</span>. Hopefully, a plot of <span class="math inline">\(Q_{OCV}(\lambda)\)</span> will appear as in <a href="#fig-xval">Figure&nbsp;<span>5.1</span></a>, but there is no theoretical guarantee that this curve will have a unique turning point, making it difficult to locate the minimum.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-xval" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="5_smoothingparameter_files/figure-html/fig-xval-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Illustrating a cross-validation function.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Ordinary cross validation plot</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -262,7 +268,7 @@ M_\lambda^{12} \\ M_\lambda^{22}
 \end{bmatrix}
 \]</span> is a symmetric positive definite matrix for <span class="math inline">\(\lambda &gt; 0\)</span> called the <em>smoothing</em> matrix. Then, <span class="math inline">\(S_\lambda\)</span> connects the data <span class="math inline">\(\mathbf{y}\)</span> to the fitted values through <span id="eq-smoother"><span class="math display">\[
 \mathbf{\hat f} = S_\lambda \, \mathbf{y}.
-\tag{5.3}\]</span></span> That is, the fitted values are simple linear function of the data.</p>
+\tag{5.4}\]</span></span> That is, the fitted values are simple linear function of the data.</p>
 </section>
 <section id="sec-edf" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="sec-edf"><span class="header-section-number">5.5</span> Effective degrees of freedom</h2>
@@ -278,19 +284,19 @@ H = X (X^T X)^{-1} X^T
 &amp;= \text{trace}(I_p)\\
 &amp;= p,
 \end{align*}\]</span> where <span class="math inline">\(I_p\)</span> is the <span class="math inline">\(p \times p\)</span> identity matrix. Thus, for OLS regression, we see that the trace of the hat matrix equals the number of model parameters.</p>
-<p>Now in <a href="#eq-smoother">Equation&nbsp;<span>5.3</span></a> we see that the smoothing matrix <span class="math inline">\(S_\lambda\)</span> takes the role of a hat matrix, since it linearly maps the data onto the fitted values. This suggests that, for the smoothing spline, we can calculate an effective number of degrees of freedom as: <span id="eq-edf"><span class="math display">\[
+<p>Now in <a href="#eq-smoother">Equation&nbsp;<span>5.4</span></a> we see that the smoothing matrix <span class="math inline">\(S_\lambda\)</span> takes the role of a hat matrix, since it linearly maps the data onto the fitted values. This suggests that, for the smoothing spline, we can calculate an effective number of degrees of freedom as: <span id="eq-edf"><span class="math display">\[
 \text{edf}_\lambda = \text{trace} \, S_\lambda.
-\tag{5.4}\]</span></span> It can be shown from the limiting behaviour of the smoothing splines as <span class="math inline">\(\lambda \rightarrow \infty\)</span> and <span class="math inline">\(\lambda \rightarrow 0\)</span> that <span class="math inline">\(\text{edf}_\infty = \nu\)</span> (the number of parameters in the OLS solution) and <span class="math inline">\(\text{edf}_0 = n\)</span> (the number of parameters in the interpolating spline).</p>
+\tag{5.5}\]</span></span> It can be shown from the limiting behaviour of the smoothing splines as <span class="math inline">\(\lambda \rightarrow \infty\)</span> and <span class="math inline">\(\lambda \rightarrow 0\)</span> that <span class="math inline">\(\text{edf}_\infty = \nu\)</span> (the number of parameters in the OLS solution) and <span class="math inline">\(\text{edf}_0 = n\)</span> (the number of parameters in the interpolating spline).</p>
 </section>
-<section id="sec-GCV" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="sec-GCV"><span class="header-section-number">5.6</span> Generalized Cross Validation</h2>
-<p>The cross-validation criterion <span class="math inline">\(Q_{OCV}(\lambda)\)</span>, defined in <a href="#eq-CV">Equation&nbsp;<span>5.2</span></a>, is used to set the smoothing parameter, <span class="math inline">\(\lambda\)</span>. However, as noted in <a href="#sec-CV"><span>Section&nbsp;5.3</span></a>, using <a href="#eq-CV">Equation&nbsp;<span>5.2</span></a> to compute <span class="math inline">\(Q_{OCV}(\lambda)\)</span> would be impractical for large <span class="math inline">\(n\)</span>, since it would require fitting a new smoothing spline <span class="math inline">\(\hat{f}_{\lambda,-j}\)</span> for each <em>leave-one-out</em> dataset <span class="math inline">\(I_{-j}\)</span>.</p>
-<p>Fortunately, it is possible to compute <span class="math inline">\(Q_{OCV}(\lambda)\)</span> directly from the spline <span class="math inline">\(\hat{f}_{\lambda}\)</span> fitted to the full dataset. It can be shown that <a href="#eq-CV">Equation&nbsp;<span>5.2</span></a> can be rewritten: <span id="eq-OCV"><span class="math display">\[
+<section id="sec-gcv" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-gcv"><span class="header-section-number">5.6</span> Generalized Cross Validation</h2>
+<p>The cross-validation criterion <span class="math inline">\(Q_{OCV}(\lambda)\)</span>, defined in <span class="quarto-unresolved-ref">?eq-CV</span>, is used to set the smoothing parameter, <span class="math inline">\(\lambda\)</span>. However, as noted in <span class="quarto-unresolved-ref">?sec-CV</span>, using <span class="quarto-unresolved-ref">?eq-CV</span> to compute <span class="math inline">\(Q_{OCV}(\lambda)\)</span> would be impractical for large <span class="math inline">\(n\)</span>, since it would require fitting a new smoothing spline <span class="math inline">\(\hat{f}_{\lambda,-j}\)</span> for each <em>leave-one-out</em> dataset <span class="math inline">\(I_{-j}\)</span>.</p>
+<p>Fortunately, it is possible to compute <span class="math inline">\(Q_{OCV}(\lambda)\)</span> directly from the spline <span class="math inline">\(\hat{f}_{\lambda}\)</span> fitted to the full dataset. It can be shown that <span class="quarto-unresolved-ref">?eq-CV</span> can be rewritten: <span id="eq-OCV"><span class="math display">\[
 Q_{OCV}(\lambda) = \frac{1}{n} \sum_{j=1}^n \left(\frac{y_j - \hat{f}_{\lambda}(t_j)}{1-s_{jj}}\right)^2,
-\tag{5.5}\]</span></span> where <span class="math inline">\(\hat{f}_{\lambda}(t_j)\)</span> is the full-data fitted spline value at <span class="math inline">\(t_j\)</span> given by <a href="#eq-smoother">Equation&nbsp;<span>5.3</span></a>, and <span class="math inline">\(s_{jj}\)</span> is the <span class="math inline">\(j\)</span>th diagonal element of the smoothing (hat) matrix <span class="math inline">\(S_\lambda\)</span>.</p>
-<p>Prior to the discovery of algorithm to compute <a href="#eq-OCV">Equation&nbsp;<span>5.5</span></a> quickly, a computationally efficient approximation to the cross-validation criterion <a href="#eq-CV">Equation&nbsp;<span>5.2</span></a> was proposed, called the <strong>Generalized Cross-Validation</strong> criterion (GCV): <span id="eq-GCV"><span class="math display">\[
+\tag{5.6}\]</span></span> where <span class="math inline">\(\hat{f}_{\lambda}(t_j)\)</span> is the full-data fitted spline value at <span class="math inline">\(t_j\)</span> given by <a href="#eq-smoother">Equation&nbsp;<span>5.4</span></a>, and <span class="math inline">\(s_{jj}\)</span> is the <span class="math inline">\(j\)</span>th diagonal element of the smoothing (hat) matrix <span class="math inline">\(S_\lambda\)</span>.</p>
+<p>Prior to the discovery of algorithm to compute <a href="#eq-OCV">Equation&nbsp;<span>5.6</span></a> quickly, a computationally efficient approximation to the cross-validation criterion <span class="quarto-unresolved-ref">?eq-CV</span> was proposed, called the <strong>Generalized Cross-Validation</strong> criterion (GCV): <span id="eq-gcv"><span class="math display">\[
 Q_{GCV}(\lambda) = \frac{ \frac{1}{n} \sum_{j=1}^n \left(y_j - \hat{f}_{\lambda}(t_j)\right)^2}{\left(1-\tfrac{1}{n}\text{trace}(S_\lambda)\right)^2}.
-\tag{5.6}\]</span></span> Thus <a href="#eq-GCV">Equation&nbsp;<span>5.6</span></a> replaces <span class="math inline">\(s_{jj}\)</span> in <a href="#eq-OCV">Equation&nbsp;<span>5.5</span></a> with the average of the diagonal elements of <span class="math inline">\(S_\lambda\)</span>, which equals <span class="math inline">\(\tfrac{1}{n}\text{edf}_\lambda\)</span>. Thus a low value of <span class="math inline">\(\text{edf}_\lambda\)</span> will deflate <span class="math inline">\(Q_{GCV}(\lambda)\)</span>, making that value of <span class="math inline">\(\lambda\)</span> more favourable.</p>
+\tag{5.7}\]</span></span> Thus <span class="quarto-unresolved-ref">?eq-GCV</span> replaces <span class="math inline">\(s_{jj}\)</span> in <a href="#eq-OCV">Equation&nbsp;<span>5.6</span></a> with the average of the diagonal elements of <span class="math inline">\(S_\lambda\)</span>, which equals <span class="math inline">\(\tfrac{1}{n}\text{edf}_\lambda\)</span>. Thus a low value of <span class="math inline">\(\text{edf}_\lambda\)</span> will deflate <span class="math inline">\(Q_{GCV}(\lambda)\)</span>, making that value of <span class="math inline">\(\lambda\)</span> more favourable.</p>
 <p>In principle, OCV supplants GCV, but GCV is still used as it is numerically more stable. In particular, GCV is used in the <span class="math inline">\(\texttt{mgcv}\)</span> package – this will be discussed in the next chapter.</p>
 </section>
 <section id="exercises" class="level2" data-number="5.7">
@@ -441,6 +447,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./6_smoothinginpractice.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
