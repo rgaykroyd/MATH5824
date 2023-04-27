@@ -209,7 +209,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#penalized-deviance" id="toc-penalized-deviance" class="nav-link" data-scroll-target="#penalized-deviance"><span class="toc-section-number">6.2</span>  Penalized deviance</a></li>
   <li><a href="#gams-in-r" id="toc-gams-in-r" class="nav-link" data-scroll-target="#gams-in-r"><span class="toc-section-number">6.3</span>  GAMs in <strong>R</strong></a></li>
   <li><a href="#coronary-heart-disease-chd-in-south-africa" id="toc-coronary-heart-disease-chd-in-south-africa" class="nav-link" data-scroll-target="#coronary-heart-disease-chd-in-south-africa"><span class="toc-section-number">6.4</span>  Coronary heart disease (CHD) in South Africa</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">6.5</span>  Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -235,9 +234,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="overview" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">6.1</span> Overview</h2>
-<p>So far, we have considered the modelling of a response variable <span class="math inline">\(y\)</span> in term of a single response variable <span class="math inline">\(x\)</span>. In particular, we have assumed that the form of this relationship is unknown but can be written as <span class="math display">\[
+<p>So far, we have considered the modelling of a response variable <span class="math inline">\(y\)</span> in terms of a single response variable <span class="math inline">\(x\)</span>. In particular, we have assumed that the form of this relationship is unknown but can be written as <span class="math display">\[
 y_i = f(t_i) + \epsilon_i,\qquad \epsilon_i\sim\text{N}(0,\sigma^2)
-\]</span> where the <span class="math inline">\(\epsilon_i\)</span> are i.i.d. <span class="math inline">\(\sim\text{N}(0,\sigma^2)\)</span> and <span class="math inline">\(f(t)\)</span> is assumed to be smooth. Given knot positions <span class="math inline">\(\{t_i,\; i=1,\dots,n\}\)</span>, we can estimate <span class="math inline">\(f(t)\)</span> with a smoothing spline <span class="math inline">\(\hat{f}_\lambda(t)\)</span> for given smoothing parameter <span class="math inline">\(\lambda\)</span> and we can further estimate <span class="math inline">\(\lambda\)</span> using ordinary or generalized cross validation. This approach is in contrast to simple linear regression where <span class="math inline">\(y\)</span> is expressed as a linear function of the explanatory variable <span class="math inline">\(y_i=\alpha + \beta x_i +\epsilon_i\)</span>.</p>
+\]</span> where the <span class="math inline">\(\epsilon_i\)</span> are i.i.d. <span class="math inline">\(\sim\text{N}(0,\sigma^2)\)</span> and <span class="math inline">\(f(t)\)</span> is assumed to be smooth. Given knot positions <span class="math inline">\(\{t_i,\; i=1,\dots,n\}\)</span>, we can estimate <span class="math inline">\(f(t)\)</span> with a smoothing spline <span class="math inline">\(\hat{f}_\lambda(t)\)</span> for given smoothing parameter <span class="math inline">\(\lambda\)</span> and, further, we can estimate <span class="math inline">\(\lambda\)</span> using ordinary or generalized cross validation. This approach is in contrast to simple linear regression where <span class="math inline">\(y\)</span> is expressed as a linear function of the explanatory variable <span class="math inline">\(y_i=\alpha + \beta x_i +\epsilon_i\)</span> which enforces a very inflexible relationship.</p>
 <p>In this chapter, we generalize the modelling to describe the dependence of the response variable <span class="math inline">\(y\)</span> on a set of explanatory variables <span class="math inline">\(\mathbf{x}=(x_1,x_2,\dots, x_p)\)</span> where, conditionally on <span class="math inline">\(\mathbf{x}\)</span>, observation <span class="math inline">\(y\)</span> has a distribution which is not necessarily normal.</p>
 <p>Just as with a generalized linear model, the <em>general additive model</em> relates a continuous or discrete response variable <span class="math inline">\(Y\)</span> to a set of explanatory variables <span class="math inline">\(\mathbf{x}=(x_1,x_2,\dots, x_p)\)</span> and, again, the model contains three parts:</p>
 <p><strong>Random part:</strong> The probability (mass or density) function of <span class="math inline">\(Y\)</span> is assumed to belong to the <em>two-parameter</em> <em>exponential family</em> of distributions with parameters <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\phi\)</span>.</p>
@@ -252,14 +251,18 @@ y_i = f(t_i) + \epsilon_i,\qquad \epsilon_i\sim\text{N}(0,\sigma^2)
 </section>
 <section id="penalized-deviance" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="penalized-deviance"><span class="header-section-number">6.2</span> Penalized deviance</h2>
-<p>The spline theory in the previous chapters has assumed Gaussian (normally distributed) data and the identity link function. For non-Gaussian data and/or a non-identity link function, we need to replace the penalized least-squares criterion of <a href="4_smoothing.html#eq-Rlambdaf">Equation&nbsp;<span>4.2</span></a> with a <em>penalized deviance</em>: <span id="eq-Rlambdafglm1"><span class="math display">\[
-R_{\nu_\lambda}({\mathbf f}, \boldsymbol{\beta})
-= D({\mathbf y},{\mathbf f},\boldsymbol{\beta})  + \lambda \, J_\nu({\mathbf f}),
-\tag{6.3}\]</span></span> where <span class="math inline">\(D({\mathbf y},{\mathbf f},\boldsymbol{\beta})\)</span> is the deviance for the vector <span class="math inline">\(\mathbf{y}\)</span> of observations modeled by a linear predictor that comprises a spline function <span class="math inline">\(f(t)\)</span> of order <span class="math inline">\(\nu\)</span> and possibly also covariate main-effects and interactions. The penalized deviance is then minimized with respect to the spline coefficients <span class="math inline">\(\mathbf{a}\)</span>, <span class="math inline">\(\mathbf{b}\)</span> and regression parameters <span class="math inline">\(\boldsymbol{\beta}\)</span>, if any. Note that the fitted values for <span class="math inline">\(y\)</span> are obtained by applying the inverse link function to the linear predictor <span class="math inline">\(f(t)\)</span>, for example the logistic function when the link is logit.<br>
-When there are several smooth terms of order <span class="math inline">\(\nu\)</span> in the model, <span class="math inline">\(f_1,\dots,f_m\)</span>, each may be assigned its own roughness penalty, <span class="math inline">\(\lambda_h\)</span>, and <a href="#eq-Rlambdafglm1">Equation&nbsp;<span>6.3</span></a> becomes <span id="eq-Rlambdafglm2"><span class="math display">\[
-R_{\nu_{\lambda_1,\dots,\lambda_m}}(f_1,\dots,f_m,\beta) =
-D(y,f_1,\dots,f_m,\beta)  + \sum_{h=1}^m \lambda_h J_\nu(f_h).
-\tag{6.4}\]</span></span></p>
+<p>The spline theory in the previous chapters has assumed Gaussian (normally distributed) data and the identity link function. For non-Gaussian data and/or a non-identity link function, we need to replace the penalized least-squares criterion of <a href="4_smoothing.html#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a> with a <em>penalized deviance</em>: <span id="eq-rlambdafglm1"><span class="math display">\[
+R_{\nu}(f, \lambda, \boldsymbol{\beta})
+=
+D({\mathbf y}, f,\boldsymbol{\beta})  + \lambda \, J_\nu(f),
+\tag{6.3}\]</span></span> where <span class="math inline">\(D({\mathbf y}, f,\boldsymbol{\beta})\)</span> is the deviance for the vector <span class="math inline">\(\mathbf{y}\)</span> of observations modeled by a linear predictor that comprises a spline function <span class="math inline">\(f(t)\)</span> of order <span class="math inline">\(\nu\)</span> and possibly also covariate main-effects and interactions. The penalized deviance is then minimized with respect to the spline coefficients <span class="math inline">\(\mathbf{a}\)</span>, <span class="math inline">\(\mathbf{b}\)</span> and regression parameters <span class="math inline">\(\boldsymbol{\beta}\)</span>, if any. Note that the fitted values for <span class="math inline">\(y\)</span> are obtained by applying the inverse link function to the linear predictor <span class="math inline">\(f(t)\)</span>, for example the logistic function when the link is logit.</p>
+<p>When there are several smooth terms of order <span class="math inline">\(\nu\)</span> in the model, <span class="math inline">\({\mathbf f} = \{f_1,\dots,f_m\}\)</span>, each may be assigned its own roughness penalty, <span class="math inline">\(\lambda_h\)</span>, and <a href="#eq-rlambdafglm1">Equation&nbsp;<span>6.3</span></a> becomes <span id="eq-Rlambdafglm2"><span class="math display">\[
+R_{\nu}(f_1,\dots,f_m, \lambda_1,\dots, \lambda_m, \boldsymbol{\beta}) =
+D({\mathbf y}, f_1,\dots,f_m, \boldsymbol{\beta})  + \sum_{h=1}^m \lambda_h J_\nu(f_h)
+\tag{6.4}\]</span></span> or we may choose to write this as <span class="math display">\[
+R_{\nu}({\mathbf f}, {\boldsymbol \lambda}, \boldsymbol{\beta}) =
+D({\mathbf y}, {\mathbf f}, \boldsymbol{\beta})  + \sum_{h=1}^m \lambda_h J_\nu(f_h).
+\]</span></p>
 </section>
 <section id="gams-in-r" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="gams-in-r"><span class="header-section-number">6.3</span> GAMs in <strong>R</strong></h2>
@@ -468,10 +471,6 @@ UBRE = 0.083268  Scale est. = 1         n = 462</code></pre>
 </div>
 </div>
 <p>The predicted dependence of the logit probability of CHD on smooth functions of age and tobacco consumption is shown above. We see an almost linear predicted age-dependence, in agreement with its edf. The curious predicted dependence on tobacco consumption might be explained by other factors correlated with tobacco consumption.</p>
-</section>
-<section id="exercises" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.5</span> Exercises</h2>
-<p><strong>To be added later</strong></p>
 
 
 </section>

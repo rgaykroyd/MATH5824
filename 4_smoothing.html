@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -215,9 +278,9 @@ l(f; \mathbf{y})
 </section>
 <section id="the-penalized-least-squares-criterion" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="the-penalized-least-squares-criterion"><span class="header-section-number">4.2</span> The penalized least-squares criterion</h2>
-<p>Noting that maximizing <a href="#eq-loglik">Equation&nbsp;<span>4.1</span></a> is equivalent to minimizing the residual sum of squares: <span class="math inline">\(\sum_{i=1}^n \left(y_i - f(t_i)\right)^2\)</span>, we can achieve this trade-off by minimizing a <em>penalized</em> sum of squared residuals: <span id="eq-Rlambdaf"><span class="math display">\[
+<p>Noting that maximizing <a href="#eq-loglik">Equation&nbsp;<span>4.1</span></a> is equivalent to minimizing the residual sum of squares: <span class="math inline">\(\sum_{i=1}^n \left(y_i - f(t_i)\right)^2\)</span>, we can achieve this trade-off by minimizing a <em>penalized</em> sum of squared residuals: <span id="eq-rlambdaf"><span class="math display">\[
 R_\nu(f,\lambda) = \sum_{i=1}^n \left(y_i - f(t_i)\right)^2 + \lambda J_\nu(f),
-\tag{4.2}\]</span></span> where <span class="math inline">\(J_\nu(f)\)</span>, as first defined in <a href="3_interpolating.html#eq-Jnuf">Equation&nbsp;<span>3.8</span></a>, penalizes the roughness of <span class="math inline">\(f\)</span>. The <em>smoothing parameter</em> <span class="math inline">\(\lambda\geq 0\)</span> controls the severity of this penalty. For now we will assume <span class="math inline">\(\lambda\)</span>, which absorbs the <span class="math inline">\(\sigma^2\)</span> in <a href="#eq-loglik">Equation&nbsp;<span>4.1</span></a>, is known.</p>
+\tag{4.2}\]</span></span> where <span class="math inline">\(J_\nu(f)\)</span>, as first defined in <a href="3_interpolating.html#eq-jnuf">Equation&nbsp;<span>3.8</span></a>, penalizes the roughness of <span class="math inline">\(f\)</span>. The <em>smoothing parameter</em> <span class="math inline">\(\lambda\geq 0\)</span> controls the severity of this penalty. For now we will assume <span class="math inline">\(\lambda\)</span>, which absorbs the <span class="math inline">\(\sigma^2\)</span> in <a href="#eq-loglik">Equation&nbsp;<span>4.1</span></a>, is known.</p>
 <p><a href="#fig-smoothlambda">Figure&nbsp;<span>4.2</span></a> shows example smoothing spline fits using a range of smoothing parameters, <span class="math inline">\(\lambda\)</span>. In <a href="#fig-smoothlambda-1">Figure&nbsp;<span>4.2 (a)</span></a> the fit is essentially a straight line, perhaps <a href="#fig-smoothlambda-2">Figure&nbsp;<span>4.2 (b)</span></a> and <a href="#fig-smoothlambda-3">Figure&nbsp;<span>4.2 (c)</span></a> show acceptable fits. <a href="#fig-smoothlambda-4">Figure&nbsp;<span>4.2 (d)</span></a>, with a very small <span class="math inline">\(\lambda\)</span> value is close to an interpolating spline fit and is clearly unacceptable.</p>
 <div id="fig-smoothlambda" class="cell quarto-layout-panel">
 <figure class="figure">
@@ -264,7 +327,7 @@ R_\nu(f,\lambda) = \sum_{i=1}^n \left(y_i - f(t_i)\right)^2 + \lambda J_\nu(f),
 </section>
 <section id="sec:relationto" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="sec:relationto"><span class="header-section-number">4.3</span> Relation to interpolating splines</h2>
-<p>We show in the following proposition that the function <span class="math inline">\(f\)</span> which minimizes <a href="#eq-Rlambdaf">Equation&nbsp;<span>4.2</span></a> is the interpolating spline of its fitted values.</p>
+<p>We show in the following proposition that the function <span class="math inline">\(f\)</span> which minimizes <a href="#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a> is the interpolating spline of its fitted values.</p>
 <div id="prp-optimalinterpolant" class="proposition theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4.1 </strong></span>Suppose <span class="math inline">\(\hat{f}\)</span> minimizes <span class="math inline">\(R_\nu(f,\lambda)\)</span> and let <span class="math inline">\(\hat{y}_i = \hat{f}(t_i), i=1,\dots,n\)</span> denote the corresponding fitted values. Then, <span class="math inline">\(\hat{f}\)</span> solves the interpolation problem for the <em>artificial</em> data set <span class="math inline">\((t_i,\hat{y}_i), i=1,\dots , n\)</span>. That is, <span class="math inline">\(\hat{f}\)</span> minimizes <span class="math inline">\(J_\nu(f)\)</span> over functions <span class="math inline">\(f\)</span> satisfying <span class="math inline">\(\hat f(t_i)=\hat{y}_i\)</span>, <span class="math inline">\(i=1,\ldots,n\)</span>. Consequently, <span class="math inline">\(\hat{f}\)</span> is a <span class="math inline">\(p^{\text{th}}\)</span>-order natural spline, where <span class="math inline">\(p=2\nu-1\)</span>. This means that, when solving the smoothing problem, we only need consider spline functions given by the representations in <a href="3_interpolating.html#prp-naturalSpline">Proposition&nbsp;<span>3.1</span></a>.</p>
 </div>
@@ -296,7 +359,7 @@ J_\nu({\hat{f}^\star}) &lt; J_\nu(\hat{f})
   \mbox{ with }
 \hat{f}^\star(t_i) = \hat{y}_i, \ i=1,\ldots,n.
 \]</span> Note that the fitted values from the function <span class="math inline">\(\hat f^\star\)</span> are also equal to <span class="math inline">\(\hat y_i, i=1,\dots,n\)</span> as it interpolates the same artificial data as <span class="math inline">\(\hat f\)</span>.</p>
-<p>Now, from <a href="#eq-Rlambdaf">Equation&nbsp;<span>4.2</span></a>, <span class="math display">\[\begin{align*}
+<p>Now, from <a href="#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a>, <span class="math display">\[\begin{align*}
   R_\nu(\hat{f}^\star, \lambda) &amp;= \sum_i (y_i-\hat{y}_i)^2 + \lambda J_\nu(\hat{f}^\star)\\
 &amp;&lt; \sum_i (y_i-\hat{y}_i)^2 + \lambda J_\nu(\hat{f})
 = R_\nu(\hat{f}, \lambda).
@@ -317,13 +380,13 @@ a_o + a_1t, &amp;\nu=2,
 \sum_i b_i = \sum_i b_i \, t_i = 0
 \, \mbox{ for }\, \nu=2.
 \tag{4.4}\]</span></span></p>
-<p>However, we have not yet figured out how to calculate the parameter values <span class="math inline">\(\hat{a}_0,\dots,\hat{a}_{\nu-1},\ \hat{b}_1,\dots,\hat{b}_n\)</span> in <a href="#eq-fhat">Equation&nbsp;<span>4.3</span></a> which optimally fit the data <span class="math inline">\(y_1,\dots,y_n\)</span>. For this, it is convenient to re-express the penalized sum of squared residuals <a href="#eq-Rlambdaf">Equation&nbsp;<span>4.2</span></a> in matrix notation.</p>
+<p>However, we have not yet figured out how to calculate the parameter values <span class="math inline">\(\hat{a}_0,\dots,\hat{a}_{\nu-1},\ \hat{b}_1,\dots,\hat{b}_n\)</span> in <a href="#eq-fhat">Equation&nbsp;<span>4.3</span></a> which optimally fit the data <span class="math inline">\(y_1,\dots,y_n\)</span>. For this, it is convenient to re-express the penalized sum of squared residuals <a href="#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a> in matrix notation.</p>
 <div id="prp-roughness" class="proposition theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4.2 </strong></span>The roughness of a natural linear spline (<span class="math inline">\(\nu=1\)</span>, i.e.&nbsp;<span class="math inline">\(p=1\)</span>) is <span id="eq-J1f"><span class="math display">\[
+<p><span class="theorem-title"><strong>Proposition 4.2 </strong></span>The roughness of a natural linear spline (<span class="math inline">\(\nu=1\)</span>, i.e.&nbsp;<span class="math inline">\(p=1\)</span>) is <span id="eq-j1f"><span class="math display">\[
 J_1(f)  
 = -2\sum_{i=1}^n \sum_{k=1}^n b_i b_k \left| t_i - t_k \right|
 = c_1\,{\mathbf b}^T \, K_1 \, {\mathbf b},
-\tag{4.5}\]</span></span> and the roughness of a natural cubic spline (<span class="math inline">\(\nu=2\)</span>, i.e.&nbsp;<span class="math inline">\(p=3\)</span>) is <span id="eq-J2f"><span class="math display">\[
+\tag{4.5}\]</span></span> and the roughness of a natural cubic spline (<span class="math inline">\(\nu=2\)</span>, i.e.&nbsp;<span class="math inline">\(p=3\)</span>) is <span id="eq-j2f"><span class="math display">\[
 J_2(f)  = 12\sum_{i=1}^n \sum_{k=1}^n b_i b_k \left| t_i - t_k \right|^3
 = c_2\,{\mathbf b}^T \, K_2 \, {\mathbf b},
 \tag{4.6}\]</span></span> where the constants are given by <span id="eq-constants"><span class="math display">\[
@@ -368,14 +431,14 @@ L_2 =
 \quad \mathbf{a}_2 = \left[\begin{array}{l}a_0\\a_1\end{array}
 \right] .
 \]</span></p>
-<p>Thus, from <a href="#eq-constraints">Equation&nbsp;<span>4.4</span></a> – <a href="#eq-fhattkmat">Equation&nbsp;<span>4.9</span></a>, the penalized least-squares criterion <a href="#eq-Rlambdaf">Equation&nbsp;<span>4.2</span></a> reduces to a quadratic function of the parameters <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\({\mathbf b}\)</span>:</p>
+<p>Thus, from <a href="#eq-constraints">Equation&nbsp;<span>4.4</span></a> – <a href="#eq-fhattkmat">Equation&nbsp;<span>4.9</span></a>, the penalized least-squares criterion <a href="#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a> reduces to a quadratic function of the parameters <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\({\mathbf b}\)</span>:</p>
 <p><span id="eq-rlambdafmat"><span class="math display">\[
 R_\nu(f, \lambda) = (\mathbf{y} - K_\nu  \, {\mathbf b} - L_\nu   \, \mathbf{a})^T  (\mathbf{y} - K_\nu  \, {\mathbf b} - L_\nu   \, \mathbf{a})
                             + \lambda \,c_\nu  \,{\mathbf b}^T K_\nu   \,{\mathbf b}
-\tag{4.10}\]</span></span> subject to <span id="eq-Lnubmat"><span class="math display">\[
+\tag{4.10}\]</span></span> subject to <span id="eq-lnubmat"><span class="math display">\[
 L_\nu^T\,{\mathbf b} = 0,
 \tag{4.11}\]</span></span> where <span class="math inline">\(\mathbf{y} = (y_1,\ldots,y_n)^T\)</span>.</p>
-<p>To find the explicit values for <span class="math inline">\(\mathbf{b}\)</span> and <span class="math inline">\(\mathbf{a}\)</span>, we must minimize the quadratic function <span class="quarto-unresolved-ref">?eq-Rlambdafmat</span> subject to the linear constraints <a href="#eq-Lnubmat">Equation&nbsp;<span>4.11</span></a>.</p>
+<p>To find the explicit values for <span class="math inline">\(\mathbf{b}\)</span> and <span class="math inline">\(\mathbf{a}\)</span>, we must minimize the quadratic function <a href="#eq-rlambdafmat">Equation&nbsp;<span>4.10</span></a> subject to the linear constraints <a href="#eq-lnubmat">Equation&nbsp;<span>4.11</span></a>.</p>
 <div id="prp-smoother" class="proposition theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4.3 </strong></span>The solution to the smoothing spline problem is given by <span id="eq-smoothsol1"><span class="math display">\[
 \begin{bmatrix}
@@ -395,11 +458,80 @@ L_\nu^T &amp; K_\nu+\lambda^* I_n
 </section>
 <section id="smoothing-splines-in-r" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="smoothing-splines-in-r"><span class="header-section-number">4.5</span> Smoothing splines in R</h2>
-<p><strong>Notes to be added</strong></p>
+<p>Fitting a smoothing spline to data involved estimating values of <span class="math inline">\(\mathbf a\)</span> and <span class="math inline">\(\mathbf b\)</span> to minimize the penalized roughness measure in <a href="#eq-rlambdafmat">Equation&nbsp;<span>4.10</span></a> subject to the constraints in <a href="#eq-lnubmat">Equation&nbsp;<span>4.11</span></a> which yields the explicit equation in <a href="#eq-smoothsol1">Equation&nbsp;<span>4.12</span></a>.</p>
+<p>Of course, it is possible to code the solution of this matrix system, but it is usual instead to use in-built commands in software such as <strong>R</strong>.</p>
+<p>In <strong>R</strong> the basic command is:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">smooth.spline</span>(x, y, lambda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>where <span class="math inline">\(\texttt{x}\)</span> and <span class="math inline">\(\texttt{y}\)</span> are vectors of data coordinates, and <span class="math inline">\(\texttt{lambda}\)</span> specifies the value of the smoothing parameter to use.</p>
+<p>For example, consider the synthetic data set which contains a break-point at <span class="math inline">\(x=2/3\)</span> first met in <a href="1_introduction.html#fig-plotpeicewise">Figure&nbsp;<span>1.2</span></a>. Fitted spline curves with <span class="math inline">\(\lambda=0.0001\)</span> and <span class="math inline">\(\lambda=1\)</span>, shown in <a href="#fig-smoothpeicewise">Figure&nbsp;<span>4.4</span></a>, are based on the following commands:</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>myfit1 <span class="ot">=</span> <span class="fu">smooth.spline</span>(x, y, <span class="at">lambda =</span> <span class="fl">0.00001</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>myfit2 <span class="ot">=</span> <span class="fu">smooth.spline</span>(x, y, <span class="at">lambda =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">mgp=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12341</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">40</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fl">0.75</span><span class="sc">*</span>(x <span class="sc">&gt;=</span> <span class="fl">0.67</span>) <span class="sc">+</span> <span class="fl">0.6</span><span class="sc">*</span>x<span class="sc">*</span>(x<span class="sc">&lt;</span><span class="fl">0.67</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">40</span>,<span class="dv">0</span>,<span class="fl">0.1</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>myfit1 <span class="ot">=</span> <span class="fu">smooth.spline</span>(x, y, <span class="at">lambda =</span> <span class="fl">0.00001</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>fit.locations <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="fl">0.01</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>fitted <span class="ot">=</span> <span class="fu">predict</span>(myfit1, fit.locations)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitted, <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>myfit2 <span class="ot">=</span> <span class="fu">smooth.spline</span>(x, y, <span class="at">lambda =</span> <span class="dv">1</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>fit.locations <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="fl">0.01</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>fitted <span class="ot">=</span> <span class="fu">predict</span>(myfit2, fit.locations)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fitted, <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-smoothpeicewise" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-smoothpeicewise-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="4_smoothing_files/figure-html/fig-smoothpeicewise-1.png" class="img-fluid figure-img" data-ref-parent="fig-smoothpeicewise" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) Weak smoothing</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-smoothpeicewise-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="4_smoothing_files/figure-html/fig-smoothpeicewise-2.png" class="img-fluid figure-img" data-ref-parent="fig-smoothpeicewise" width="672"></p>
+<p></p><figcaption class="figure-caption">(b) Strong smoothing</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: Simulated data superimposed with fitted smoothing splines.</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>If no value of the smoothing parameter is specified, the the optimal value is calculated using generalized cross-validation as discussed in the next chapter.</p>
 </section>
 <section id="exercies" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="exercies"><span class="header-section-number">4.6</span> Exercies</h2>
-<p><strong>Questions will be added later</strong></p>
+<div class=".exercises">
+<p>4.1 Consider the <em>Old Faithful</em> data set on geyser eruptions available in R. Use the following commands to learn more about and visualize the data:</p>
+<pre><code>data(faithful)   
+help(faithful)  
+plot(faithful) </code></pre>
+<p>Fit a cubic smoothing spline to these data, using a range of values for the smoothing parameter <span class="math inline">\(\lambda\)</span>. By eye, suggest a suitable value for <span class="math inline">\(\lambda\)</span>.</p>
+</div>
 
 
 </section>
