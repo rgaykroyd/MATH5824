@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MATH5824 Generalized Linear and Additive Models - Overview</title>
+<title>MATH5824 Generalised Linear and Additive Models - Overview</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">MATH5824 Generalized Linear and Additive Models</a> 
+      <a href="./">MATH5824 Generalised Linear and Additive Models</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -116,36 +116,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./2_basicdefinitions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./3_interpolating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./6_smoothinginpractice.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -157,6 +127,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#changes-since-last-year" id="toc-changes-since-last-year" class="nav-link" data-scroll-target="#changes-since-last-year">Changes since last year</a></li>
   <li><a href="#official-module-description" id="toc-official-module-description" class="nav-link" data-scroll-target="#official-module-description">Official Module Description</a>
   <ul class="collapse">
   <li><a href="#module-summary" id="toc-module-summary" class="nav-link" data-scroll-target="#module-summary">Module summary</a></li>
@@ -189,9 +160,14 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="preface" class="level2">
 <h2 class="anchored" data-anchor-id="preface">Preface</h2>
-<p>These lecture notes are produced for the University of Leeds module “MATH5824 - Generalized Linear and Additive Models” for the academic year 2022-23. They are based on those used previously for this module and I am grateful to previous module lecturers for their considerable effort: Lanpeng Ji, Amanda Minter, John Kent, Wally Gilks, and Stuart Barber. This is the first year, however, that they have been produced in accessible format and hence some errors might occur during this conversion process. For information, I am using <a href="https://quarto.org/docs/tools/rstudio.html">Quarto</a> (a successor to RMarkdown) from <a href="https://posit.co/">RStudio</a> to produce both the html and PDF, and then <a href="https://github.com/">GitHub</a> to create the website which can be accessed at <a href="rgaykroyd.github.io/MATH3823/">rgaykroyd.github.io/MATH3823/</a>. Please note that the PDF versions will only be made available on the University of Leeds Minerva system. Although I am a long-term user of RStudio, I have not previously used Quarto/RMarkdown nor Github and hence please be patient if there are hitches along the way.</p>
-<p>In the Level 3 component of this module, we extend the simple linear regression model to the generalized linear model which can cope with non-normally distributed response variables, in particular data following binomial and Poisson distributions. However, we still just use linear functions of the predictor variables. A further extension of the linear model is the generalized additive model. Here, we no longer insist on the predictor variables affecting the response via a linear function of the predictors, but allow the response to depend on a more general smooth function of the predictor. In the Level 5 component of this module, we study splines and their use in interpolating and smoothing the effects of explanatory variables in the generalized linear models of the Level 3 component of this module (see separate Lecture Notes accompanying MATH3823).</p>
-<p>RG Aykroyd, Leeds, November 22, 2022</p>
+<p>These lecture notes are produced for the University of Leeds module “MATH5824 - Generalized Linear and Additive Models” for the academic year 2023-24. They are based on the lecture notes used previously for this module and I am grateful to previous module lecturers for their considerable effort: Lanpeng Ji, Amanda Minter, John Kent, Wally Gilks, and Stuart Barber. This year, again, I am using <a href="https://quarto.org/docs/tools/rstudio.html">Quarto</a> (a successor to RMarkdown) from <a href="https://posit.co/">RStudio</a> to produce both the html and PDF, and then <a href="https://github.com/">GitHub</a> to create the website which can be accessed at <a href="rgaykroyd.github.io/MATH5824/">rgaykroyd.github.io/MATH5824/</a>. Please note that the PDF versions will only be made available on the University of Leeds Minerva system. Although I am a long-term user of RStudio, I am a novice at Quarto/RMarkdown and a complete beginner using Github and hence please be patient if there are hitches along the way.</p>
+<p>RG Aykroyd, Leeds, January 22, 2024</p>
+<p><br>
+</p>
+</section>
+<section id="changes-since-last-year" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="changes-since-last-year">Changes since last year</h2>
+<p>Feedback from the students last year was very positive, but there were consistent comments regarding two issues: (1) a shortage of practice exercises and the opportunity to discuss these in class, and (2) limited RStudio support in preparation for the assessment. For the first of these, additional exercises have been prepared and are included in the learning material. Also, I am trying some short quizzes so that you can check your basic knowledge. Further, I intend to set-aside some lecture time for us to discuss selected exercises. For the second, an additional computer session has been added, in Week 5 (26 February - 1 March), this is 3 weeks before the assessed practice in Week 8 (18 - 22 March). Further, a few new instructional videos will be available addressing some RStudio topics. Together, these represents a considerable about of extra work for me, but I hope that they are helpful and so please give your feedback whenever there is an opportunity.</p>
 <p><br>
 </p>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -235,7 +211,7 @@ Warning
 </section>
 <section id="university-module-catalogue" class="level2">
 <h2 class="anchored" data-anchor-id="university-module-catalogue">University Module Catalogue</h2>
-<p>For any further details, please see <a href="https://webprod3.leeds.ac.uk/catalogue/dynmodules.asp?Y=202223&amp;M=MATH-5824M">MATH5824 Module Catalogue page</a></p>
+<p>For any further details, please see <a href="https://webprod3.leeds.ac.uk/catalogue/dynmodules.asp?Y=202324&amp;M=MATH-5824M">MATH5824 Module Catalogue page</a></p>
 
 
 </section>

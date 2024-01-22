@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MATH5824 Generalized Linear and Additive Models - 1&nbsp; Non-parametric Modelling</title>
+<title>MATH5824 Generalised Linear and Additive Models - 1&nbsp; Non-parametric Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./2_basicdefinitions.html" rel="next">
 <link href="./0_preface.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -90,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">MATH5824 Generalized Linear and Additive Models</a> 
+      <a href="./">MATH5824 Generalised Linear and Additive Models</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -118,36 +117,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./2_basicdefinitions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./3_interpolating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./6_smoothinginpractice.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -158,8 +127,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation"><span class="header-section-number">1.1</span> Motivation</a></li>
-  <li><a href="#sec-genmodelling" id="toc-sec-genmodelling" class="nav-link" data-scroll-target="#sec-genmodelling"><span class="header-section-number">1.2</span> General modelling approaches</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1.1</span> Introduction</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="header-section-number">1.2</span> Motivation</a></li>
+  <li><a href="#sec-genmodelling" id="toc-sec-genmodelling" class="nav-link" data-scroll-target="#sec-genmodelling"><span class="header-section-number">1.3</span> General modelling approaches</a>
   <ul class="collapse">
   <li><a href="#parametric-models" id="toc-parametric-models" class="nav-link" data-scroll-target="#parametric-models">Parametric models</a></li>
   <li><a href="#non-parametric-models" id="toc-non-parametric-models" class="nav-link" data-scroll-target="#non-parametric-models">Non-parametric models</a></li>
@@ -193,8 +163,18 @@ ul.task-list li input[type="checkbox"] {
 \def\b#1{\mathbf{#1}}
 \]</span></p>
 </div>
-<section id="motivation" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="motivation"><span class="header-section-number">1.1</span> Motivation</h2>
+<section id="introduction" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1.1</span> Introduction</h2>
+<p>In the Level 3 component of this module, we extend the simple linear regression model to the generalised linear model which can cope with non-normally distributed response variables, in particular data following binomial and Poisson distributions. However, we still just use linear functions of the predictor variables. A further extension of the linear model is the generalised additive model. Here, we no longer insist on the predictor variables affecting the response via a linear function of the predictors, but allow the response to depend on a more general smooth function of the predictor. In the Level 5 component of this module, we study splines and their use in interpolating and smoothing the effects of explanatory variables in the generalised linear models of the Level 3 component of this module (see separate Lecture Notes accompanying MATH3823). Towards the end of the material, we will learn that the fitting of generalised additive models is a straightforward extension of what is learnt in MATH3823.</p>
+<p>Outline of the additional material in MATH5824 compared to MATH3823:</p>
+<ol type="1">
+<li>Interpolating and smoothing splines.</li>
+<li>Cross-validation and fitting splines to data.</li>
+<li>The generalised additive model.</li>
+</ol>
+</section>
+<section id="motivation" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="motivation"><span class="header-section-number">1.2</span> Motivation</h2>
 <p><a href="#tbl-coalseemdata">Table&nbsp;<span>1.1</span></a> reports on the depth of a coal seam determined by drilling bore holes at regular intervals along a line. The depth <span class="math inline">\(y\)</span> at location <span class="math inline">\(x=6\)</span> is missing: could we estimate it?</p>
 <div id="tbl-coalseemdata" class="anchored">
 <table class="table">
@@ -376,8 +356,8 @@ ul.task-list li input[type="checkbox"] {
 <p>The simplest method, <em>constant-spline interpolation</em>, assumes that the dependent variable remains constant between successive observations, with the result shown in <a href="#fig-plotCoalseemspline-1">Figure&nbsp;<span>1.3 (a)</span></a>. However, the discontinuities in this model make it quite unreliable. A better method, whose results are shown in <a href="#fig-plotCoalseemspline-2">Figure&nbsp;<span>1.3 (b)</span></a>, is <em>linear-spline interpolation</em>, which fits a straight line between successive observations. Even so, this method produces discontinuities in the <em>gradient</em> at each data point. A better method still, shown in <a href="#fig-plotCoalseemspline-3">Figure&nbsp;<span>1.3 (c)</span></a>, is <em>cubic spline interpolation</em>, which fits a cubic polynomial between successive data points such that both the gradient and the curvature at each data point is continuous.</p>
 <p>A feature of all these interpolation methods is that they fit the data exactly. Is this a good thing? The final method assumes that there may be some measurement error in the observations, which justifies fitting a smoother cubic spline than the cubic interpolating spline, but as we see in <a href="#fig-plotCoalseemspline-4">Figure&nbsp;<span>1.3 (d)</span></a> which does not reproduce the data points exactly. Is this a bad thing? We will see during this module how to construct and evaluate these curves. Here, the results are presented only for motivation.</p>
 </section>
-<section id="sec-genmodelling" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="sec-genmodelling"><span class="header-section-number">1.2</span> General modelling approaches</h2>
+<section id="sec-genmodelling" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="sec-genmodelling"><span class="header-section-number">1.3</span> General modelling approaches</h2>
 <p>We wish to model the dependence of a response variable <span class="math inline">\(y\)</span> on an explanatory variable <span class="math inline">\(x\)</span>, where <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are both continuous. We observe <span class="math inline">\(y_i\)</span> at each time <span class="math inline">\(x_i,\)</span> for <span class="math inline">\(i=1,\ldots, n\)</span>, where the observation locations are ordered: <span class="math inline">\(x_1 &lt; x_2 &lt; \ldots &lt;x_n\)</span>. We imagine that the <span class="math inline">\(y\)</span>’s are noisy versions of a smooth function of <span class="math inline">\(x\)</span>, say <span class="math inline">\(f(x)\)</span>. That is, <span id="eq-smoothregression"><span class="math display">\[
 y_i = f(x_i) + \epsilon_i,
 \tag{1.1}\]</span></span> where the <span class="math inline">\(\{\epsilon_i\}\)</span> are i.i.d: <span id="eq-normalerror"><span class="math display">\[
@@ -387,12 +367,12 @@ y_i = f(x_i) + \epsilon_i,
 <section id="parametric-models" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="parametric-models">Parametric models</h3>
 <p>By far the most common parametric model is simple linear regression, for example, <span class="math inline">\(f(x) = \alpha + \beta x\)</span>, where parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are to be estimated. This is, of course, the simplest example of the polynomial model family, <span class="math inline">\(f(x) = \alpha + \beta x + \gamma x^2 +\cdots + \omega \; x^p\)</span>, where <span class="math inline">\(p\)</span> is the <em>order</em> of the polynomial and where all of <span class="math inline">\(\alpha, \beta, \gamma, \dots, \omega\)</span> are to be estimated. This has as special cases: quadratic, cubic, quartic, and quintic polynomials models. Also common are exponential models, for example <span class="math inline">\(f(x) = \alpha e^{-\beta x}\)</span>, where <span class="math inline">\(\alpha,\beta\)</span> are to be estimated – do not confuse this with the exponential probability density function.</p>
-<p>Note that the polynomial models are all linear functions <em>of the parameters</em>. They are standard forms in regression modelling, as studied in MATH3714 (Linear regression and Robustness) and MATH3823 (Generalized linear models). The exponential model, however, is an example of a model which is non-linearly in the parameters – it is an example of a <em>non-linear regression model</em>.</p>
+<p>Note that the polynomial models are all linear functions <em>of the parameters</em>. They are standard forms in regression modelling, as studied in MATH3714 (Linear regression and Robustness) and MATH3823 (Generalised linear models). The exponential model, however, is an example of a model which is non-linearly in the parameters – it is an example of a <em>non-linear regression model</em>.</p>
 <p>Although very many parametric models exist, they are all somewhat inflexible in their description of <span class="math inline">\(f\)</span>. They cannot accommodate arbitrary fluctuations in <span class="math inline">\(f(x)\)</span> over <span class="math inline">\(x\)</span> because they contain only a small number of parameters (degrees-of-freedom).</p>
 </section>
 <section id="non-parametric-models" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="non-parametric-models">Non-parametric models</h3>
-<p>In such models, <span class="math inline">\(f\)</span> is assumed to be a smooth function of <span class="math inline">\(x\)</span>, but otherwise we do not know what <span class="math inline">\(f\)</span> looks like. A <em>smooth function</em> <span class="math inline">\(f\)</span> is such that <span class="math inline">\(f(x_i)\)</span> is close to <span class="math inline">\(f(x_j)\)</span> whenever <span class="math inline">\(x_i\)</span> is close to <span class="math inline">\(x_j\)</span>. To characterize and fit <span class="math inline">\(f\)</span> we will use an approach based on <em>splines</em>. In practice, different approaches to characterizing and fitting smooth <span class="math inline">\(f\)</span> lead to similar fits to the data. The spline approach fits neatly with normal and generalized linear models (NLMs and GLMs), but so do other approaches (for example, kernel smoothing and wavelets). Methods of fitting <span class="math inline">\(f\)</span> based on kernel smoothing and the Nadaraya–Watson estimator are studied in the Level 5 component of MATH5714 (Linear regression, robustness and smoothing) where the choice of bandwidth in kernel methods is analogous to the choice of smoothing parameter value in spline smoothing.</p>
+<p>In such models, <span class="math inline">\(f\)</span> is assumed to be a smooth function of <span class="math inline">\(x\)</span>, but otherwise we do not know what <span class="math inline">\(f\)</span> looks like. A <em>smooth function</em> <span class="math inline">\(f\)</span> is such that <span class="math inline">\(f(x_i)\)</span> is close to <span class="math inline">\(f(x_j)\)</span> whenever <span class="math inline">\(x_i\)</span> is close to <span class="math inline">\(x_j\)</span>. To characterise and fit <span class="math inline">\(f\)</span> we will use an approach based on <em>splines</em>. In practice, different approaches to characterizing and fitting smooth <span class="math inline">\(f\)</span> lead to similar fits to the data. The spline approach fits neatly with normal and generalised linear models (NLMs and GLMs), but so do other approaches (for example, kernel smoothing and wavelets). Methods of fitting <span class="math inline">\(f\)</span> based on kernel smoothing and the Nadaraya–Watson estimator are studied in the Level 5 component of MATH5714 (Linear regression, robustness and smoothing) where the choice of bandwidth in kernel methods is analogous to the choice of smoothing parameter value in spline smoothing.</p>
 </section>
 <section id="piecewise-polynomial-models" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="piecewise-polynomial-models">Piecewise polynomial models</h3>
@@ -643,9 +623,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./2_basicdefinitions.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
