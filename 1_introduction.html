@@ -63,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<link rel="stylesheet" href="webex.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -135,6 +136,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#non-parametric-models" id="toc-non-parametric-models" class="nav-link" data-scroll-target="#non-parametric-models">Non-parametric models</a></li>
   <li><a href="#piecewise-polynomial-models" id="toc-piecewise-polynomial-models" class="nav-link" data-scroll-target="#piecewise-polynomial-models">Piecewise polynomial models</a></li>
   </ul></li>
+  <li><a href="#sec-exercises1" id="toc-sec-exercises1" class="nav-link" data-scroll-target="#sec-exercises1"><span class="header-section-number">1.4</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -380,12 +382,255 @@ y_i = f(x_i) + \epsilon_i,
 <section id="piecewise-polynomial-models" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="piecewise-polynomial-models">Piecewise polynomial models</h3>
 <p>A common problem with low-order polynomials is that they can often fit well for part of the data but have unappealing features elsewhere. For example, although none of the models in <a href="#fig-plotCoalseemregress">Figure&nbsp;<span>1.1</span></a> fit the data at all well, we might imagine that three short linear segments might be a good fit to the coal-seam data. Also, the piecewise linear model was a good description of the data in <a href="#fig-plotpeicewise-3">Figure&nbsp;<span>1.2 (c)</span></a>. This suggests that local polynomial models might be useful. In some situation, for example when we know that the function <span class="math inline">\(f\)</span> is continuous, jumps in the fitted model, as in <a href="#fig-plotpeicewise-3">Figure&nbsp;<span>1.2 (c)</span></a>, are unacceptable. Alternatively, we may require differentiability of <span class="math inline">\(f\)</span>. Such technical issues lead to the use of <em>splines,</em> which is introduced in the next chapter.</p>
-
-
 </section>
+</section>
+<section id="sec-exercises1" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="sec-exercises1"><span class="header-section-number">1.4</span> Exercises</h2>
+<div class="webex-box">
+1.1 Consider the first three models fitted in <a href="#fig-plotCoalseemregress">Figure&nbsp;<span>1.1</span></a> and let the data be denoted, <span class="math inline">\(\{(x_i, y_i): i=1,2,\dots, n\}\)</span>. These three models can be written <span class="math display">\[\begin{align*}
+(a) \quad &amp;  y = \alpha +\epsilon\\
+(b) \quad &amp;  y = \alpha +\beta x+\epsilon\\
+(c) \quad &amp;  y = \alpha +\beta x + \gamma x^2 +\epsilon
+\end{align*}\]</span> where <span class="math inline">\(\epsilon\)</span> represents normally distributed random error. Use the principle of least squares, or otherwise, to obtain estimates of the model parameters.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>For each, start by defining the residual sum of squares (RSS), <span class="math inline">\(RSS=\sum (y_i - \hat{y}_i)^2\)</span> where, in turn (a) <span class="math inline">\(\hat{y}_i= \alpha\)</span>, (b) <span class="math inline">\(\hat{y}_i= \alpha+\beta x_i\)</span>, (c) <span class="math inline">\(\hat{y}_i= \alpha+\beta x_i+\gamma x_i^2\)</span>. Then, find he parameter values which minimise the RSS by (possibly partial) differentiation.</p>
+</div>
+1.2 Discuss possible approaches to fitting an exponential model, <span class="math inline">\(f(x)=\alpha e^{-\beta x}\)</span>, to data. Note that no actual algebraic derivation, nor numerical coded algorithm is expect.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>There is more than one approach. Can least squares be used? Could a simple transformation of the data and the fitted model make solving the problem easier? Is there an algebraic solution? Is there a purely numerical solution?</p>
+</div>
+1.2 In <a href="#fig-plotpeicewise-3">Figure&nbsp;<span>1.2 (c)</span></a>, discuss how you might fit a two-part linear model for the case where the change-point is <em>unknown</em>. Note that no actual algebraic derivation, nor numerical coded algorithm is expect.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>With many similar problems, imaging breaking the problem down into steps. If you know the location of the change-point then what should you do? Can you then try different possible change-point locations?</p>
+</div>
+1.3 Discuss the four fitted models in <a href="#fig-plotCoalseemspline">Figure&nbsp;<span>1.3</span></a>. Can you give positive and negative properties of each model? Which do you think is best and which worst? Do you think which is best/worst, depends on the data? Justify your answers.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>Don’t get too stuck on the data used here, but think of general issues: ease of use, reliability of the data, is there error with the data or is it very reliable? What if the response it discrete?</p>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Robert G Aykroyd">
-<meta name="dcterms.date" content="2024-01-23">
 
-<title>MATH5824 Generalised Linear and Additive Models</title>
+<title>MATH5824 Generalised Linear and Additive Models - 2&nbsp; Introducing Splines</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./0_preface.html" rel="next">
+<link href="./3_interpolating.html" rel="next">
+<link href="./1_introduction.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -77,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Weekly schedule</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2_basicdefinitions.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -104,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Weekly schedule</span></a>
   </div>
 </li>
@@ -120,6 +119,36 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_basicdefinitions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_interpolating.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6_smoothinginpractice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -130,7 +159,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#weekly-schedule" id="toc-weekly-schedule" class="nav-link active" data-scroll-target="#weekly-schedule">Weekly schedule</a></li>
+  <li><a href="#basic-definitions" id="toc-basic-definitions" class="nav-link active" data-scroll-target="#basic-definitions"><span class="header-section-number">2.1</span> Basic definitions</a></li>
+  <li><a href="#sec-exercises2" id="toc-sec-exercises2" class="nav-link" data-scroll-target="#sec-exercises2"><span class="header-section-number">2.2</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -139,26 +169,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">MATH5824 Generalised Linear and Additive Models</h1>
+<h1 class="title"><span id="sec-basicdefinitions" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Robert G Aykroyd </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 23, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -171,135 +189,92 @@ ul.task-list li input[type="checkbox"] {
 \def\b#1{\mathbf{#1}}
 \]</span></p>
 </div>
-<section id="weekly-schedule" class="level1 unnumbered">
-<h1 class="unnumbered">Weekly schedule</h1>
-<p>Items will be added here week-by-week and so keep checking when you need up-to-date information on what you should be doing. Note that items specific to <em>MATH5824M</em> will be marked accordingly, otherwise items refer to the material common with <em>MATH3823</em>.</p>
+<section id="basic-definitions" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="basic-definitions"><span class="header-section-number">2.1</span> Basic definitions</h2>
+<p>Let <span class="math inline">\(t_1 &lt; t_2 &lt; \ldots &lt; t_m\)</span> be a fixed set of <em>sites</em> or <em>knots</em> which need not correspond to observation locations, as in <a href="#fig-knots">Figure&nbsp;<span>2.1</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-knots" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_basicdefinitions_files/figure-html/fig-knots-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2.1: Diagram of knots and data points.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that we use the symbol <span class="math inline">\(t\)</span>, rather than <span class="math inline">\(x\)</span>, so that we do not confuse knots and observation locations.</p>
+<p>A spline of order <span class="math inline">\(p\geq 1\)</span> is a piecewise-polynomial of order <span class="math inline">\(p\)</span> which is <span class="math inline">\((p-1)\)</span> times differentiable at the knots. Thus there are coefficients <span class="math inline">\(\{a_{k\ell},\; k=0,\ldots,m, \; \ell=0,\ldots,p\}\)</span> such that <span id="eq-spline"><span class="math display">\[
+f(t) = \sum_{\ell=0}^p a_{k\ell} \; t^\ell,\qquad \text{for}~t_k \leq t &lt;t_{k+1},
+\tag{2.1}\]</span></span> where we take <span class="math inline">\(t_0 = -\infty\)</span> and <span class="math inline">\(t_{m+1} = +\infty\)</span>.</p>
+<p>If we are using cubic polynomials, (<span class="math inline">\(p=3\)</span>), then <span class="math inline">\(f\)</span> is given by the following equations: <span class="math display">\[
+f(t) = a_{00} + a_{01} t + a_{02}t^2 +a_{03}t^3, \quad
+t_0 \le t &lt; t_1
+\]</span> to the left of the first knot, <span class="math display">\[
+f(t) = a_{10} + a_{11} t + a_{12}t^2 +a_{13}t^3, \quad
+t_1 \le t &lt; t_2
+\]</span> between the first and second knots, and so on until <span class="math display">\[
+f(t) = a_{m0} + a_{m1} t + a_{m2}t^2 +a_{m3}t^3, \quad
+t_m \le t &lt; t_{m+1}
+\]</span> to the right of the final knot. This is illustrated in <a href="#fig-piecewise-cubic-1">Figure&nbsp;<span>2.2 (a)</span></a> with <span class="math inline">\(m=2.\)</span></p>
+<div id="fig-piecewise-cubic" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-piecewise-cubic-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_basicdefinitions_files/figure-html/fig-piecewise-cubic-1.png" class="img-fluid figure-img" data-ref-parent="fig-piecewise-cubic" width="672"></p>
+<figcaption class="figure-caption">(a) No smoothness constraints</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-piecewise-cubic-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_basicdefinitions_files/figure-html/fig-piecewise-cubic-2.png" class="img-fluid figure-img" data-ref-parent="fig-piecewise-cubic" width="672"></p>
+<figcaption class="figure-caption">(b) With smoothness constraints</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.2: Piecewise-cubic functions in three intervals with knot positions indicated with vertical lines.</figcaption><p></p>
+</figure>
+</div>
+<p>Because of the use of polynomials, <span class="math inline">\(f\)</span> is smooth <em>between</em> each successive pair of knots. At the knots, however, <span class="math inline">\(f\)</span> might not be continuous and it might not be differentiable – in such cases we would say that the function is not smooth.</p>
+<p>To ensure that <span class="math inline">\(f\)</span> is also smooth at each of the knots, we impose smoothness constraints which control continuity of the function and its derivatives at the knots.</p>
+<p>Let <span class="math inline">\(f^{(\ell)}\)</span> be the <span class="math inline">\(\ell\)</span>-th order derivative, with <span class="math inline">\(f^{(0)}=f\)</span> being the function itself, <span class="math inline">\(f^{(1)}=f'\)</span> is the first derivative and <span class="math inline">\(f^{(2)}=f''\)</span> the second derivative. Further, let <span class="math inline">\(f^{(\ell)}(t-\epsilon)\)</span> and <span class="math inline">\(f^{(\ell)}(t+\epsilon)\)</span>, for <span class="math inline">\(\epsilon\ge 0\)</span>, denote evaluation of the function or its derivative at points just below and just above <span class="math inline">\(t\)</span> – we will be interested in their relative values as <span class="math inline">\(\epsilon \rightarrow 0\)</span>.</p>
+<p>To impose smoothness, we require that</p>
+<p><span id="eq-smoothcons"><span class="math display">\[
+\lim _{\epsilon\rightarrow 0} f^{(\ell)}(t_k-\epsilon)
+=
+\lim _{\epsilon\rightarrow 0} f^{(\ell)}(t_k+\epsilon),
+\tag{2.2}\]</span></span> for all <span class="math inline">\(k=1,\ldots,m\)</span> and for <span class="math inline">\(\ell = 0,\ldots,(p-1)\)</span>.</p>
+<p>In other words we say that <span class="math inline">\(f\)</span> is smooth if the limits, from below and from above, of the function and its <span class="math inline">\((p-1)\)</span> derivatives exist and are equal.</p>
+<p>The meaning of these smoothness constraints is illustrated in <a href="#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>. In <a href="#fig-piecewise-cubic-1">Figure&nbsp;<span>2.2 (a)</span></a>, a piecewise cubic function with two knots has been plotted. The first derivative, <span class="math inline">\(f'\)</span>, is discontinuous at the first knot and the function itself, <span class="math inline">\(f\)</span>, is discontinuous at the second knot. <a href="#fig-piecewise-cubic-2">Figure&nbsp;<span>2.2 (b)</span></a> shows a similar shaped cubic spline with two knots. This time, the function <span class="math inline">\(f\)</span> and its first two derivatives are continuous at both knots.</p>
+<p>The smoothness conditions in <a href="#eq-smoothcons">Equation&nbsp;<span>2.2</span></a> induce constraints on the coefficients <span class="math inline">\(\{a_{k\ell}\}\)</span>. A polynomial of order <span class="math inline">\(p\)</span> has <span class="math inline">\(p+1\)</span> coefficients, and there are <span class="math inline">\(m+1\)</span> intervals when we have <span class="math inline">\(m\)</span> knots. This leads to <span class="math inline">\((p+1)\times(m+1)\)</span> coefficients but there are <span class="math inline">\(p\)</span> constraints at each of the <span class="math inline">\(m\)</span> knots. Thus the total <em>degrees of freedom</em> of the system is <span id="eq-df"><span class="math display">\[
+\text{df}_{\text{spline}}   = (p+1)(m+1) - pm = m+p+1.
+\tag{2.3}\]</span></span></p>
+<p>These degrees of freedom provide the necessary flexibility in the spline.</p>
+<p>Note that <span class="math inline">\(f\)</span> is infinitely differentiable everywhere, except at the knots where it is <span class="math inline">\(p-1\)</span> times differentiable. In particular, for <span class="math inline">\(p=1\)</span>, <span class="math inline">\(f\)</span> is a linear spline comprising linear pieces constrained to be continuous at the knots, although the slope of <span class="math inline">\(f\)</span> is discontinuous at the knots. Also, for <span class="math inline">\(p=3\)</span>, <span class="math inline">\(f\)</span> is a cubic spline comprising cubic polynomial pieces continuous at the knots; where the first and second derivatives of <span class="math inline">\(f\)</span> are also continuous, but the third derivative is discontinuous at the knots.</p>
+</section>
+<section id="sec-exercises2" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-exercises2"><span class="header-section-number">2.2</span> Exercises</h2>
+<div class="exercises">
+<p>2.1 Why is it not sensible to define a smooth function made-up of constant components? Similarly, why is not sensible to create a differentiable function from linear splines?</p>
+<p>2.2 In the situation illustrated in <a href="#fig-piecewise-cubic-2">Figure&nbsp;<span>2.2 (b)</span></a>, where <span class="math inline">\(p=3\)</span> and <span class="math inline">\(m=2\)</span>, clearly identify the <span class="math inline">\((p+1)\times (m+1)=12\)</span> model parameters and the <span class="math inline">\(pm=6\)</span> smoothness constraints in terms of the cubic polynomials and their derivatives.</p>
+<p>2.3 Further consider the situation illustrated in <a href="#fig-piecewise-cubic-2">Figure&nbsp;<span>2.2 (b)</span></a>. Suppose now that we require the splines to pass through specified coordinates <span class="math inline">\((t_1, f(t_1))\)</span> and <span class="math inline">\((t_2, f(t_2))\)</span>. What is the degrees of freedom for this model? How many such cubic splines would satisfy these constraints? Discuss potential additional constraints which would lead to a unique fitted model. Do you think having a unique solution is a positive or negative property?</p>
+<p>2.4 For a general problem, what would be the effect of requiring additional constraints of the form of <a href="#eq-smoothcons">Equation&nbsp;<span>2.2</span></a> but with <span class="math inline">\(\ell = p\)</span>? Would this lead to an acceptable fitted cubic spline model? Justify your answer.</p>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Week 1 (29 January - 2 February)
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li><strong>Before first Lecture:</strong> Please read the <em>Overview</em>.</li>
-<li><strong>Lecture on Tuesday:</strong> We will briefly cover all material in <em>Chapter: Introduction</em>.</li>
-<li><strong>Before next Lecture:</strong> Please re-read <em>Chapter 1</em> carefully, especially any sections not covered in Lectures.</li>
-<li><strong>Lecture on Thursday:</strong> Start <em>Chapter 2: Essentials of Normal Linear Models</em> with <em>Section 2.1: Overview</em> &amp; <em>Section 2.2: Linear models</em>.</li>
-<li><strong>Before next Lecture:</strong> Please read the <em>MATH5824M Overview</em>.</li>
-<li><strong>Lecture on Friday:</strong> Cover the whole of <em>MATH5824M Chapter 1: Non-parametric Modelling</em>.</li>
-<li><strong>Weekly feedback:</strong> Complete the Chapter 1 Quizzes and self-study the Exercises in <em>Section 1.5</em> – solutions to be added during Week 1. If you have time, then also self-study the <em>MATH5824M Exercises</em> in <em>Section 1.4</em>.</li>
-</ul>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Advanced notice
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Module Assessment:</strong> Set on 14 March with submission deadline 23 April (that is after the break). You will be expected to write a short report based on an RStudio practical.</li>
-<li><strong>Computer classes:</strong> 27/28 February for Practice and 19/20 March for Assessment – check your timetable.</li>
-</ul>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Provisional Weekly Lecture Schedule
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<table class="table">
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">Week 1</td>
-<td style="text-align: left;">Chapter 1</td>
-<td>All</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Week 2</td>
-<td style="text-align: left;">Chapter 2</td>
-<td>All</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 3</td>
-<td style="text-align: left;">Exercises</td>
-<td>Exercises 1, 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: left;">Chapter 3</td>
-<td>Sections 3.1-3.3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 4</td>
-<td style="text-align: left;"></td>
-<td>Sections 3.4-3.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: left;">Exercises</td>
-<td>Exercises 3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 5</td>
-<td style="text-align: left;">Chapter 4</td>
-<td>Sections 4.1-4.3</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Week 6</td>
-<td style="text-align: left;"></td>
-<td>Sections 4.4-4.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 7</td>
-<td style="text-align: left;">Chapter 5</td>
-<td>Sections 5.1-5.3</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Week 8</td>
-<td style="text-align: left;"></td>
-<td>Sections 5.4-5.6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: left;">Exercises</td>
-<td>Exercises 4, 5</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Easter</td>
-<td style="text-align: left;"></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 9</td>
-<td style="text-align: left;">Chapter 6</td>
-<td>All</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Week 10</td>
-<td style="text-align: left;">Exercises</td>
-<td>Exercises 6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 11</td>
-<td style="text-align: left;">Revision</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p><a href="https://rgaykroyd.github.io/MATH5824/Exercises/Exercises_2.2.html">Exercise 2.2 Solutions can be found here.</a></p>
 </div>
 </div>
 
@@ -748,10 +723,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./1_introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./0_preface.html" class="pagination-link">
-        <span class="nav-page-text">Overview</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./3_interpolating.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

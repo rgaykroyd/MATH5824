@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Robert G Aykroyd">
-<meta name="dcterms.date" content="2024-01-23">
 
-<title>MATH5824 Generalised Linear and Additive Models</title>
+<title>MATH5824 Generalised Linear and Additive Models - 5&nbsp; Choosing the Smoothing Parameter</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./0_preface.html" rel="next">
+<link href="./6_smoothinginpractice.html" rel="next">
+<link href="./4_smoothing.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -77,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Weekly schedule</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5_smoothingparameter.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -104,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Weekly schedule</span></a>
   </div>
 </li>
@@ -120,6 +119,36 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_basicdefinitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_interpolating.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6_smoothinginpractice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -130,7 +159,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#weekly-schedule" id="toc-weekly-schedule" class="nav-link active" data-scroll-target="#weekly-schedule">Weekly schedule</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">5.1</span> Overview</a></li>
+  <li><a href="#trainingtest-approach" id="toc-trainingtest-approach" class="nav-link" data-scroll-target="#trainingtest-approach"><span class="header-section-number">5.2</span> Training/test approach</a></li>
+  <li><a href="#sec-cv" id="toc-sec-cv" class="nav-link" data-scroll-target="#sec-cv"><span class="header-section-number">5.3</span> Cross-validation or <em>leave-one-out</em></a></li>
+  <li><a href="#the-smoothing-matrix" id="toc-the-smoothing-matrix" class="nav-link" data-scroll-target="#the-smoothing-matrix"><span class="header-section-number">5.4</span> The smoothing matrix</a></li>
+  <li><a href="#sec-edf" id="toc-sec-edf" class="nav-link" data-scroll-target="#sec-edf"><span class="header-section-number">5.5</span> Effective degrees of freedom</a></li>
+  <li><a href="#sec-gcv" id="toc-sec-gcv" class="nav-link" data-scroll-target="#sec-gcv"><span class="header-section-number">5.6</span> Generalized Cross Validation</a></li>
   </ul>
 </nav>
     </div>
@@ -139,26 +173,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">MATH5824 Generalised Linear and Additive Models</h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Robert G Aykroyd </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 23, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -171,137 +193,126 @@ ul.task-list li input[type="checkbox"] {
 \def\b#1{\mathbf{#1}}
 \]</span></p>
 </div>
-<section id="weekly-schedule" class="level1 unnumbered">
-<h1 class="unnumbered">Weekly schedule</h1>
-<p>Items will be added here week-by-week and so keep checking when you need up-to-date information on what you should be doing. Note that items specific to <em>MATH5824M</em> will be marked accordingly, otherwise items refer to the material common with <em>MATH3823</em>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Week 1 (29 January - 2 February)
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<section id="overview" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">5.1</span> Overview</h2>
+<p>Suppose we are given data <span class="math inline">\(D=\{(t_i,y_i),\,i=1,\ldots,n\}\)</span> and that our model is: <span id="eq-smoothmodel"><span class="math display">\[
+y_i = f(t_i) + \epsilon_i,\qquad \epsilon_i\sim\text{N}(0,\sigma^2)
+\tag{5.1}\]</span></span> where the <span class="math inline">\(\epsilon_i\)</span> are i.i.d. <span class="math inline">\(\sim\text{N}(0,\sigma^2)\)</span> and <span class="math inline">\(f(t)\)</span> is assumed to be smooth. Given knot positions <span class="math inline">\(\{t_i,\; i=1,\dots,n\}\)</span>, we can estimate <span class="math inline">\(f(t)\)</span> with a smoothing spline <span class="math inline">\(\hat{f}_\lambda(t)\)</span>.</p>
+<p>How then should we choose the value of the smoothing parameter <span class="math inline">\(\lambda\)</span>? By setting <span class="math inline">\(\lambda \rightarrow 0\)</span>, we obtain exactly the interpolating spline <span class="math inline">\(\hat{f}_0(t)\)</span> and a perfect fit to the data. However, this tends to <em>overfit</em> the data: applying it to to a new sample of data where model <a href="#eq-smoothmodel">Equation&nbsp;<span>5.1</span></a> still applies would produce a poor fit. Conversely, by setting <span class="math inline">\(\lambda \rightarrow \infty\)</span>, we get: <span class="math display">\[\begin{align*}
+f_\infty(t) &amp;=
+\begin{cases} \hat{a}_0, &amp; \nu=1,\ p=1\\
+\hat{a}_0 + \hat{a}_1 t, &amp; \nu=2,\ p=3.
+\end{cases}
+\end{align*}\]</span> Here, <span class="math inline">\(\hat{a}_0=\bar{y}\)</span>, for the <span class="math inline">\(\nu=1, p=1\)</span> case, and <span class="math inline">\(\{\hat{a}_0,\ \hat{a}_1\}\)</span>, for the <span class="math inline">\(v=2, p=3\)</span> case, are the OLS linear regression parameters.<br>
+If the true <span class="math inline">\(f(t)\)</span> was constant or linear, this solution would be reasonable, but often we are interested in less regular functions.</p>
+</section>
+<section id="trainingtest-approach" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="trainingtest-approach"><span class="header-section-number">5.2</span> Training/test approach</h2>
+<p>One way to approach estimation of <span class="math inline">\(\lambda\)</span> is to partition the set of indices <span class="math inline">\(I= \{1,\dots,n\}\)</span> into two subsets <span class="math inline">\(I_1\)</span> and <span class="math inline">\(I_2\)</span>, where <span class="math inline">\(I_1\cup I_2 = I\)</span> and <span class="math inline">\(I_1 \cap I_2 = \phi\)</span>. Thus we obtain two datasets:</p>
 <ul>
-<li><strong>Before first Lecture:</strong> Please read the <em>Overview</em>.</li>
-<li><strong>Lecture on Tuesday:</strong> We will briefly cover all material in <em>Chapter: Introduction</em>.</li>
-<li><strong>Before next Lecture:</strong> Please re-read <em>Chapter 1</em> carefully, especially any sections not covered in Lectures.</li>
-<li><strong>Lecture on Thursday:</strong> Start <em>Chapter 2: Essentials of Normal Linear Models</em> with <em>Section 2.1: Overview</em> &amp; <em>Section 2.2: Linear models</em>.</li>
-<li><strong>Before next Lecture:</strong> Please read the <em>MATH5824M Overview</em>.</li>
-<li><strong>Lecture on Friday:</strong> Cover the whole of <em>MATH5824M Chapter 1: Non-parametric Modelling</em>.</li>
-<li><strong>Weekly feedback:</strong> Complete the Chapter 1 Quizzes and self-study the Exercises in <em>Section 1.5</em> – solutions to be added during Week 1. If you have time, then also self-study the <em>MATH5824M Exercises</em> in <em>Section 1.4</em>.</li>
+<li>Training dataset: <span class="math inline">\(D_1 = \{(t_{i},y_{i}),\ i\in I_1\}\)</span>,</li>
+<li>Test dataset: <span class="math inline">\(D_2 = \{(t_{i},y_{i}),\ i\in I_2\}\)</span>.</li>
 </ul>
+<p>We fit a smoothing spline <span class="math inline">\(\hat{f}_{\lambda,I_1}(t)\)</span> to the training dataset, and judge the quality of the fit using the test dataset: <span id="eq-cv"><span class="math display">\[
+Q_{I_1:I_2}(\lambda) = \sum_{i\in I_2} \left(y_i - \hat{f}_{\lambda,I_1}(t_i)\right)^2.
+\tag{5.2}\]</span></span> We choose <span class="math inline">\(\lambda\)</span> to minimize <span class="math inline">\(Q_{I_1:I_2}(\lambda)\)</span>. Many algorithms exist for such minimization, for example through evaluation on a fine grid of <span class="math inline">\(\lambda\)</span> values, although many more computationally efficient algorithms exist.</p>
+</section>
+<section id="sec-cv" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-cv"><span class="header-section-number">5.3</span> Cross-validation or <em>leave-one-out</em></h2>
+<p>This is an extreme form of the above principle. The test dataset <span class="math inline">\(D_2\)</span> comprises a single observation, <span class="math inline">\((t_{j},y_{j})\)</span>, for a given value of <span class="math inline">\(j\)</span>. The training set <span class="math inline">\(D_1\)</span> is then <span class="math inline">\(D_{-j} = \{(t_{i},y_{i}),\ i \in I_{-j}\}\)</span>, where <span class="math inline">\(I_{-j}\)</span> denotes the full set <span class="math inline">\(I\)</span> excluding <span class="math inline">\(j\)</span>. Then in a slightly amended notation we can write <span class="math display">\[
+Q_{-j:j}(\lambda) = \left(y_j - \hat{f}_{\lambda,-j}(t_j)\right)^2
+\]</span> to assess the quality of fit. Of course, <span class="math inline">\(j\)</span> is arbitrary, so we repeat this process for each <span class="math inline">\(j\in\{1,\dots,n\}\)</span> then average the assessments to form the <em>ordinary cross-validation criterion</em>: <span id="eq-ocv"><span class="math display">\[
+Q_{OCV}(\lambda) = \frac{1}{n} \sum_{j=1}^n \left(y_j - \hat{f}_{\lambda,-j}(t_j)\right)^2.
+\tag{5.3}\]</span></span></p>
+<p>We then choose the value <span class="math inline">\(\hat{\lambda}\)</span> which minimizes <span class="math inline">\(Q_{OCV}(\lambda)\)</span>. Hopefully, a plot of <span class="math inline">\(Q_{OCV}(\lambda)\)</span> will appear as in <a href="#fig-xval">Figure&nbsp;<span>5.1</span></a>, but there is no theoretical guarantee that this curve will have a unique turning point, making it difficult to locate the minimum.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-xval" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="5_smoothingparameter_files/figure-html/fig-xval-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5.1: Ordinary cross validation plot</figcaption>
+</figure>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Advanced notice
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Module Assessment:</strong> Set on 14 March with submission deadline 23 April (that is after the break). You will be expected to write a short report based on an RStudio practical.</li>
-<li><strong>Computer classes:</strong> 27/28 February for Practice and 19/20 March for Assessment – check your timetable.</li>
-</ul>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Provisional Weekly Lecture Schedule
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<table class="table">
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">Week 1</td>
-<td style="text-align: left;">Chapter 1</td>
-<td>All</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Week 2</td>
-<td style="text-align: left;">Chapter 2</td>
-<td>All</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 3</td>
-<td style="text-align: left;">Exercises</td>
-<td>Exercises 1, 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: left;">Chapter 3</td>
-<td>Sections 3.1-3.3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 4</td>
-<td style="text-align: left;"></td>
-<td>Sections 3.4-3.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: left;">Exercises</td>
-<td>Exercises 3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 5</td>
-<td style="text-align: left;">Chapter 4</td>
-<td>Sections 4.1-4.3</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Week 6</td>
-<td style="text-align: left;"></td>
-<td>Sections 4.4-4.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 7</td>
-<td style="text-align: left;">Chapter 5</td>
-<td>Sections 5.1-5.3</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Week 8</td>
-<td style="text-align: left;"></td>
-<td>Sections 5.4-5.6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: left;">Exercises</td>
-<td>Exercises 4, 5</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Easter</td>
-<td style="text-align: left;"></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 9</td>
-<td style="text-align: left;">Chapter 6</td>
-<td>All</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Week 10</td>
-<td style="text-align: left;">Exercises</td>
-<td>Exercises 6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Week 11</td>
-<td style="text-align: left;">Revision</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>At first sight, evaluation of <span class="math inline">\(Q_{OCV}(\lambda)\)</span> for a given <span class="math inline">\(\lambda\)</span> appears computationally intensive: we must compute <span class="math inline">\(n\)</span> different smoothing solutions, each corresponding to one of the <em>left-out</em> data points. Fortunately, there is a computational trick which enables us to compute <span class="math inline">\(Q_{OCV}(\lambda)\)</span> directly from the smoothing spline solution constructed from the whole dataset</p>
+</section>
+<section id="the-smoothing-matrix" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="the-smoothing-matrix"><span class="header-section-number">5.4</span> The smoothing matrix</h2>
+<p>Here we show, for a given value of the smoothing parameter <span class="math inline">\(\lambda\)</span> and the index <span class="math inline">\(\nu \geq 1\)</span>, that the fitted value <span class="math inline">\(\hat{f}_\lambda(t_k)\)</span> at each knot <span class="math inline">\(t_k\)</span> may be written as a linear combination of the observations, <span class="math inline">\(y_1,\dots,y_n\)</span>.</p>
+<p>Recall from <a href="4_smoothing.html#prp-smoother">Proposition&nbsp;<span>4.3</span></a> that the smoothing spline <span class="math inline">\(\hat{f}_\lambda(t)\)</span>, which minimizes the penalized sum of squares criterion <a href="4_smoothing.html#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a> for a given value of the smoothing parameter <span class="math inline">\(\lambda\)</span>, has coefficients <span class="math inline">\(\hat{\mathbf{a}}, \hat{\mathbf{b}}\)</span> where <span class="math display">\[
+\begin{bmatrix}
+\hat{\mathbf a} \\ \hat{\mathbf b}
+\end{bmatrix}
+=
+M_{\lambda}^{-1}
+\begin{bmatrix}
+{\mathbf 0} \\ {\mathbf y}
+\end{bmatrix}
+\quad \text{where} \quad
+M_{\lambda} =
+\begin{bmatrix}
+0 &amp; L_\nu^T \\
+L_\nu &amp; K_\nu+\lambda^* I_n
+\end{bmatrix}
+\]</span></p>
+<p>The fitted values of the smoothing spline at the knots can be represented in matrix form as <span class="math display">\[
+\mathbf{\hat{f}} = \left[
+\begin{array}{c}\hat{f}(t_1) \\
+\vdots  \\
+\hat{f}(t_n)\end{array}
+\right]
+= K  \, {\hat {\mathbf b}} + L \, {\hat {\mathbf a}}
+=
+\begin{bmatrix}
+K &amp; L
+\end{bmatrix}
+\begin{bmatrix} M_\lambda^{12} \\ M_\lambda^{22}
+\end{bmatrix}
+\mathbf{y},
+\]</span> where <span class="math inline">\(M_\lambda^{-1}\)</span> has been partitioned in the form <span class="math display">\[
+M_\lambda^{-1} = \begin{bmatrix} M_\lambda^{11} &amp; M_\lambda^{12} \\ M_\lambda^{21} &amp; M_\lambda^{22}
+\end{bmatrix},
+\]</span> where <span class="math inline">\(M_\lambda^{12}\)</span> is <span class="math inline">\(\nu \times \nu\)</span> and <span class="math inline">\(M_\lambda^{22}\)</span> is <span class="math inline">\(n \times n\)</span> .</p>
+<p>It can be shown that the matrix <span class="math display">\[
+S_\lambda =
+\begin{bmatrix} K &amp; L
+\end{bmatrix}
+\begin{bmatrix}
+M_\lambda^{12} \\ M_\lambda^{22}
+\end{bmatrix}
+\]</span> is a symmetric positive definite matrix for <span class="math inline">\(\lambda &gt; 0\)</span> called the <em>smoothing</em> matrix. Then, <span class="math inline">\(S_\lambda\)</span> connects the data <span class="math inline">\(\mathbf{y}\)</span> to the fitted values through <span id="eq-smoother"><span class="math display">\[
+\mathbf{\hat f} = S_\lambda \, \mathbf{y}.
+\tag{5.4}\]</span></span> That is, the fitted values are simple linear function of the data.</p>
+</section>
+<section id="sec-edf" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-edf"><span class="header-section-number">5.5</span> Effective degrees of freedom</h2>
+<p>How many degrees of freedom are there in the smoothing spline? There are altogether <span class="math inline">\(n+\nu\)</span> parameters, <span class="math inline">\(\nu\)</span> in <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\(n\)</span> in <span class="math inline">\(\mathbf{b}\)</span>, but these are not completely free.</p>
+<p>We showed earlier that as the smoothing parameter <span class="math inline">\(\lambda\rightarrow \infty\)</span>, the smoothing spline <span class="math inline">\(\hat{f}(t)\)</span> becomes the least-squares regression solution for model formula <span class="math inline">\(y \sim 1\)</span> when <span class="math inline">\(\nu=1\)</span>, or model formula <span class="math inline">\(y \sim 1+t\)</span> when <span class="math inline">\(\nu=2\)</span>. Thus, when <span class="math inline">\(\lambda= \infty\)</span>, the degrees of freedom in the spline is <span class="math inline">\(\nu\)</span>. We also showed that when <span class="math inline">\(\lambda=0\)</span>, the smoothing spline <span class="math inline">\(\hat{f}(t)\)</span> becomes the interpolating spline, for which the degrees of freedom is the number of observations, <span class="math inline">\(n\)</span>.</p>
+<p>Thus, intuitively, for values of <span class="math inline">\(\lambda\)</span> between the extremes of <span class="math inline">\(0\)</span> and <span class="math inline">\(\infty\)</span>, the spline degrees of freedom should lie somewhere between <span class="math inline">\(\nu\)</span> and <span class="math inline">\(n\)</span>; the greater the smoothing, the fewer the degrees of freedom. How can we capture this notion precisely?</p>
+<p>A clue comes from Ordinary Least Squares (OLS) regression, in which the fitted values are given by <span class="math display">\[
+\hat{\mathbf{y}} = X (X^T X)^{-1} X^T \mathbf{y} = H \mathbf{y},
+\]</span> where <span class="math inline">\(X\)</span> is the <span class="math inline">\(n \times p\)</span> design matrix, where <span class="math inline">\(p\)</span> is the number of model parameters. Here, <span class="math display">\[
+H = X (X^T X)^{-1} X^T
+\]</span> is called the <strong>hat</strong> matrix, which linearly maps the data <span class="math inline">\(\mathbf y\)</span> onto the fitted values <span class="math inline">\(\hat{\mathbf{y}}\)</span>. Using the property that <span class="math inline">\(\text{trace}(QR) = \text{trace}(RQ)\)</span> for matrices <span class="math inline">\(Q,R\)</span> of conformable dimensions, the trace of the hat matrix is: <span class="math display">\[\begin{align*}
+\text{trace}(X(X^T X)^{-1} X^T) &amp;= \text{trace}((X^T X)^{-1} X^T X)\\
+&amp;= \text{trace}(I_p)\\
+&amp;= p,
+\end{align*}\]</span> where <span class="math inline">\(I_p\)</span> is the <span class="math inline">\(p \times p\)</span> identity matrix. Thus, for OLS regression, we see that the trace of the hat matrix equals the number of model parameters.</p>
+<p>Now in <a href="#eq-smoother">Equation&nbsp;<span>5.4</span></a> we see that the smoothing matrix <span class="math inline">\(S_\lambda\)</span> takes the role of a hat matrix, since it linearly maps the data onto the fitted values. This suggests that, for the smoothing spline, we can calculate an effective number of degrees of freedom as: <span id="eq-edf"><span class="math display">\[
+\text{edf}_\lambda = \text{trace} \, S_\lambda.
+\tag{5.5}\]</span></span> It can be shown from the limiting behaviour of the smoothing splines as <span class="math inline">\(\lambda \rightarrow \infty\)</span> and <span class="math inline">\(\lambda \rightarrow 0\)</span> that <span class="math inline">\(\text{edf}_\infty = \nu\)</span> (the number of parameters in the OLS solution) and <span class="math inline">\(\text{edf}_0 = n\)</span> (the number of parameters in the interpolating spline).</p>
+</section>
+<section id="sec-gcv" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-gcv"><span class="header-section-number">5.6</span> Generalized Cross Validation</h2>
+<p>The cross-validation criterion <span class="math inline">\(Q_{OCV}(\lambda)\)</span>, defined in <a href="#eq-cv">Equation&nbsp;<span>5.2</span></a>, is used to set the smoothing parameter, <span class="math inline">\(\lambda\)</span>. However, as noted in <a href="#sec-cv"><span>Section&nbsp;5.3</span></a>, using <a href="#eq-cv">Equation&nbsp;<span>5.2</span></a> to compute <span class="math inline">\(Q_{OCV}(\lambda)\)</span> would be impractical for large <span class="math inline">\(n,\)</span> since it would require fitting a new smoothing spline <span class="math inline">\(\hat{f}_{\lambda,-j}\)</span> for each <em>leave-one-out</em> dataset <span class="math inline">\(I_{-j}\)</span>.</p>
+<p>Fortunately, it is possible to compute <span class="math inline">\(Q_{OCV}(\lambda)\)</span> directly from the spline <span class="math inline">\(\hat{f}_{\lambda}\)</span> fitted to the full dataset. It can be shown that <a href="#eq-cv">Equation&nbsp;<span>5.2</span></a> can be rewritten: <span id="eq-ocv"><span class="math display">\[
+Q_{OCV}(\lambda) = \frac{1}{n} \sum_{j=1}^n \left(\frac{y_j - \hat{f}_{\lambda}(t_j)}{1-s_{jj}}\right)^2,
+\tag{5.6}\]</span></span> where <span class="math inline">\(\hat{f}_{\lambda}(t_j)\)</span> is the full-data fitted spline value at <span class="math inline">\(t_j\)</span> given by <a href="#eq-smoother">Equation&nbsp;<span>5.4</span></a>, and <span class="math inline">\(s_{jj}\)</span> is the <span class="math inline">\(j\)</span>th diagonal element of the smoothing (hat) matrix <span class="math inline">\(S_\lambda\)</span>.</p>
+<p>Prior to the discovery of algorithm to compute <a href="#eq-ocv">Equation&nbsp;<span>5.6</span></a> quickly, a computationally efficient approximation to the cross-validation criterion <a href="#eq-cv">Equation&nbsp;<span>5.2</span></a> was proposed, called the <strong>Generalized Cross-Validation</strong> criterion (GCV): <span id="eq-gcv"><span class="math display">\[
+Q_{GCV}(\lambda) = \frac{ \frac{1}{n} \sum_{j=1}^n \left(y_j - \hat{f}_{\lambda}(t_j)\right)^2}{\left(1-\tfrac{1}{n}\text{trace}(S_\lambda)\right)^2}.
+\tag{5.7}\]</span></span> Thus <a href="#eq-gcv">Equation&nbsp;<span>5.7</span></a> replaces <span class="math inline">\(s_{jj}\)</span> in <a href="#eq-ocv">Equation&nbsp;<span>5.6</span></a> with the average of the diagonal elements of <span class="math inline">\(S_\lambda\)</span>, which equals <span class="math inline">\(\tfrac{1}{n}\text{edf}_\lambda\)</span>. Thus a low value of <span class="math inline">\(\text{edf}_\lambda\)</span> will deflate <span class="math inline">\(Q_{GCV}(\lambda)\)</span>, making that value of <span class="math inline">\(\lambda\)</span> more favourable.</p>
+<p>In principle, OCV supplants GCV, but GCV is still used as it is numerically more stable. In particular, GCV is used in the <span class="math inline">\(\texttt{mgcv}\)</span> package – this will be discussed in the next chapter.</p>
 
 
 </section>
@@ -748,10 +759,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./4_smoothing.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./0_preface.html" class="pagination-link">
-        <span class="nav-page-text">Overview</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./6_smoothinginpractice.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
