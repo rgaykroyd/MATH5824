@@ -30,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./3_interpolating.html" rel="next">
 <link href="./1_introduction.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -125,30 +124,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./3_interpolating.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./6_smoothinginpractice.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -160,7 +135,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#basic-definitions" id="toc-basic-definitions" class="nav-link active" data-scroll-target="#basic-definitions"><span class="header-section-number">2.1</span> Basic definitions</a></li>
-  <li><a href="#sec-exercises2" id="toc-sec-exercises2" class="nav-link" data-scroll-target="#sec-exercises2"><span class="header-section-number">2.2</span> Exercises</a></li>
+  <li><a href="#focus-on-splines-quiz" id="toc-focus-on-splines-quiz" class="nav-link" data-scroll-target="#focus-on-splines-quiz">Focus on splines quiz</a></li>
+  <li><a href="#imposing-smoothness" id="toc-imposing-smoothness" class="nav-link" data-scroll-target="#imposing-smoothness"><span class="header-section-number">2.2</span> Imposing smoothness</a></li>
+  <li><a href="#focus-on-smoothness-quiz" id="toc-focus-on-smoothness-quiz" class="nav-link" data-scroll-target="#focus-on-smoothness-quiz">Focus on smoothness quiz</a></li>
+  <li><a href="#sec-exercises2" id="toc-sec-exercises2" class="nav-link" data-scroll-target="#sec-exercises2"><span class="header-section-number">2.3</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -189,6 +167,9 @@ ul.task-list li input[type="checkbox"] {
 \def\b#1{\mathbf{#1}}
 \]</span></p>
 </div>
+<p>Here is a short video [3 mins] to introduce the chapter.</p>
+<iframe title="MATH5824 Chapter Intro video" width="450" height="253" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" src="https://mymedia.leeds.ac.uk/Mediasite/Play/5f9d4b59b2fe4f258d3a83611e7c09141d" allowfullscreen="" msallowfullscreen="" allow="fullscreen">
+</iframe>
 <section id="basic-definitions" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="basic-definitions"><span class="header-section-number">2.1</span> Basic definitions</h2>
 <p>Let <span class="math inline">\(t_1 &lt; t_2 &lt; \ldots &lt; t_m\)</span> be a fixed set of <em>sites</em> or <em>knots</em> which need not correspond to observation locations, as in <a href="#fig-knots">Figure&nbsp;<span>2.1</span></a>.</p>
@@ -239,6 +220,27 @@ t_m \le t &lt; t_{m+1}
 <p></p><figcaption class="figure-caption">Figure&nbsp;2.2: Piecewise-cubic functions in three intervals with knot positions indicated with vertical lines.</figcaption><p></p>
 </figure>
 </div>
+</section>
+<section id="focus-on-splines-quiz" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="focus-on-splines-quiz">Focus on splines quiz</h2>
+<p>Test your knowledge recall and comprehension to reinforce basic ideas about splines.</p>
+<div class="webex-box">
+<div class="webex-check">
+<ol type="1">
+<li><p>Which of the following best describes the relationship between knots and data locations.</p>
+<div id="radio_YKVVRXCZXZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YKVVRXCZXZ" value=""> <span>Knots are the response and data locations are the explanatory variable</span></label><label><input type="radio" autocomplete="off" name="radio_YKVVRXCZXZ" value=""> <span>There must be fewer knots than data locations</span></label><label><input type="radio" autocomplete="off" name="radio_YKVVRXCZXZ" value="answer"> <span>Knots and data locations are both marked on the x-axis</span></label><label><input type="radio" autocomplete="off" name="radio_YKVVRXCZXZ" value=""> <span>Knots and data points are exactly the same</span></label>
+</div></li>
+<li><p>How many polynomial equations are need to define a cubic spline with four knots? <select class="webex-select"><option value="blank"></option><option value="">3</option><option value="">4</option><option value="answer">5</option><option value="">12</option><option value="">None of the above</option></select></p></li>
+<li><p>What is the highest power possible in a cubic spline?. <select class="webex-select"><option value="blank"></option><option value="">0</option><option value="">1</option><option value="">2</option><option value="answer">3</option><option value="">None of the above</option></select></p></li>
+<li><p>How many times can a spline of order 5 be differentiated at the knots? <select class="webex-select"><option value="blank"></option><option value="">Cannot be differentiated</option><option value="">Twice differentiable</option><option value="answer">Four times differentiable</option><option value="">Infinitly differentiable</option></select></p></li>
+<li><p>Which of the following is NOT a property of cubic splines? <select class="webex-select"><option value="blank"></option><option value="">Piecewise cubic polynomial</option><option value="">Twice differentiable</option><option value="answer">May contain change-points</option><option value="">Continuous at the knots</option></select></p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="imposing-smoothness" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="imposing-smoothness"><span class="header-section-number">2.2</span> Imposing smoothness</h2>
 <p>Because of the use of polynomials, <span class="math inline">\(f\)</span> is smooth <em>between</em> each successive pair of knots. At the knots, however, <span class="math inline">\(f\)</span> might not be continuous and it might not be differentiable – in such cases we would say that the function is not smooth.</p>
 <p>To ensure that <span class="math inline">\(f\)</span> is also smooth at each of the knots, we impose smoothness constraints which control continuity of the function and its derivatives at the knots.</p>
 <p>Let <span class="math inline">\(f^{(\ell)}\)</span> be the <span class="math inline">\(\ell\)</span>-th order derivative, with <span class="math inline">\(f^{(0)}=f\)</span> being the function itself, <span class="math inline">\(f^{(1)}=f'\)</span> is the first derivative and <span class="math inline">\(f^{(2)}=f''\)</span> the second derivative. Further, let <span class="math inline">\(f^{(\ell)}(t-\epsilon)\)</span> and <span class="math inline">\(f^{(\ell)}(t+\epsilon)\)</span>, for <span class="math inline">\(\epsilon\ge 0\)</span>, denote evaluation of the function or its derivative at points just below and just above <span class="math inline">\(t\)</span> – we will be interested in their relative values as <span class="math inline">\(\epsilon \rightarrow 0\)</span>.</p>
@@ -256,13 +258,52 @@ t_m \le t &lt; t_{m+1}
 <p>These degrees of freedom provide the necessary flexibility in the spline.</p>
 <p>Note that <span class="math inline">\(f\)</span> is infinitely differentiable everywhere, except at the knots where it is <span class="math inline">\(p-1\)</span> times differentiable. In particular, for <span class="math inline">\(p=1\)</span>, <span class="math inline">\(f\)</span> is a linear spline comprising linear pieces constrained to be continuous at the knots, although the slope of <span class="math inline">\(f\)</span> is discontinuous at the knots. Also, for <span class="math inline">\(p=3\)</span>, <span class="math inline">\(f\)</span> is a cubic spline comprising cubic polynomial pieces continuous at the knots; where the first and second derivatives of <span class="math inline">\(f\)</span> are also continuous, but the third derivative is discontinuous at the knots.</p>
 </section>
-<section id="sec-exercises2" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="sec-exercises2"><span class="header-section-number">2.2</span> Exercises</h2>
-<div class="exercises">
-<p>2.1 Why is it not sensible to define a smooth function made-up of constant components? Similarly, why is not sensible to create a differentiable function from linear splines?</p>
-<p>2.2 In the situation illustrated in <a href="#fig-piecewise-cubic-2">Figure&nbsp;<span>2.2 (b)</span></a>, where <span class="math inline">\(p=3\)</span> and <span class="math inline">\(m=2\)</span>, clearly identify the <span class="math inline">\((p+1)\times (m+1)=12\)</span> model parameters and the <span class="math inline">\(pm=6\)</span> smoothness constraints in terms of the cubic polynomials and their derivatives.</p>
-<p>2.3 Further consider the situation illustrated in <a href="#fig-piecewise-cubic-2">Figure&nbsp;<span>2.2 (b)</span></a>. Suppose now that we require the splines to pass through specified coordinates <span class="math inline">\((t_1, f(t_1))\)</span> and <span class="math inline">\((t_2, f(t_2))\)</span>. What is the degrees of freedom for this model? How many such cubic splines would satisfy these constraints? Discuss potential additional constraints which would lead to a unique fitted model. Do you think having a unique solution is a positive or negative property?</p>
-<p>2.4 For a general problem, what would be the effect of requiring additional constraints of the form of <a href="#eq-smoothcons">Equation&nbsp;<span>2.2</span></a> but with <span class="math inline">\(\ell = p\)</span>? Would this lead to an acceptable fitted cubic spline model? Justify your answer.</p>
+<section id="focus-on-smoothness-quiz" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="focus-on-smoothness-quiz">Focus on smoothness quiz</h2>
+<p>Test your knowledge recall and comprehension to reinforce basic ideas about smoothness.</p>
+<div class="webex-box">
+<div class="webex-check">
+<ol type="1">
+<li><p>Which of the following best describes the motivation for using smooth fitted models? <select class="webex-select"><option value="blank"></option><option value="">Makes model fitting easier</option><option value="">Calculations are easy to do in R</option><option value="">It produces nice graphs</option><option value="answer">Reduces the effect of measurement error</option><option value="">None of the above</option></select></p></li>
+<li><p>Which of the following best describes the motivation for using piecewise polynomial components? <select class="webex-select"><option value="blank"></option><option value="">Can involve change-points</option><option value="answer">Well understood and easy to use</option><option value="">Can model jumps well</option><option value="">They lead to normally distributed errors</option><option value="">None of the above</option></select></p></li>
+<li><p>Is the following a true statement? ``The higher the order of the polynomial components the smoother the spline’’ <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>If a model fitted to a particular data set has zero degrees of freedom, then which of the following statements about the solution is most likely to be true? <select class="webex-select"><option value="blank"></option><option value="">Does not fit the data well</option><option value="">No solution</option><option value="answer">Unique solution</option><option value="">Multiple solutions</option></select></p></li>
+<li><p>Which of the following best describes spline modeling? <select class="webex-select"><option value="blank"></option><option value="">The only non-parametric method available</option><option value="">It is a parametric approach</option><option value="">Requires high-level coding</option><option value="answer">A flexible non-parametric approach</option></select></p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="sec-exercises2" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-exercises2"><span class="header-section-number">2.3</span> Exercises</h2>
+<div class="webex-box">
+2.1 Why is it not sensible to define a smooth function made-up of constant components? Similarly, why is not sensible to create a differentiable function from linear splines?
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>For each case, think about the number of parameters for each component and the implications of any constraints.</p>
+</div>
+2.2 In the situation illustrated in <a href="#fig-piecewise-cubic-2">Figure&nbsp;<span>2.2 (b)</span></a>, where <span class="math inline">\(p=3\)</span> and <span class="math inline">\(m=2\)</span>, clearly identify the <span class="math inline">\((p+1)\times (m+1)=12\)</span> model parameters and the <span class="math inline">\(pm=6\)</span> smoothness constraints in terms of the cubic polynomials and their derivatives.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>Define a cubic polynomial for each interval and consider continuity and differentiability.</p>
+</div>
+2.3 Further consider the situation illustrated in <a href="#fig-piecewise-cubic-2">Figure&nbsp;<span>2.2 (b)</span></a>. Suppose now that we require the splines to pass through specified coordinates <span class="math inline">\((t_1, f(t_1))\)</span> and <span class="math inline">\((t_2, f(t_2))\)</span>. What is the degrees of freedom for this model? How many such cubic splines would satisfy these constraints? Discuss potential additional constraints which would lead to a unique fitted model. Do you think having a unique solution is a positive or negative property?
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>Think about the degrees of freedom, that is the total number of parameters and the number of constraints, including forcing the spine to pass through two points. Think about the implications of having zero and non-zero degrees of freedom. There are very many (infinitely many?) potential additional constraints, but suggest one or two which sound a good idea.</p>
+</div>
+2.4 For a general problem, what would be the effect of requiring additional constraints of the form of <a href="#eq-smoothcons">Equation&nbsp;<span>2.2</span></a> but with <span class="math inline">\(\ell = p\)</span>? Would this lead to an acceptable fitted cubic spline model? Justify your answer.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>Think about the implication of this on the curvature of neighbouring components, and hence on overall curvature.</p>
+</div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -274,7 +315,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="https://rgaykroyd.github.io/MATH5824/Exercises/Exercises_2.2.html">Exercise 2.2 Solutions can be found here.</a></p>
+<p><a href="https://rgaykroyd.github.io/MATH5824/Solutions_2.html">Exercise 2 Solutions can be found here.</a></p>
 </div>
 </div>
 
@@ -728,9 +769,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./3_interpolating.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
