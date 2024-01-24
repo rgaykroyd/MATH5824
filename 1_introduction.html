@@ -130,6 +130,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1.1</span> Introduction</a></li>
   <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="header-section-number">1.2</span> Motivation</a></li>
+  <li><a href="#focus-on-polynomials-quiz" id="toc-focus-on-polynomials-quiz" class="nav-link" data-scroll-target="#focus-on-polynomials-quiz">Focus on polynomials quiz</a></li>
   <li><a href="#sec-genmodelling" id="toc-sec-genmodelling" class="nav-link" data-scroll-target="#sec-genmodelling"><span class="header-section-number">1.3</span> General modelling approaches</a>
   <ul class="collapse">
   <li><a href="#parametric-models" id="toc-parametric-models" class="nav-link" data-scroll-target="#parametric-models">Parametric models</a></li>
@@ -361,6 +362,21 @@ ul.task-list li input[type="checkbox"] {
 <p>The simplest method, <em>constant-spline interpolation</em>, assumes that the dependent variable remains constant between successive observations, with the result shown in <a href="#fig-plotCoalseemspline-1">Figure&nbsp;<span>1.3 (a)</span></a>. However, the discontinuities in this model make it quite unreliable. A better method, whose results are shown in <a href="#fig-plotCoalseemspline-2">Figure&nbsp;<span>1.3 (b)</span></a>, is <em>linear-spline interpolation</em>, which fits a straight line between successive observations. Even so, this method produces discontinuities in the <em>gradient</em> at each data point. A better method still, shown in <a href="#fig-plotCoalseemspline-3">Figure&nbsp;<span>1.3 (c)</span></a>, is <em>cubic spline interpolation</em>, which fits a cubic polynomial between successive data points such that both the gradient and the curvature at each data point is continuous.</p>
 <p>A feature of all these interpolation methods is that they fit the data exactly. Is this a good thing? The final method assumes that there may be some measurement error in the observations, which justifies fitting a smoother cubic spline than the cubic interpolating spline, but as we see in <a href="#fig-plotCoalseemspline-4">Figure&nbsp;<span>1.3 (d)</span></a> which does not reproduce the data points exactly. Is this a bad thing? We will see during this module how to construct and evaluate these curves. Here, the results are presented only for motivation.</p>
 </section>
+<section id="focus-on-polynomials-quiz" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="focus-on-polynomials-quiz">Focus on polynomials quiz</h2>
+<p>Test your knowledge recall and comprehension to reinforce basic ideas about continuity and differentiability.</p>
+<div class="webex-box">
+<div class="webex-check">
+<ol type="1">
+<li><p>Which of the predicted curves in Figure 1.3 are continous? <select class="webex-select"><option value="blank"></option><option value="">None of the models</option><option value="">Model (a) only</option><option value="">Models (c) and (d) only</option><option value="answer">All models</option></select></p></li>
+<li><p>Which of the predicted curves in Figure 1.3 have a continous first derivative? <select class="webex-select"><option value="blank"></option><option value="">None of the models</option><option value="">Model (b) only</option><option value="answer">Models (c) and (d) only</option><option value="">All models</option></select></p></li>
+<li><p>Which of the predicted curves in Figure 1.3 have a continous second derivative? <select class="webex-select"><option value="blank"></option><option value="">None of the models</option><option value="">Model (b) only</option><option value="answer">Models (c) and (d) only</option><option value="">All models</option></select></p></li>
+<li><p>Which of the predicted curves in Figure 1.3 have a continous third derivative? <select class="webex-select"><option value="blank"></option><option value="">None of the models</option><option value="">Model (b) only</option><option value="answer">Models (c) and (d) only</option><option value="">All models</option></select></p></li>
+<li><p>Which of the predicted curves in Figure 1.3 has the highest residual sum of squares? <select class="webex-select"><option value="blank"></option><option value="">None of the models</option><option value="">Model (a)</option><option value="">Model (b)</option><option value="">Model (c)</option><option value="answer">Model (d)</option><option value="">All model</option></select></p></li>
+</ol>
+</div>
+</div>
+</section>
 <section id="sec-genmodelling" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="sec-genmodelling"><span class="header-section-number">1.3</span> General modelling approaches</h2>
 <p>We wish to model the dependence of a response variable <span class="math inline">\(y\)</span> on an explanatory variable <span class="math inline">\(x\)</span>, where <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are both continuous. We observe <span class="math inline">\(y_i\)</span> at each time <span class="math inline">\(x_i,\)</span> for <span class="math inline">\(i=1,\ldots, n\)</span>, where the observation locations are ordered: <span class="math inline">\(x_1 &lt; x_2 &lt; \ldots &lt;x_n\)</span>. We imagine that the <span class="math inline">\(y\)</span>’s are noisy versions of a smooth function of <span class="math inline">\(x\)</span>, say <span class="math inline">\(f(x)\)</span>. That is, <span id="eq-smoothregression"><span class="math display">\[
@@ -398,26 +414,39 @@ Click here to see hints.
 </button>
 <p>For each, start by defining the residual sum of squares (RSS), <span class="math inline">\(RSS=\sum (y_i - \hat{y}_i)^2\)</span> where, in turn (a) <span class="math inline">\(\hat{y}_i= \alpha\)</span>, (b) <span class="math inline">\(\hat{y}_i= \alpha+\beta x_i\)</span>, (c) <span class="math inline">\(\hat{y}_i= \alpha+\beta x_i+\gamma x_i^2\)</span>. Then, find he parameter values which minimise the RSS by (possibly partial) differentiation.</p>
 </div>
-1.2 Discuss possible approaches to fitting an exponential model, <span class="math inline">\(f(x)=\alpha e^{-\beta x}\)</span>, to data. Note that no actual algebraic derivation, nor numerical coded algorithm is expect.
+1.2 Discuss possible approaches to fitting an exponential model, <span class="math inline">\(y=\alpha e^{\beta x},\)</span> to data. Note that no actual algebraic derivation, nor numerical coded algorithm is expect.
 <div class="webex-solution">
 <button>
 Click here to see hints.
 </button>
 <p>There is more than one approach. Can least squares be used? Could a simple transformation of the data and the fitted model make solving the problem easier? Is there an algebraic solution? Is there a purely numerical solution?</p>
 </div>
-1.2 In <a href="#fig-plotpeicewise-3">Figure&nbsp;<span>1.2 (c)</span></a>, discuss how you might fit a two-part linear model for the case where the change-point is <em>unknown</em>. Note that no actual algebraic derivation, nor numerical coded algorithm is expect.
+1.3 In <a href="#fig-plotpeicewise-3">Figure&nbsp;<span>1.2 (c)</span></a>, discuss how you might fit a two-part linear model for the case where the change-point is <em>unknown</em>. Note that no actual algebraic derivation, nor numerical coded algorithm is expect.
 <div class="webex-solution">
 <button>
 Click here to see hints.
 </button>
 <p>With many similar problems, imaging breaking the problem down into steps. If you know the location of the change-point then what should you do? Can you then try different possible change-point locations?</p>
 </div>
-1.3 Discuss the four fitted models in <a href="#fig-plotCoalseemspline">Figure&nbsp;<span>1.3</span></a>. Can you give positive and negative properties of each model? Which do you think is best and which worst? Do you think which is best/worst, depends on the data? Justify your answers.
+1.4 Discuss the four fitted models in <a href="#fig-plotCoalseemspline">Figure&nbsp;<span>1.3</span></a>. Can you give positive and negative properties of each model? Which do you think is best and which worst? Do you think which is best/worst, depends on the data? Justify your answers.
 <div class="webex-solution">
 <button>
 Click here to see hints.
 </button>
 <p>Don’t get too stuck on the data used here, but think of general issues: ease of use, reliability of the data, is there error with the data or is it very reliable? What if the response it discrete?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://rgaykroyd.github.io/MATH5824/Solutions_1.html">Exercise 1 Solutions can be found here.</a></p>
 </div>
 </div>
 
