@@ -1,5 +1,61 @@
 [
   {
+    "objectID": "0_preface.html",
+    "href": "0_preface.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Official Module Description"
+  },
+  {
+    "objectID": "0_preface.html#preface",
+    "href": "0_preface.html#preface",
+    "title": "Overview",
+    "section": "Preface",
+    "text": "Preface\nThese lecture notes are produced for the University of Leeds module “MATH5824 - Generalized Linear and Additive Models” for the academic year 2023-24. They are based on the lecture notes used previously for this module and I am grateful to previous module lecturers for their considerable effort: Lanpeng Ji, Amanda Minter, John Kent, Wally Gilks, and Stuart Barber. This year, again, I am using Quarto (a successor to RMarkdown) from RStudio to produce both the html and PDF, and then GitHub to create the website which can be accessed at rgaykroyd.github.io/MATH5824/. Please note that the PDF versions will only be made available on the University of Leeds Minerva system. Although I am a long-term user of RStudio, I am a novice at Quarto/RMarkdown and a complete beginner using Github and hence please be patient if there are hitches along the way.\nRG Aykroyd, Leeds, January 22, 2024"
+  },
+  {
+    "objectID": "0_preface.html#changes-since-last-year",
+    "href": "0_preface.html#changes-since-last-year",
+    "title": "Overview",
+    "section": "Changes since last year",
+    "text": "Changes since last year\nFeedback from the students last year was very positive, but there were consistent comments regarding two issues: (1) a shortage of practice exercises and the opportunity to discuss these in class, and (2) limited RStudio support in preparation for the assessment. For the first of these, additional exercises have been prepared and are included in the learning material. Also, I am trying some short quizzes so that you can check your basic knowledge. Further, I intend to set-aside some lecture time for us to discuss selected exercises. For the second, an additional computer session has been added, in Week 5 (26 February - 1 March), this is 3 weeks before the assessed practice in Week 8 (18 - 22 March). Further, a few new instructional videos will be available addressing some RStudio topics. Together, these represents a considerable about of extra work for me, but I hope that they are helpful and so please give your feedback whenever there is an opportunity."
+  },
+  {
+    "objectID": "0_preface.html#generative-ai-usage-within-this-module",
+    "href": "0_preface.html#generative-ai-usage-within-this-module",
+    "title": "Overview",
+    "section": "Generative AI usage within this module",
+    "text": "Generative AI usage within this module\nThe assessments for this module fall in the red category for using Generative AI which means you must not use Generative AI tools. The purpose and format of the assessments makes it inappropriate or impractical for AI tools to be used.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nStatistical ethics and sensitive data\nPlease note that from time to time we will be using data sets from situations which some might perceive as sensitive. All such data sets will, however, be derived from real-world studies which appear in textbooks or in scientific journals. The daily work of many statisticians involves applying their professional skills in a wide variety of situations and as such it is important to include a range of commonly encountered examples in this module. Whenever possible, sensitive topics will be signposted in advance. If you feel that any examples may be personally upsetting then, if possible, please contact the module lecturer in advance. If you are significantly effected by any of these situations, then you can seek support from the Student Counselling and Wellbeing service."
+  },
+  {
+    "objectID": "0_preface.html#module-summary",
+    "href": "0_preface.html#module-summary",
+    "title": "Overview",
+    "section": "Module summary",
+    "text": "Module summary\nLinear regression is a tremendously useful statistical technique but is limited to normally distributed responses. Generalised linear models extend linear regression in many ways - allowing us to analyse more complex data sets. In this module we will see how to combine continuous and categorical predictors, analyse binomial response data and model count data.A further extension is the generalised additive model. Here, we no longer insist on the predictor variables affecting the response via a linear function of the predictors, but allow the response to depend on a more general smooth function of the predictor."
+  },
+  {
+    "objectID": "0_preface.html#objectives",
+    "href": "0_preface.html#objectives",
+    "title": "Overview",
+    "section": "Objectives",
+    "text": "Objectives\nOn completion of this module, students should be able to:\n\ncarry out regression analysis with generalised linear models including the use of link functions, deviance and overdispersion;\nfit and interpret the special cases of log linear models and logistic regression;\ncompare a number of methods for scatterpot smoothing suitable for use in a generalised additive model;\nuse a backfitting algorithm to estimate the parameters of a generalised additive model;\ninterpret a fitted generalised additive model;\nuse a statistical package with real data to fit these models to data and to write a report giving and interpreting the results."
+  },
+  {
+    "objectID": "0_preface.html#syllabus",
+    "href": "0_preface.html#syllabus",
+    "title": "Overview",
+    "section": "Syllabus",
+    "text": "Syllabus\nGeneralised linear model; probit model; logistic regression; log linear models; scatterplot smoothers; generalised additive model."
+  },
+  {
+    "objectID": "0_preface.html#university-module-catalogue",
+    "href": "0_preface.html#university-module-catalogue",
+    "title": "Overview",
+    "section": "University Module Catalogue",
+    "text": "University Module Catalogue\nFor any further details, please see MATH5824 Module Catalogue page"
+  },
+  {
     "objectID": "1_introduction.html#introduction",
     "href": "1_introduction.html#introduction",
     "title": "1  Non-parametric Modelling",
@@ -35,94 +91,10 @@
     "text": "1.4 Exercises\n\n1.1 Consider the first three models fitted in Figure 1.1 and let the data be denoted, \\(\\{(x_i, y_i): i=1,2,\\dots, n\\}\\). These three models can be written \\[\\begin{align*}\n(a) \\quad &  y = \\alpha +\\epsilon\\\\\n(b) \\quad &  y = \\alpha +\\beta x+\\epsilon\\\\\n(c) \\quad &  y = \\alpha +\\beta x + \\gamma x^2 +\\epsilon\n\\end{align*}\\] where \\(\\epsilon\\) represents normally distributed random error. Use the principle of least squares, or otherwise, to obtain estimates of the model parameters.\n\n\nClick here to see hints.\n\nFor each, start by defining the residual sum of squares (RSS), \\(RSS=\\sum (y_i - \\hat{y}_i)^2\\) where, in turn (a) \\(\\hat{y}_i= \\alpha\\), (b) \\(\\hat{y}_i= \\alpha+\\beta x_i\\), (c) \\(\\hat{y}_i= \\alpha+\\beta x_i+\\gamma x_i^2\\). Then, find he parameter values which minimise the RSS by (possibly partial) differentiation.\n\n1.2 Discuss possible approaches to fitting an exponential model, \\(y=\\alpha e^{\\beta x},\\) to data. Note that no actual algebraic derivation, nor numerical coded algorithm is expect.\n\n\nClick here to see hints.\n\nThere is more than one approach. Can least squares be used? Could a simple transformation of the data and the fitted model make solving the problem easier? Is there an algebraic solution? Is there a purely numerical solution?\n\n1.3 In Figure 1.2 (c), discuss how you might fit a two-part linear model for the case where the change-point is unknown. Note that no actual algebraic derivation, nor numerical coded algorithm is expect.\n\n\nClick here to see hints.\n\nWith many similar problems, imaging breaking the problem down into steps. If you know the location of the change-point then what should you do? Can you then try different possible change-point locations?\n\n1.4 Discuss the four fitted models in Figure 1.3. Can you give positive and negative properties of each model? Which do you think is best and which worst? Do you think which is best/worst, depends on the data? Justify your answers.\n\n\nClick here to see hints.\n\nDon’t get too stuck on the data used here, but think of general issues: ease of use, reliability of the data, is there error with the data or is it very reliable? What if the response it discrete?\n\n\n\n\n\n\n\n\nNote\n\n\n\nExercise 1 Solutions can be found here."
   },
   {
-    "objectID": "0_preface.html",
-    "href": "0_preface.html",
-    "title": "Overview",
-    "section": "",
-    "text": "Official Module Description"
-  },
-  {
-    "objectID": "0_preface.html#preface",
-    "href": "0_preface.html#preface",
-    "title": "Overview",
-    "section": "Preface",
-    "text": "Preface\nThese lecture notes are produced for the University of Leeds module “MATH5824 - Generalized Linear and Additive Models” for the academic year 2023-24. They are based on the lecture notes used previously for this module and I am grateful to previous module lecturers for their considerable effort: Lanpeng Ji, Amanda Minter, John Kent, Wally Gilks, and Stuart Barber. This year, again, I am using Quarto (a successor to RMarkdown) from RStudio to produce both the html and PDF, and then GitHub to create the website which can be accessed at rgaykroyd.github.io/MATH5824/. Please note that the PDF versions will only be made available on the University of Leeds Minerva system. Although I am a long-term user of RStudio, I am a novice at Quarto/RMarkdown and a complete beginner using Github and hence please be patient if there are hitches along the way.\nRG Aykroyd, Leeds, January 22, 2024"
-  },
-  {
-    "objectID": "0_preface.html#changes-since-last-year",
-    "href": "0_preface.html#changes-since-last-year",
-    "title": "Overview",
-    "section": "Changes since last year",
-    "text": "Changes since last year\nFeedback from the students last year was very positive, but there were consistent comments regarding two issues: (1) a shortage of practice exercises and the opportunity to discuss these in class, and (2) limited RStudio support in preparation for the assessment. For the first of these, additional exercises have been prepared and are included in the learning material. Also, I am trying some short quizzes so that you can check your basic knowledge. Further, I intend to set-aside some lecture time for us to discuss selected exercises. For the second, an additional computer session has been added, in Week 5 (26 February - 1 March), this is 3 weeks before the assessed practice in Week 8 (18 - 22 March). Further, a few new instructional videos will be available addressing some RStudio topics. Together, these represents a considerable about of extra work for me, but I hope that they are helpful and so please give your feedback whenever there is an opportunity.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nStatistical ethics and sensitive data\nPlease note that from time to time we will be using data sets from situations which some might perceive as sensitive. All such data sets will, however, be derived from real-world studies which appear in textbooks or in scientific journals. The daily work of many statisticians involves applying their professional skills in a wide variety of situations and as such it is important to include a range of commonly encountered examples in this module. Whenever possible, sensitive topics will be signposted in advance. If you feel that any examples may be personally upsetting then, if possible, please contact the module lecturer in advance. If you are significantly effected by any of these situations, then you can seek support from the Student Counselling and Wellbeing service."
-  },
-  {
-    "objectID": "0_preface.html#module-summary",
-    "href": "0_preface.html#module-summary",
-    "title": "Overview",
-    "section": "Module summary",
-    "text": "Module summary\nLinear regression is a tremendously useful statistical technique but is limited to normally distributed responses. Generalised linear models extend linear regression in many ways - allowing us to analyse more complex data sets. In this module we will see how to combine continuous and categorical predictors, analyse binomial response data and model count data.A further extension is the generalised additive model. Here, we no longer insist on the predictor variables affecting the response via a linear function of the predictors, but allow the response to depend on a more general smooth function of the predictor."
-  },
-  {
-    "objectID": "0_preface.html#objectives",
-    "href": "0_preface.html#objectives",
-    "title": "Overview",
-    "section": "Objectives",
-    "text": "Objectives\nOn completion of this module, students should be able to:\n\ncarry out regression analysis with generalised linear models including the use of link functions, deviance and overdispersion;\nfit and interpret the special cases of log linear models and logistic regression;\ncompare a number of methods for scatterpot smoothing suitable for use in a generalised additive model;\nuse a backfitting algorithm to estimate the parameters of a generalised additive model;\ninterpret a fitted generalised additive model;\nuse a statistical package with real data to fit these models to data and to write a report giving and interpreting the results."
-  },
-  {
-    "objectID": "0_preface.html#syllabus",
-    "href": "0_preface.html#syllabus",
-    "title": "Overview",
-    "section": "Syllabus",
-    "text": "Syllabus\nGeneralised linear model; probit model; logistic regression; log linear models; scatterplot smoothers; generalised additive model."
-  },
-  {
-    "objectID": "0_preface.html#university-module-catalogue",
-    "href": "0_preface.html#university-module-catalogue",
-    "title": "Overview",
-    "section": "University Module Catalogue",
-    "text": "University Module Catalogue\nFor any further details, please see MATH5824 Module Catalogue page"
-  },
-  {
-    "objectID": "2_basicdefinitions.html#basic-definitions",
-    "href": "2_basicdefinitions.html#basic-definitions",
-    "title": "2  Introducing Splines",
-    "section": "2.1 Basic definitions",
-    "text": "2.1 Basic definitions\nLet \\(t_1 &lt; t_2 &lt; \\ldots &lt; t_m\\) be a fixed set of sites or knots which need not correspond to observation locations, as in Figure 2.1.\n\n\n\n\n\nFigure 2.1: Diagram of knots and data points.\n\n\n\n\nNote that we use the symbol \\(t\\), rather than \\(x\\), so that we do not confuse knots and observation locations.\nA spline of order \\(p\\geq 1\\) is a piecewise-polynomial of order \\(p\\) which is \\((p-1)\\) times differentiable at the knots. Thus there are coefficients \\(\\{a_{k\\ell},\\; k=0,\\ldots,m, \\; \\ell=0,\\ldots,p\\}\\) such that \\[\nf(t) = \\sum_{\\ell=0}^p a_{k\\ell} \\; t^\\ell,\\qquad \\text{for}~t_k \\leq t &lt;t_{k+1},\n\\tag{2.1}\\] where we take \\(t_0 = -\\infty\\) and \\(t_{m+1} = +\\infty\\).\nIf we are using cubic polynomials, (\\(p=3\\)), then \\(f\\) is given by the following equations: \\[\nf(t) = a_{00} + a_{01} t + a_{02}t^2 +a_{03}t^3, \\quad\nt_0 \\le t &lt; t_1\n\\] to the left of the first knot, \\[\nf(t) = a_{10} + a_{11} t + a_{12}t^2 +a_{13}t^3, \\quad\nt_1 \\le t &lt; t_2\n\\] between the first and second knots, and so on until \\[\nf(t) = a_{m0} + a_{m1} t + a_{m2}t^2 +a_{m3}t^3, \\quad\nt_m \\le t &lt; t_{m+1}\n\\] to the right of the final knot. This is illustrated in Figure 2.2 (a) with \\(m=2.\\)\n\n\n\n\n\n\n\n(a) No smoothness constraints\n\n\n\n\n\n\n\n(b) With smoothness constraints\n\n\n\n\nFigure 2.2: Piecewise-cubic functions in three intervals with knot positions indicated with vertical lines."
-  },
-  {
-    "objectID": "2_basicdefinitions.html#focus-on-splines-quiz",
-    "href": "2_basicdefinitions.html#focus-on-splines-quiz",
-    "title": "2  Introducing Splines",
-    "section": "Focus on splines quiz",
-    "text": "Focus on splines quiz\nTest your knowledge recall and comprehension to reinforce basic ideas about splines.\n\n\n\nWhich of the following best describes the relationship between knots and data locations.\n\n Knots are the response and data locations are the explanatory variable There must be fewer knots than data locations Knots and data locations are both marked on the x-axis Knots and data points are exactly the same\n\nHow many polynomial equations are need to define a cubic spline with four knots? 34512None of the above\nWhat is the highest power possible in a cubic spline?. 0123None of the above\nHow many times can a spline of order 5 be differentiated at the knots? Cannot be differentiatedTwice differentiableFour times differentiableInfinitly differentiable\nWhich of the following is NOT a property of cubic splines? Piecewise cubic polynomialTwice differentiableMay contain change-pointsContinuous at the knots"
-  },
-  {
-    "objectID": "2_basicdefinitions.html#imposing-smoothness",
-    "href": "2_basicdefinitions.html#imposing-smoothness",
-    "title": "2  Introducing Splines",
-    "section": "2.2 Imposing smoothness",
-    "text": "2.2 Imposing smoothness\nBecause of the use of polynomials, \\(f\\) is smooth between each successive pair of knots. At the knots, however, \\(f\\) might not be continuous and it might not be differentiable – in such cases we would say that the function is not smooth.\nTo ensure that \\(f\\) is also smooth at each of the knots, we impose smoothness constraints which control continuity of the function and its derivatives at the knots.\nLet \\(f^{(\\ell)}\\) be the \\(\\ell\\)-th order derivative, with \\(f^{(0)}=f\\) being the function itself, \\(f^{(1)}=f'\\) is the first derivative and \\(f^{(2)}=f''\\) the second derivative. Further, let \\(f^{(\\ell)}(t-\\epsilon)\\) and \\(f^{(\\ell)}(t+\\epsilon)\\), for \\(\\epsilon\\ge 0\\), denote evaluation of the function or its derivative at points just below and just above \\(t\\) – we will be interested in their relative values as \\(\\epsilon \\rightarrow 0\\).\nTo impose smoothness, we require that\n\\[\n\\lim _{\\epsilon\\rightarrow 0} f^{(\\ell)}(t_k-\\epsilon)\n=\n\\lim _{\\epsilon\\rightarrow 0} f^{(\\ell)}(t_k+\\epsilon),\n\\tag{2.2}\\] for all \\(k=1,\\ldots,m\\) and for \\(\\ell = 0,\\ldots,(p-1)\\).\nIn other words we say that \\(f\\) is smooth if the limits, from below and from above, of the function and its \\((p-1)\\) derivatives exist and are equal.\nThe meaning of these smoothness constraints is illustrated in Figure 2.2. In Figure 2.2 (a), a piecewise cubic function with two knots has been plotted. The first derivative, \\(f'\\), is discontinuous at the first knot and the function itself, \\(f\\), is discontinuous at the second knot. Figure 2.2 (b) shows a similar shaped cubic spline with two knots. This time, the function \\(f\\) and its first two derivatives are continuous at both knots.\nThe smoothness conditions in Equation 2.2 induce constraints on the coefficients \\(\\{a_{k\\ell}\\}\\). A polynomial of order \\(p\\) has \\(p+1\\) coefficients, and there are \\(m+1\\) intervals when we have \\(m\\) knots. This leads to \\((p+1)\\times(m+1)\\) coefficients but there are \\(p\\) constraints at each of the \\(m\\) knots. Thus the total degrees of freedom of the system is \\[\n\\text{df}_{\\text{spline}}   = (p+1)(m+1) - pm = m+p+1.\n\\tag{2.3}\\]\nThese degrees of freedom provide the necessary flexibility in the spline.\nNote that \\(f\\) is infinitely differentiable everywhere, except at the knots where it is \\(p-1\\) times differentiable. In particular, for \\(p=1\\), \\(f\\) is a linear spline comprising linear pieces constrained to be continuous at the knots, although the slope of \\(f\\) is discontinuous at the knots. Also, for \\(p=3\\), \\(f\\) is a cubic spline comprising cubic polynomial pieces continuous at the knots; where the first and second derivatives of \\(f\\) are also continuous, but the third derivative is discontinuous at the knots."
-  },
-  {
-    "objectID": "2_basicdefinitions.html#focus-on-smoothness-quiz",
-    "href": "2_basicdefinitions.html#focus-on-smoothness-quiz",
-    "title": "2  Introducing Splines",
-    "section": "Focus on smoothness quiz",
-    "text": "Focus on smoothness quiz\nTest your knowledge recall and comprehension to reinforce basic ideas about smoothness.\n\n\n\nWhich of the following best describes the motivation for using smooth fitted models? Makes model fitting easierCalculations are easy to do in RIt produces nice graphsReduces the effect of measurement errorNone of the above\nWhich of the following best describes the motivation for using piecewise polynomial components? Can involve change-pointsWell understood and easy to useCan model jumps wellThey lead to normally distributed errorsNone of the above\nIs the following a true statement? ``The higher the order of the polynomial components the smoother the spline’’ TRUEFALSE\nIf a model fitted to a particular data set has zero degrees of freedom, then which of the following statements about the solution is most likely to be true? Does not fit the data wellNo solutionUnique solutionMultiple solutions\nWhich of the following best describes spline modeling? The only non-parametric method availableIt is a parametric approachRequires high-level codingA flexible non-parametric approach"
-  },
-  {
-    "objectID": "2_basicdefinitions.html#sec-exercises2",
-    "href": "2_basicdefinitions.html#sec-exercises2",
-    "title": "2  Introducing Splines",
-    "section": "2.3 Exercises",
-    "text": "2.3 Exercises\n\n2.1 Why is it not sensible to define a smooth function made-up of constant components? Similarly, why is not sensible to create a differentiable function from linear splines?\n\n\nClick here to see hints.\n\nFor each case, think about the number of parameters for each component and the implications of any constraints.\n\n2.2 In the situation illustrated in Figure 2.2 (b), where \\(p=3\\) and \\(m=2\\), clearly identify the \\((p+1)\\times (m+1)=12\\) model parameters and the \\(pm=6\\) smoothness constraints in terms of the cubic polynomials and their derivatives.\n\n\nClick here to see hints.\n\nDefine a cubic polynomial for each interval and consider continuity and differentiability.\n\n2.3 Further consider the situation illustrated in Figure 2.2 (b). Suppose now that we require the splines to pass through specified coordinates \\((t_1, f(t_1))\\) and \\((t_2, f(t_2))\\). What is the degrees of freedom for this model? How many such cubic splines would satisfy these constraints? Discuss potential additional constraints which would lead to a unique fitted model. Do you think having a unique solution is a positive or negative property?\n\n\nClick here to see hints.\n\nThink about the degrees of freedom, that is the total number of parameters and the number of constraints, including forcing the spine to pass through two points. Think about the implications of having zero and non-zero degrees of freedom. There are very many (infinitely many?) potential additional constraints, but suggest one or two which sound a good idea.\n\n2.4 For a general problem, what would be the effect of requiring additional constraints of the form of Equation 2.2 but with \\(\\ell = p\\)? Would this lead to an acceptable fitted cubic spline model? Justify your answer.\n\n\nClick here to see hints.\n\nThink about the implication of this on the curvature of neighbouring components, and hence on overall curvature.\n\n\n\n\n\n\n\n\nNote\n\n\n\nExercise 2 Solutions can be found here."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "MATH5824 Generalised Linear and Additive Models",
     "section": "",
-    "text": "\\[\n\\def\\b#1{\\mathbf{#1}}\n\\]\n\n\nWeekly schedule\nItems will be added here week-by-week and so keep checking when you need up-to-date information on what you should be doing. Note that items specific to MATH5824M will be marked accordingly, otherwise items refer to the material common with MATH3823.\n\n\n\n\n\n\nWeek 1 (29 January - 2 February)\n\n\n\n\nBefore first Lecture: Please read the Overview.\nLecture on Tuesday: We will briefly cover all material in Chapter: Introduction.\nBefore next Lecture: Please re-read Chapter 1 carefully, especially any sections not covered in Lectures.\nLecture on Thursday: Start Chapter 2: Essentials of Normal Linear Models with Section 2.1: Overview & Section 2.2: Linear models.\nBefore next Lecture: Please read the MATH5824M Overview.\nLecture on Friday: Cover the whole of MATH5824M Chapter 1: Non-parametric Modelling.\nWeekly feedback: Complete the Chapter 1 Quizzes and self-study the Exercises in Section 1.5 – solutions to be added during Week 1. If you have time, then also self-study the MATH5824M Exercises in Section 1.4.\n\n\n\n\n\n\n\n\n\nAdvanced notice\n\n\n\n\nModule Assessment: Set on 14 March with submission deadline 23 April (that is after the break). You will be expected to write a short report based on an RStudio practical.\nComputer classes: 27/28 February for Practice and 19/20 March for Assessment – check your timetable.\n\n\n\n\n\n\n\n\n\nProvisional Weekly Lecture Schedule\n\n\n\n\n\n\nWeek 1\nChapter 1\nAll\n\n\nWeek 2\nChapter 2\nAll\n\n\nWeek 3\nExercises\nExercises 1, 2\n\n\n\nChapter 3\nSections 3.1-3.3\n\n\nWeek 4\n\nSections 3.4-3.5\n\n\n\nExercises\nExercises 3\n\n\nWeek 5\nChapter 4\nSections 4.1-4.3\n\n\nWeek 6\n\nSections 4.4-4.5\n\n\nWeek 7\nChapter 5\nSections 5.1-5.3\n\n\nWeek 8\n\nSections 5.4-5.6\n\n\n\nExercises\nExercises 4, 5\n\n\nEaster\n\n\n\n\nWeek 9\nChapter 6\nAll\n\n\nWeek 10\nExercises\nExercises 6\n\n\nWeek 11\nRevision"
+    "text": "\\[\n\\def\\b#1{\\mathbf{#1}}\n\\]\n\n\nWeekly schedule\nItems will be added here week-by-week and so keep checking when you need up-to-date information on what you should be doing. Note that items specific to MATH5824M will be marked accordingly, otherwise items refer to the material common with MATH3823.\n\n\n\n\n\n\nWeek 1 (29 January - 2 February)\n\n\n\n\nBefore first Lecture: Please read the Overview.\nLecture on Tuesday: We will briefly cover all material in Chapter: Introduction.\nBefore next Lecture: Please re-read Chapter 1 carefully, especially any sections not covered in Lectures.\nLecture on Thursday: Start Chapter 2: Essentials of Normal Linear Models with Section 2.1: Overview & Section 2.2: Linear models.\nBefore next Lecture: Please read the MATH5824M Overview.\nLecture on Friday: Cover the whole of MATH5824M Chapter 1: Non-parametric Modelling.\nWeekly feedback: Complete the Chapter 1 Quizzes and self-study the Exercises in Section 1.5 – solutions to be added during Week 1. If you have time, then also self-study the MATH5824M Exercises in Section 1.4.\n\n\n\n\n\n\n\n\n\nAdvanced notice\n\n\n\n\nModule Assessment: Set on 14 March with submission deadline 23 April (that is after the break). You will be expected to write a short report based on an RStudio practical.\nComputer classes: 27/28 February for Practice and 19/20 March for Assessment – check your timetable.\nGenerative AI usage within this module: The assessments for this module fall in the red category for using Generative AI which means you must not use Generative AI tools. The purpose and format of the assessments makes it inappropriate or impractical for AI tools to be used.\n\n\n\n\n\n\n\n\n\nProvisional Weekly Lecture Schedule\n\n\n\n\n\n\nWeek 1\nChapter 1\nAll\n\n\nWeek 2\nChapter 2\nAll\n\n\nWeek 3\nExercises\nExercises 1, 2\n\n\n\nChapter 3\nSections 3.1-3.3\n\n\nWeek 4\n\nSections 3.4-3.5\n\n\n\nExercises\nExercises 3\n\n\nWeek 5\nChapter 4\nSections 4.1-4.3\n\n\nWeek 6\n\nSections 4.4-4.5\n\n\nWeek 7\nChapter 5\nSections 5.1-5.3\n\n\nWeek 8\n\nSections 5.4-5.6\n\n\n\nExercises\nExercises 4, 5\n\n\nEaster\n\n\n\n\nWeek 9\nChapter 6\nAll\n\n\nWeek 10\nExercises\nExercises 6\n\n\nWeek 11\nRevision"
   }
 ]
