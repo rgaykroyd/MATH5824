@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./2_basicdefinitions.html" rel="next">
 <link href="./0_preface.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -116,6 +117,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./1_introduction.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_basicdefinitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></a>
   </div>
 </li>
     </ul>
@@ -273,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
 <p></p><figcaption class="figure-caption">Figure&nbsp;1.1: The coal-seam data superimposed with predictions from polynomial regression models.</figcaption><p></p>
 </figure>
 </div>
-<p>Each of these models would predict a different value for the missing observation <span class="math inline">\(y_6.\)</span> We do not know the accuracy of the depth measurements, so in principle any of these curves could be correct. Clearly, the residual variance is largest for the constant-depth model in <a href="#fig-plotCoalseemregress-1">Figure&nbsp;<span>1.1 (a)</span></a>, and smallest for the cubic polynomial in <a href="#fig-plotCoalseemregress-3">Figure&nbsp;<span>1.1 (c)</span></a>. However, none of these models produces a convincingly good fit. Moreover, these models are not particularly believable, since we know that geological pressures exerted over very long periods of time cause the landscape and its underlying layers of rock to undulate and fracture. This suggests we need a different strategy.</p>
+<p>Each of these models would predict a different value for the missing observation <span class="math inline">\(y_6.\)</span> We do not know the accuracy of the depth measurements, so in principle any of these curves could be correct. Clearly, the residual variance is largest for the constant-depth model in <a href="#fig-plotCoalseemregress-1">Figure&nbsp;<span>1.1 (a)</span></a>, and smallest for the cubic polynomial in <a href="#fig-plotCoalseemregress-3">Figure&nbsp;<span>1.1 (c)</span></a> – the residual sums of squares are: 6252.5, 5773.05, 4489.84, 4242.89. However, none of these models produces a convincingly good fit. Moreover, these models are not particularly believable, since we know that geological pressures exerted over very long periods of time cause the landscape and its underlying layers of rock to undulate and fracture. This suggests we need a different strategy.</p>
 <p>Next, consider the simulated example in <a href="#fig-plotpeicewise">Figure&nbsp;<span>1.2</span></a>. At first look we might be happy with the fitted curves in <a href="#fig-plotpeicewise-1">Figure&nbsp;<span>1.2 (a)</span></a> or <a href="#fig-plotpeicewise-2">Figure&nbsp;<span>1.2 (b)</span></a>. The data, however, are created with a <em>change-point</em> at <span class="math inline">\(x=0.67\)</span> where the relationship changes from linear with slope <span class="math inline">\(0.6\)</span> to a constant value of <span class="math inline">\(0.75\)</span>. This description is completely lost with these two models.</p>
 <div id="fig-plotpeicewise" class="cell quarto-layout-panel">
 <figure class="figure">
@@ -900,6 +907,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./2_basicdefinitions.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
