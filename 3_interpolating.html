@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -64,7 +64,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./4_smoothing.html" rel="next">
 <link href="./2_basicdefinitions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -91,7 +90,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_interpolating.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -165,24 +165,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./6_smoothinginpractice.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -196,11 +178,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">3.1</span> Overview</a></li>
   <li><a href="#natural-splines" id="toc-natural-splines" class="nav-link" data-scroll-target="#natural-splines"><span class="header-section-number">3.2</span> Natural splines</a></li>
   <li><a href="#properties-of-natural-splines" id="toc-properties-of-natural-splines" class="nav-link" data-scroll-target="#properties-of-natural-splines"><span class="header-section-number">3.3</span> Properties of natural splines</a></li>
-  <li><a href="#roughness-penalties" id="toc-roughness-penalties" class="nav-link" data-scroll-target="#roughness-penalties"><span class="header-section-number">3.4</span> Roughness penalties</a>
-  <ul class="collapse">
-  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments">Comments</a></li>
-  </ul></li>
+  <li><a href="#focus-on-natural-splines-quiz" id="toc-focus-on-natural-splines-quiz" class="nav-link" data-scroll-target="#focus-on-natural-splines-quiz">Focus on natural splines quiz</a></li>
+  <li><a href="#roughness-penalties" id="toc-roughness-penalties" class="nav-link" data-scroll-target="#roughness-penalties"><span class="header-section-number">3.4</span> Roughness penalties</a></li>
   <li><a href="#fitting-interpolating-splines-in-r" id="toc-fitting-interpolating-splines-in-r" class="nav-link" data-scroll-target="#fitting-interpolating-splines-in-r"><span class="header-section-number">3.5</span> Fitting interpolating splines in R</a></li>
+  <li><a href="#focus-on-fitting-splines-quiz" id="toc-focus-on-fitting-splines-quiz" class="nav-link" data-scroll-target="#focus-on-fitting-splines-quiz">Focus on fitting splines quiz</a></li>
   <li><a href="#sec-exercises2" id="toc-sec-exercises2" class="nav-link" data-scroll-target="#sec-exercises2"><span class="header-section-number">3.6</span> Exercises</a></li>
   </ul>
 </nav>
@@ -230,6 +211,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \def\b#1{\mathbf{#1}}
 \]</span></p>
 </div>
+<p>Here is a short video [3 mins] to introduce the chapter.</p>
+<iframe title="MATH5824 Chapter 2 video" width="450" height="253" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" src="https://mymedia.leeds.ac.uk/Mediasite/Play/d27e101baa3b4821b6f47d918a5f2a641d" allowfullscreen="" msallowfullscreen="" allow="fullscreen">
+</iframe>
 <section id="overview" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">3.1</span> Overview</h2>
 <p><a href="1_introduction.html"><span>Chapter&nbsp;1</span></a> considered general limitations of parametric models, and polynomial regression in particular (see <a href="1_introduction.html#fig-plotCoalseemregress">Figure&nbsp;<span>1.1</span></a>), which motivated the use of the more flexible spline models (see <a href="1_introduction.html#fig-plotCoalseemspline">Figure&nbsp;<span>1.3</span></a>) – though at that stage no mathematical details were presented. In <a href="2_basicdefinitions.html"><span>Chapter&nbsp;2</span></a>, basic spline definitions were given, including the notation of smoothness constraints, and these ideas were further explored in the Exercises in <a href="#sec-exercises2"><span>Section&nbsp;3.6</span></a>. This chapter will now give mathematical details of the interpolating spline problem and consider application to data. A feature of all these interpolation methods is that they fit the data exactly and that the fitted functions are smooth. <a href="#fig-plotCoalseemsplinered">Figure&nbsp;<span>3.1</span></a>, is <em>cubic spline interpolation</em>, which fits a cubic polynomial between successive data points such that the function, gradient and the curvature are all continuous at each data point. The solid line shows the fitted values within the range of the data, whereas the dashed line shows the fitted values outside the range of the data – <em>extrapolation</em>.</p>
@@ -260,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="natural-splines" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="natural-splines"><span class="header-section-number">3.2</span> Natural splines</h2>
-<p>Suppose we have <span class="math inline">\(n\)</span> observations <span class="math inline">\(\{y_1,\dots,y_m\}\)</span> at locations <span class="math inline">\(\{t_1,\dots,x_m\}\)</span>. We can construct a cubic spline (that is with <span class="math inline">\(p=3\)</span>) to pass through (interpolate) all the points <span class="math inline">\((t_i,y_i),\ i=1,\dots,m\)</span>. In fact, for any given set of points, there is an infinite number of cubic splines which interpolate them, see <a href="#fig-multiSpline">Figure&nbsp;<span>3.2</span></a> for examples. Exactly one of these splines has the property that, in the leftmost and rightmost intervals, it is a straight line. Such a spline is called a <em>natural</em> cubic spline.</p>
+<p>Suppose we have <span class="math inline">\(n\)</span> observations <span class="math inline">\(\{y_1,\dots,y_m\}\)</span> at locations <span class="math inline">\(\{t_1,\dots,x_m\}.\)</span> We can construct a cubic spline (that is with <span class="math inline">\(p=3\)</span>) to pass through (interpolate) all the points <span class="math inline">\((t_i,y_i),\ i=1,\dots,m\)</span>. In fact, for any given set of points, there is an infinite number of cubic splines which interpolate them, see <a href="#fig-multiSpline">Figure&nbsp;<span>3.2</span></a> for examples. Exactly one of these splines has the property that, in the leftmost and rightmost intervals, it is a straight line. Such a spline is called a <em>natural</em> cubic spline.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-multiSpline" class="quarto-figure quarto-figure-center anchored">
@@ -269,6 +253,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Figure&nbsp;3.2: Cubic interpolating splines fitted to the coal-seam data, with the dashed lines showing extrapolation – the natural spline is shown in solid black.</figcaption>
 </figure>
 </div>
+</div>
+</div>
+<p>Note that natural splines are not the only choice for the spline method – see the R help page for other options – with perhaps the most useful other being <span class="math inline">\(\texttt{periodic}\)</span> which can be considered if we expect the unknown function to also be periodic. <a href="#fig-spline-methods">Figure&nbsp;<span>3.3</span></a> shows the fitted natural and periodic spline fitted to a simulated <em>cosine</em> function. The only noticeable difference is outside the range of the data, that is for extrapolation. Great care should be used, however, as imposing such additional restrictions on the fitted function can lead to unforeseen modelling errors when we do not observe the full range of <span class="math inline">\(\texttt{x}\)</span> values.</p>
+<div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15340</span>) <span class="co"># for reproducibility</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">mgp=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate some artificial data </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">12</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out=</span>n); y <span class="ot">=</span> <span class="fu">cos</span>(x<span class="sc">+</span><span class="dv">1</span>)<span class="sc">+</span><span class="fu">rnorm</span>(n,<span class="dv">0</span>,<span class="fl">0.1</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">c</span>(y[<span class="sc">-</span>n],y[<span class="dv">1</span>]) <span class="co"># make sure first/last point equal</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit splines but with different "methods"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ... using natural splines</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>,<span class="dv">7</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">3</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>), <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>mysplinefit2 <span class="ot">=</span> <span class="fu">splinefun</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(mysplinefit2,     <span class="dv">0</span>,   <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">add=</span>T)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(mysplinefit2, <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="dv">7</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">3</span>, <span class="at">add=</span>T, <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ... using periodic splines</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>,<span class="dv">7</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">3</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>), <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>mysplinefit2 <span class="ot">=</span> <span class="fu">splinefun</span>(x, y, <span class="at">method=</span><span class="st">"periodic"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(mysplinefit2, <span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">add=</span>T)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(mysplinefit2, <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="dv">7</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">3</span>, <span class="at">add=</span>T, <span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-spline-methods" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-spline-methods-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="3_interpolating_files/figure-html/fig-spline-methods-1.png" class="img-fluid figure-img" data-ref-parent="fig-spline-methods" width="672"></p>
+<figcaption class="figure-caption">(a) Using method=“natural”</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-spline-methods-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="3_interpolating_files/figure-html/fig-spline-methods-2.png" class="img-fluid figure-img" data-ref-parent="fig-spline-methods" width="672"></p>
+<figcaption class="figure-caption">(b) Using method=“periodic”</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.3: Example of different interpolating splines.</figcaption><p></p>
+</figure>
 </div>
 </div>
 </section>
@@ -311,6 +348,21 @@ f(t) = a_0 + a_1 t + \sum_{i=1}^m b_i \left| t - t_i \right|^3;  \quad  \sum_{i=
 </div>
 <p><strong>Proof</strong>: Not covered here (but may be included later in the module if time allows).</p>
 </section>
+<section id="focus-on-natural-splines-quiz" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="focus-on-natural-splines-quiz">Focus on natural splines quiz</h2>
+<p>Test your knowledge recall and comprehension to reinforce basic ideas about natural splines.</p>
+<div class="webex-box">
+<div class="webex-check">
+<ol type="1">
+<li><p>Which of the following is a key property of every spline? <select class="webex-select"><option value="blank"></option><option value="">Has jump discontinuities</option><option value="answer">Is a smooth non-parametric function</option><option value="">Is an example of a parametric model</option><option value="">Always interpolate data</option><option value="">Always extrapolate data</option></select></p></li>
+<li><p>Which of the following is NOT a key property of a cubic spline function? <select class="webex-select"><option value="blank"></option><option value="">Is always continuous</option><option value="answer">Is always infinitely differentiable</option><option value="">Is a smooth function</option><option value="">Is a piecewise polynomial</option><option value="">Has extra contraints at knots</option></select></p></li>
+<li><p>Which of the following statements is true ? <select class="webex-select"><option value="blank"></option><option value="answer">Natual splines are a special case of polynomial splines</option><option value="">Polynomial splines are a special case of natural splines</option><option value="">Polynomial splines are identical to natural splines</option><option value="">Natural splines have fewer constraints than polynomial splines</option><option value="">Natural splines are smoother than polynomial splines</option></select></p></li>
+<li><p>Which of the following statements is a true ? <select class="webex-select"><option value="blank"></option><option value="">Natural splines have fewer constraints in the outer intervals</option><option value="">Natural splines have additional constraint in the internal intervals</option><option value="answer">Natural splines have additional constraints in the outer intervals</option><option value="">Natural splines are not smooth functions</option><option value="">Natural splines have fewer constraint in the internal intervals</option></select></p></li>
+</ol>
+<p>5 What determines the degrees of freedom of a natural spline? <select class="webex-select"><option value="blank"></option><option value="">Both the number of knots and the polynomial order</option><option value="">The sample size</option><option value="answer">The number of knots</option><option value="">Both the number of knots and the sample size</option><option value="">The order of the polynomial used</option></select></p>
+</div>
+</div>
+</section>
 <section id="roughness-penalties" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="roughness-penalties"><span class="header-section-number">3.4</span> Roughness penalties</h2>
 <p>An aim of spline models is to describe an unknown function using piecewise-polynomials which are smooth. In the previous section, smoothness was imposed by explicitly constraining specified high-order derivatives. An alternative approach is to measure and control the degree of smoothness of the splines. In practice the <em>roughness</em> of the spline is usually measured and one definition of roughness is: <span id="eq-jnuf"><span class="math display">\[
@@ -323,41 +375,38 @@ J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 <p><span class="theorem-title"><strong>Proposition 3.2 </strong></span>The optimal interpolating function is a <span class="math inline">\(p\)</span>th-order natural spline, where <span class="math inline">\(p = 2ν − 1\)</span>. That is, the natural spline <span class="math inline">\(f\)</span> is the unique minimizer of <span class="math inline">\(J_\nu(f)\)</span>.</p>
 </div>
 <p><strong>Proof</strong>: Not covered here (but may be included later in the module if time allows).</p>
-<section id="comments" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="comments">Comments</h3>
+<p><strong>Comments</strong></p>
 <ul>
 <li>Linear and cubic interpolating splines are also of interest in numerical analysis, for example to interpolate tables of numbers.</li>
 <li>The linear interpolating spline is simply the piecewise-linear path connecting the data points.</li>
-<li>Of course, in the linear spline case, knot points are clearly visible as kinks in the interpolating function.</li>
-<li>But, in the cubic spline case, knots points are invisible to the naked eye. Hence, in general, there is little motivation to use higher-order splines.</li>
+<li>Of course, in the linear spline case, knot points are clearly visible as kinks in the interpolating function. But, in the cubic spline case, knots points are invisible to the naked eye. Hence, in general, there is little motivation to use higher-order splines.</li>
 <li>Numerical considerations: the interpolating spline solutions involve matrix inversion. The inversion of an <span class="math inline">\(n \times n\)</span> matrix involves <span class="math inline">\(O(n^3)\)</span> operations – hence it is time consuming if <span class="math inline">\(n\)</span> is large (for example, <span class="math inline">\(n=1000\)</span> or <span class="math inline">\(10000\)</span>). Fortunately there are tricks to reduce the computation to <span class="math inline">\(O(n)\)</span>.</li>
 </ul>
 </section>
-</section>
 <section id="fitting-interpolating-splines-in-r" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="fitting-interpolating-splines-in-r"><span class="header-section-number">3.5</span> Fitting interpolating splines in R</h2>
-<p>There are two main function within <span class="math inline">\(\mathbf{R}\)</span> for fitting interpolating splines to data, which outputs fitted values for specified points or which returns an <span class="math inline">\(\mathbf{R}\)</span> <em>function</em> which can be used directly by other commands, such as . The following illustrates the two approaches.</p>
+<p>There are two main function within <span class="math inline">\(\mathbf{R}\)</span> for fitting interpolating splines to data, <span class="math inline">\(\texttt{spline}\)</span> which outputs fitted values for specified points or <span class="math inline">\(\texttt{splinefun}\)</span> which returns an <span class="math inline">\(\mathbf{R}\)</span> <em>function</em> which can be used directly by other commands, such as <span class="math inline">\(\texttt{curve}\)</span>. The following illustrates the two approaches.</p>
 <div>
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15342</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">mgp=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>; y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">9</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># spline deals with points</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>), <span class="at">pch=</span><span class="dv">4</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>mysplinefit1 <span class="ot">=</span> <span class="fu">spline</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(mysplinefit1)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># splinefun produces a function</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>), <span class="at">pch=</span><span class="dv">4</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>mysplinefit2 <span class="ot">=</span> <span class="fu">splinefun</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(mysplinefit2, <span class="dv">0</span>, <span class="dv">10</span>, <span class="at">add=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15342</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">mgp=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>; y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">9</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># spline deals with points</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>), <span class="at">pch=</span><span class="dv">4</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>mysplinefit1 <span class="ot">=</span> <span class="fu">spline</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(mysplinefit1)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># splinefun produces a function</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>), <span class="at">pch=</span><span class="dv">4</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>mysplinefit2 <span class="ot">=</span> <span class="fu">splinefun</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(mysplinefit2, <span class="dv">0</span>, <span class="dv">10</span>, <span class="at">add=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-spline-commands" class="cell quarto-layout-panel">
 <figure class="figure">
@@ -379,7 +428,7 @@ J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.3: R code for cubic interpolating splines.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.4: R code for cubic interpolating splines.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -387,13 +436,13 @@ J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15342</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>; y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">9</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># spline deals with points</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mysplinefit1 <span class="ot">=</span> <span class="fu">spline</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">spline</span>(x, y, <span class="at">xout=</span><span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">7.5</span>), <span class="at">method=</span><span class="st">"natural"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15342</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>; y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">9</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># spline deals with points</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>mysplinefit1 <span class="ot">=</span> <span class="fu">spline</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">spline</span>(x, y, <span class="at">xout=</span><span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">7.5</span>), <span class="at">method=</span><span class="st">"natural"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$x
@@ -404,24 +453,112 @@ $y
 </div>
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># splinefun produces a function</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mysplinefit2 <span class="ot">=</span> <span class="fu">splinefun</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mysplinefit2</span>(<span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">7.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># splinefun produces a function</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mysplinefit2 <span class="ot">=</span> <span class="fu">splinefun</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mysplinefit2</span>(<span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">7.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0.08785792 -0.78655273</code></pre>
 </div>
 </div>
+<p><br>
+</p>
+<p>Before finishing, as we saw in Lecture 2, let us consider the derivatives of the fitted spline function. <a href="#fig-spline-derivatives">Figure&nbsp;<span>3.5</span></a> shows (a) the fitted natural spline, along with its first three derivatives in (b)-(d). Note that the function and the first two derivatives are continuous everywhere, but that the third derivatives is not continuous but has jumps at the knot locations. Note also that the first derivative, and higher derivatives, are all constant outside the range of the interior knots.</p>
+<div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15342</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>; y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">9</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>mysplinefit2 <span class="ot">=</span> <span class="fu">splinefun</span>(x, y, <span class="at">method=</span><span class="st">"natural"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(mysplinefit2, <span class="dv">0</span>, <span class="dv">10</span>, <span class="at">add=</span>T, <span class="at">lwd=</span><span class="fl">1.5</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>x, <span class="at">col=</span><span class="st">"grey"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first derivative</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">mysplinefit2</span>(x,<span class="at">deriv=</span><span class="dv">1</span>), <span class="dv">0</span>, <span class="dv">10</span>, <span class="at">lwd=</span><span class="fl">1.5</span>,  </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="st">"First derivative"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>x, <span class="at">col=</span><span class="st">"grey"</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"grey"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the second derivative</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">mysplinefit2</span>(x,<span class="at">deriv=</span><span class="dv">2</span>), <span class="dv">0</span>, <span class="dv">10</span>, <span class="at">lwd=</span><span class="fl">1.5</span>, </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="st">"Second derivative"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>x, <span class="at">col=</span><span class="st">"grey"</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"grey"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the third derivative</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">mysplinefit2</span>(x,<span class="at">deriv=</span><span class="dv">3</span>), <span class="dv">0</span>, <span class="dv">10</span>, <span class="at">lwd=</span><span class="fl">1.5</span>, <span class="at">n=</span><span class="dv">10001</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="st">"Third derivative"</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>x, <span class="at">col=</span><span class="st">"grey"</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"grey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-spline-derivatives" class="cell quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-spline-derivatives-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="3_interpolating_files/figure-html/fig-spline-derivatives-1.png" class="img-fluid figure-img" data-ref-parent="fig-spline-derivatives" width="672"></p>
+<figcaption class="figure-caption">(a) Data and spline function</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-spline-derivatives-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="3_interpolating_files/figure-html/fig-spline-derivatives-2.png" class="img-fluid figure-img" data-ref-parent="fig-spline-derivatives" width="672"></p>
+<figcaption class="figure-caption">(b) First derivative</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-spline-derivatives-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="3_interpolating_files/figure-html/fig-spline-derivatives-3.png" class="img-fluid figure-img" data-ref-parent="fig-spline-derivatives" width="672"></p>
+<figcaption class="figure-caption">(c) Second derivative</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-spline-derivatives-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="3_interpolating_files/figure-html/fig-spline-derivatives-4.png" class="img-fluid figure-img" data-ref-parent="fig-spline-derivatives" width="672"></p>
+<figcaption class="figure-caption">(d) Third derivative</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.5: Derivatives of cubic interpolating splines.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="focus-on-fitting-splines-quiz" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="focus-on-fitting-splines-quiz">Focus on fitting splines quiz</h2>
+<p>Test your knowledge recall and comprehension to reinforce basic ideas about R commands for splines.</p>
+<div class="webex-box">
+<div class="webex-check">
+<ol type="1">
+<li><p>Which of the following should be first in every data analysis? <select class="webex-select"><option value="blank"></option><option value="">Fit a spline model</option><option value="">Calculate the correlation</option><option value="">Add the fitted curve to a plot of the data</option><option value="">Fit a linear model</option><option value="answer">Draw a scatter plot</option></select></p></li>
+<li><p>Which of the following is NOT part of a data analysis using interpolating splines? <select class="webex-select"><option value="blank"></option><option value="">Read the data description</option><option value="answer">Examine model residuals</option><option value="">Add the fitted curve to a plot of the data</option><option value="">Fit a spline model</option><option value="">Draw a scatter plot of the data</option></select></p></li>
+<li><p>What is the main difference between the R commands spline and splinefun? <select class="webex-select"><option value="blank"></option><option value="answer">splinefun produces a function</option><option value="">spline interpolates whereas splinefun smooths</option><option value="">spline is more boring</option><option value="">Only spline has knots</option><option value="">They are identical, only the name is different</option></select></p></li>
+<li><p>Which of the following is NOT an optional method for the R command spline? <select class="webex-select"><option value="blank"></option><option value="">fmm</option><option value="">periodic</option><option value="">natural</option><option value="">hyman</option><option value="answer">smooth</option></select></p></li>
+<li><p>When using the output from splinefun, which of the following CANNOT be plotted? <select class="webex-select"><option value="blank"></option><option value="answer">Fourth derivative</option><option value="">Function value</option><option value="">Second derivative</option><option value="">First derivative</option><option value="">Third derivative</option></select></p></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="sec-exercises2" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-exercises2"><span class="header-section-number">3.6</span> Exercises</h2>
+<p><strong>Hints and solutions will be added next week.</strong></p>
 <div class="exercises">
 <p>3.1 For the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1\)</span>, write-down the linear functions for the three intervals and clearly identify all the <span class="math inline">\(6\)</span> model parameters. Next, write down the constraints required to make the functions pass through the <span class="math inline">\(m=2\)</span> data points, and the two constraints which impose continuity of function. What additional constraints are needed to fix the first derivative at zero for the outer two intervals?</p>
 <p>3.2 Continuing the problem described in Exercise 3.1, write the constraints as a system of 6 linear equations in the 6 unknown model parameters. How might you solve this system to give the parameter values which solve the interpolation problem?</p>
 <p>3.3 Continuing the linear system described in Exercise 3.2, create a synthetic problem by choosing two data response values. Then solve the system in <span class="math inline">\({\mathbf R}\)</span>, or otherwise, and plot the fitted spline interpolating function.</p>
 <p>3.4 Again, considering the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1.\)</span> Using the alternative representation in <a href="#eq-naturalSplineLinear">Equation&nbsp;<span>3.6</span></a>, write down two constraints involving the data points and the additional constraint on the <span class="math inline">\(b_i\)</span> parameters. Write this linear system of 3 equations in three unknowns in matrix form.</p>
 <p>3.5 Continuing the linear system described in Exercise 3.4, using the same points created in Exercise 3.4, calculate the parameter values in this new parameterization. Check that your two fitted interpolating spline give the same answers. Which approach do you prefer? Justify you answer.</p>
-<p>3.6 Create you own version of the R code used to produce <a href="#fig-spline-commands">Figure&nbsp;<span>3.3</span></a> and experiment with the two alternative spline fitting commands. Remove the <span class="math inline">\(\texttt{set.seed(15342)}\)</span> command so that you produce different data each time and comment on the similarities and differences when using different data sets.</p>
+<p>3.6 Create you own version of the R code used to produce <a href="#fig-spline-commands">Figure&nbsp;<span>3.4</span></a> and experiment with the two alternative spline fitting commands. Remove the <span class="math inline">\(\texttt{set.seed(15342)}\)</span> command so that you produce different data each time and comment on the similarities and differences when using different data sets.</p>
 <p>3.7 Let <span class="math display">\[\begin{equation*}
      f(t) = 3 + 2t + 4|t|^3 + |t-1|^3.
 \end{equation*}\]</span> Write <span class="math inline">\(f\)</span> as a cubic polynomial in each of the intervals <span class="math inline">\((-\infty,0)\)</span>, <span class="math inline">\((0,1)\)</span> and <span class="math inline">\((1, \infty)\)</span>. Verify that <span class="math inline">\(f\)</span> and its first two derivatives are continuous at the knots.</p>
@@ -885,9 +1022,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./4_smoothing.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
