@@ -221,14 +221,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </iframe>
 <section id="overview" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> Overview</h2>
-<p>In <a href="1_introduction.html#sec-genmodelling"><span>Section&nbsp;1.3</span></a> we described a general statistical model with a response variable <span class="math inline">\(y\)</span> and an explanatory variable <span class="math inline">\(x\)</span>. We observe <span class="math inline">\(y_i\)</span> at each location <span class="math inline">\(t_i,\)</span> for <span class="math inline">\(i=1,\ldots, n\)</span>. We imagined that the <span class="math inline">\(y\)</span>’s are noisy versions of a smooth function of <span class="math inline">\(t\)</span>, say <span class="math inline">\(f(\cdot)\)</span> where the errors follow a normal distribution with constant variance. That is <span class="math display">\[
-y_i = f(t_i) + \epsilon_i, \quad
+<p>In <a href="1_introduction.html#sec-genmodelling"><span>Section&nbsp;1.3</span></a> we described a general statistical model with a response variable <span class="math inline">\(y\)</span> and an explanatory variable <span class="math inline">\(x\)</span>. We observe <span class="math inline">\(y_i\)</span> at each location <span class="math inline">\(x_i,\)</span> for <span class="math inline">\(i=1,\ldots, n\)</span>. We imagined that the <span class="math inline">\(y\)</span>’s are noisy versions of a smooth function of <span class="math inline">\(t\)</span>, say <span class="math inline">\(f(\cdot)\)</span> where the errors follow a normal distribution with constant variance. That is <span class="math display">\[
+y_i = f(x_i) + \epsilon_i, \quad
 \epsilon_i \sim \mathrm{N}(0,\sigma^2),
 \]</span> for <span class="math inline">\(i=1,\ldots,n\)</span>, where <span class="math inline">\(f\)</span> is smooth, the <span class="math inline">\(\epsilon_i\)</span> are i.i.d., and <span class="math inline">\(f\)</span> and <span class="math inline">\(\sigma^2\)</span> are unknown.<br>
 The log-likelihood for this situation is: <span id="eq-loglik"><span class="math display">\[
 l(f; \mathbf{y})
-= -\frac{1}{2\sigma^2} \sum_{i=1}^n \left(y_i - f(t_i)\right)^2 - n \log \sigma
-\tag{4.1}\]</span></span> and we wish to estimate <span class="math inline">\(f\)</span> for a given data set <span class="math inline">\(\mathbf{y}=\{y_1,\dots, y_n\}\)</span>. With no constraints on <span class="math inline">\(f\)</span>, the log-likelihood would be maximized by setting <span class="math inline">\(f(t_i)=y_i\)</span> for all <span class="math inline">\(i\)</span>, and we would estimate the noise variance as <span class="math inline">\(\hat{\sigma}^2=0\)</span>. This takes no account of randomness in the data and <span class="math inline">\(f\)</span> would in general need to be quite wiggly to achieve this fit.</p>
+= -\frac{1}{2\sigma^2} \sum_{i=1}^n \left(y_i - f(x_i)\right)^2 - n \log \sigma
+\tag{4.1}\]</span></span> and we wish to estimate <span class="math inline">\(f\)</span> for a given data set <span class="math inline">\(\mathbf{y}=\{y_1,\dots, y_n\}\)</span>. With no constraints on <span class="math inline">\(f\)</span>, the log-likelihood would be maximized by setting <span class="math inline">\(f(x_i)=y_i\)</span> for all <span class="math inline">\(i\)</span>, and we would estimate the noise variance as <span class="math inline">\(\hat{\sigma}^2=0\)</span>. This takes no account of randomness in the data and <span class="math inline">\(f\)</span> would in general need to be quite wiggly to achieve this fit.</p>
 <p><a href="#fig-interpsmooth-1">Figure&nbsp;<span>4.1 (a)</span></a> shows such an interpolation of noisy data. This would be of little use for explanation, interpolation or prediction.</p>
 <div id="fig-interpsmooth" class="cell quarto-layout-panel">
 <figure class="figure">
@@ -253,12 +253,12 @@ l(f; \mathbf{y})
 <p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Comparison of interpolating and smoothing methods applied to a noisy dat set.</figcaption><p></p>
 </figure>
 </div>
-<p>We do not expect, or even want, the fitted function <span class="math inline">\(f\)</span> to pass exactly through the data points <span class="math inline">\(\{(t_i,y_i)\}\)</span>, but merely to lie close to them. We would rather trade-off goodness-of-fit against smoothness of <span class="math inline">\(f\)</span>. <a href="#fig-interpsmooth-2">Figure&nbsp;<span>4.1 (b)</span></a> shows a smoothing spline fit to the same data. This is much better as there is a clear explanation of the relationship, it could be used reasonably well for interpolation and prediction.</p>
+<p>We do not expect, or even want, the fitted function <span class="math inline">\(f\)</span> to pass exactly through the data points <span class="math inline">\(\{(x_i,y_i), i=1,\dots,n\}\)</span>, but merely to lie close to them. We would rather trade-off goodness-of-fit against smoothness of <span class="math inline">\(f\)</span>. <a href="#fig-interpsmooth-2">Figure&nbsp;<span>4.1 (b)</span></a> shows a smoothing spline fit to the same data. This is much better as there is a clear explanation of the relationship, it could be used reasonably well for interpolation and prediction.</p>
 </section>
 <section id="the-penalized-least-squares-criterion" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="the-penalized-least-squares-criterion"><span class="header-section-number">4.2</span> The penalized least-squares criterion</h2>
-<p>Noting that maximizing <a href="#eq-loglik">Equation&nbsp;<span>4.1</span></a> is equivalent to minimizing the residual sum of squares: <span class="math inline">\(\sum_{i=1}^n \left(y_i - f(t_i)\right)^2\)</span>, we can achieve this trade-off by minimizing a <em>penalized</em> sum of squared residuals: <span id="eq-rlambdaf"><span class="math display">\[
-R_\nu(f,\lambda) = \sum_{i=1}^n \left(y_i - f(t_i)\right)^2 + \lambda J_\nu(f),
+<p>Noting that maximizing <a href="#eq-loglik">Equation&nbsp;<span>4.1</span></a> is equivalent to minimizing the residual sum of squares: <span class="math inline">\(\sum_{i=1}^n \left(y_i - f(x_i)\right)^2\)</span>, we can achieve this trade-off by minimizing a <em>penalized</em> sum of squared residuals: <span id="eq-rlambdaf"><span class="math display">\[
+R_\nu(f,\lambda) = \sum_{i=1}^n \left(y_i - f(x_i)\right)^2 + \lambda J_\nu(f),
 \tag{4.2}\]</span></span> where <span class="math inline">\(J_\nu(f)\)</span>, as first defined in <a href="3_interpolating.html#eq-jnuf">Equation&nbsp;<span>3.8</span></a>, penalizes the roughness of <span class="math inline">\(f\)</span>. The <em>smoothing parameter</em> <span class="math inline">\(\lambda\geq 0\)</span> controls the severity of this penalty. For now we will assume <span class="math inline">\(\lambda\)</span>, which absorbs the <span class="math inline">\(\sigma^2\)</span> in <a href="#eq-loglik">Equation&nbsp;<span>4.1</span></a>, is known.</p>
 <p><a href="#fig-smoothlambda">Figure&nbsp;<span>4.2</span></a> shows example smoothing spline fits using a range of smoothing parameters, <span class="math inline">\(\lambda\)</span>. In <a href="#fig-smoothlambda-1">Figure&nbsp;<span>4.2 (a)</span></a> the fit is essentially a straight line, perhaps <a href="#fig-smoothlambda-2">Figure&nbsp;<span>4.2 (b)</span></a> and <a href="#fig-smoothlambda-3">Figure&nbsp;<span>4.2 (c)</span></a> show acceptable fits. <a href="#fig-smoothlambda-4">Figure&nbsp;<span>4.2 (d)</span></a>, with a very small <span class="math inline">\(\lambda\)</span> value is close to an interpolating spline fit and is clearly unacceptable.</p>
 <div id="fig-smoothlambda" class="cell quarto-layout-panel">
@@ -302,7 +302,7 @@ R_\nu(f,\lambda) = \sum_{i=1}^n \left(y_i - f(t_i)\right)^2 + \lambda J_\nu(f),
 <p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Comparison of interpolating and smoothing methods applied to a noisy dat set.</figcaption><p></p>
 </figure>
 </div>
-<p>As the smoothing parameter <span class="math inline">\(\lambda\)</span> increases, the optimal <span class="math inline">\(f\)</span> becomes smoother. In particular, it can be shown that as <span class="math inline">\(\lambda \rightarrow \infty\)</span>, the vector of coefficients <span class="math inline">\({\mathbf b} \rightarrow {\mathbf 0}\)</span>, and <span class="math inline">\({\mathbf a}\)</span> tends to the OLS estimate of the regression parameters. Thus, the smoothing spline converges to the sample mean <span class="math inline">\(f(t)=\bar y\)</span> when <span class="math inline">\(\nu=1\)</span>, and to the ordinary least squares fitted line, <span class="math inline">\(f(t)=\hat\alpha+\hat\beta t\)</span>, when <span class="math inline">\(\nu=2\)</span>. In the other direction, as <span class="math inline">\(\lambda \rightarrow 0\)</span> the smoothing solution converges to the interpolating spline.</p>
+<p>As the smoothing parameter <span class="math inline">\(\lambda\)</span> increases, the optimal <span class="math inline">\(f\)</span> becomes smoother. In particular, it can be shown that as <span class="math inline">\(\lambda \rightarrow \infty\)</span>, the vector of coefficients <span class="math inline">\({\mathbf b} \rightarrow {\mathbf 0}\)</span>, and <span class="math inline">\({\mathbf a}\)</span> tends to the OLS estimate of the regression parameters. Thus, the smoothing spline converges to the sample mean <span class="math inline">\(f(x)=\bar y\)</span> when <span class="math inline">\(\nu=1\)</span>, and to the ordinary least squares fitted line, <span class="math inline">\(f(x)=\hat\alpha+\hat\beta t\)</span>, when <span class="math inline">\(\nu=2\)</span>. In the other direction, as <span class="math inline">\(\lambda \rightarrow 0\)</span> the smoothing solution converges to the interpolating spline.</p>
 </section>
 <section id="focus-on-smoothing-splines-quiz" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="focus-on-smoothing-splines-quiz">Focus on smoothing splines quiz</h2>
@@ -328,7 +328,7 @@ R_\nu(f,\lambda) = \sum_{i=1}^n \left(y_i - f(t_i)\right)^2 + \lambda J_\nu(f),
 <h2 data-number="4.3" class="anchored" data-anchor-id="sec:relationto"><span class="header-section-number">4.3</span> Relation to interpolating splines</h2>
 <p>We show in the following proposition that the function <span class="math inline">\(f\)</span> which minimizes <a href="#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a> is the interpolating spline of its fitted values.</p>
 <div id="prp-optimalinterpolant" class="proposition theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4.1 </strong></span>Suppose <span class="math inline">\(\hat{f}\)</span> minimizes <span class="math inline">\(R_\nu(f,\lambda)\)</span> and let <span class="math inline">\(\hat{y}_i = \hat{f}(t_i), i=1,\dots,n\)</span> denote the corresponding fitted values. Then, <span class="math inline">\(\hat{f}\)</span> solves the interpolation problem for the <em>artificial</em> data set <span class="math inline">\((t_i,\hat{y}_i), i=1,\dots , n\)</span>. That is, <span class="math inline">\(\hat{f}\)</span> minimizes <span class="math inline">\(J_\nu(f)\)</span> over functions <span class="math inline">\(f\)</span> satisfying <span class="math inline">\(\hat f(t_i)=\hat{y}_i\)</span>, <span class="math inline">\(i=1,\ldots,n\)</span>. Consequently, <span class="math inline">\(\hat{f}\)</span> is a <span class="math inline">\(p^{\text{th}}\)</span>-order natural spline, where <span class="math inline">\(p=2\nu-1\)</span>. This means that, when solving the smoothing problem, we only need consider spline functions given by the representations in <a href="3_interpolating.html#prp-naturalSpline">Proposition&nbsp;<span>3.1</span></a>.</p>
+<p><span class="theorem-title"><strong>Proposition 4.1 </strong></span>Suppose <span class="math inline">\(\hat{f}\)</span> minimizes <span class="math inline">\(R_\nu(f,\lambda)\)</span> and let <span class="math inline">\(\hat{y}_i = \hat{f}(x_i), i=1,\dots,n\)</span> denote the corresponding fitted values. Then, <span class="math inline">\(\hat{f}\)</span> solves the interpolation problem for the <em>artificial</em> data set <span class="math inline">\((x_i,\hat{y}_i), i=1,\dots , n\)</span>. That is, <span class="math inline">\(\hat{f}\)</span> minimizes <span class="math inline">\(J_\nu(f)\)</span> over functions <span class="math inline">\(f\)</span> satisfying <span class="math inline">\(\hat f(x_i)=\hat{y}_i\)</span>, <span class="math inline">\(i=1,\ldots,n\)</span>. Consequently, <span class="math inline">\(\hat{f}\)</span> is a <span class="math inline">\(p^{\text{th}}\)</span>-order natural spline, where <span class="math inline">\(p=2\nu-1\)</span>. This means that, when solving the smoothing problem, we only need consider spline functions given by the representations in <a href="3_interpolating.html#prp-naturalSpline">Proposition&nbsp;<span>3.1</span></a>.</p>
 </div>
 <div id="fig-prpproof" class="cell quarto-layout-panel">
 <figure class="figure">
@@ -353,66 +353,66 @@ R_\nu(f,\lambda) = \sum_{i=1}^n \left(y_i - f(t_i)\right)^2 + \lambda J_\nu(f),
 <p></p><figcaption class="figure-caption">Figure&nbsp;4.3: Illustration of proposition showing that solution of the smothing problem is a natural interpolating spline.</figcaption><p></p>
 </figure>
 </div>
-<p><strong>Proof:</strong> Suppose the assertion is not true. In this case, we must be able to find a function <span class="math inline">\({\hat{f}^\star}\)</span>, say, which also interpolates the artificial data <span class="math inline">\((t_i,\hat{y}_i), i=1,\dots ,n\)</span>, but which has a smaller roughness penalty. That is <span class="math display">\[
+<p><strong>Proof:</strong> Suppose the assertion is not true. In this case, we must be able to find a function <span class="math inline">\({\hat{f}^\star}\)</span>, say, which also interpolates the artificial data <span class="math inline">\((x_i,\hat{y}_i), i=1,\dots ,n\)</span>, but which has a smaller roughness penalty. That is <span class="math display">\[
 J_\nu({\hat{f}^\star}) &lt; J_\nu(\hat{f})
   \mbox{ with }
-\hat{f}^\star(t_i) = \hat{y}_i, \ i=1,\ldots,n.
+\hat{f}^\star(x_i) = \hat{y}_i, \ i=1,\ldots,n.
 \]</span> Note that the fitted values from the function <span class="math inline">\(\hat f^\star\)</span> are also equal to <span class="math inline">\(\hat y_i, i=1,\dots,n\)</span> as it interpolates the same artificial data as <span class="math inline">\(\hat f\)</span>.</p>
 <p>Now, from <a href="#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a>, <span class="math display">\[\begin{align*}
   R_\nu(\hat{f}^\star, \lambda) &amp;= \sum_i (y_i-\hat{y}_i)^2 + \lambda J_\nu(\hat{f}^\star)\\
 &amp;&lt; \sum_i (y_i-\hat{y}_i)^2 + \lambda J_\nu(\hat{f})
 = R_\nu(\hat{f}, \lambda).
-\end{align*}\]</span> Hence <span class="math inline">\(R_\nu(\hat{f}^\star, \lambda) &lt; R_\nu(\hat{f}, \lambda)\)</span>. But, by construction <span class="math inline">\(\hat{f}\)</span> minimizes <span class="math inline">\(R_\nu(f, \lambda)\)</span>, which is a contradiction. Hence, it must not be possible to find a function <span class="math inline">\({\hat{f}^\star}\)</span> which also interpolates the artificial data but which has a smaller roughness penalty.</p>
+\end{align*}\]</span> Hence <span class="math inline">\(R_\nu(\hat{f}^\star, \lambda) &lt; R_\nu(\hat{f}, \lambda)\)</span>. But, by construction <span class="math inline">\(\hat{f}\)</span> minimizes <span class="math inline">\(R_\nu(f, \lambda),\)</span> which is a contradiction. Hence, it must not be possible to find a function <span class="math inline">\({\hat{f}^\star}\)</span> which also interpolates the artificial data but which has a smaller roughness penalty.</p>
 <p>We have shown that <span class="math inline">\(\hat{f}\)</span> is the optimal interpolant of the fitted values <span class="math inline">\(\hat{y}_i,\ i=1,\dots,n,\)</span> so it follows from <a href="#prp-optimalinterpolant">Proposition&nbsp;<span>4.1</span></a> that <span class="math inline">\(\hat{f}\)</span> is a natural spline of order <span class="math inline">\(p=2\nu-1\)</span>.</p>
 </section>
 <section id="sec-smoothingmatrix" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="sec-smoothingmatrix"><span class="header-section-number">4.4</span> The smoothing problem in matrix notation</h2>
-<p>We have just proved that the function <span class="math inline">\(\hat{f}\)</span> that minimises <span class="math inline">\(R_\nu (f, \lambda)\)</span> must be a natural spline (linear if <span class="math inline">\(\nu=1\)</span>, cubic if <span class="math inline">\(\nu=2\)</span>) with knots at <span class="math inline">\(\{t_i,\,i=1,\ldots,n\}.\)</span> That is, as in <a href="3_interpolating.html#prp-naturalSpline">Proposition&nbsp;<span>3.1</span></a>, we can write:</p>
+<p>We have just proved that the function <span class="math inline">\(\hat{f}\)</span> that minimizes <span class="math inline">\(R_\nu (f, \lambda)\)</span> must be a natural spline (linear if <span class="math inline">\(\nu=1\)</span>, cubic if <span class="math inline">\(\nu=2\)</span>) with knots at <span class="math inline">\(\{t_i,\,i=1,\ldots,m\}.\)</span> That is, as in <a href="3_interpolating.html#prp-naturalSpline">Proposition&nbsp;<span>3.1</span></a>, we can write:</p>
 <p><span id="eq-fhat"><span class="math display">\[
-\hat{f}(t) = \sum_{i=1}^n b_i\left|t-t_i\right|^p +
+\hat{f}(t) = \sum_{i=1}^m b_i\left|t-t_i\right|^p +
 \begin{cases}
 a_0, &amp;\nu=1\\
 a_o + a_1t, &amp;\nu=2,
 \end{cases}  
 \tag{4.3}\]</span></span> where <span class="math inline">\(p=2\nu-1\)</span> and constraints <span id="eq-constraints"><span class="math display">\[
-\sum_i b_i = 0 \, \mbox{ for }\, \nu=1 \quad
-\sum_i b_i = \sum_i b_i \, t_i = 0
+\sum_{i=1}^m b_i = 0 \, \mbox{ for }\, \nu=1 \quad
+\sum_{i=1}^m b_i = \sum_{i=1}^m b_i \, t_i = 0
 \, \mbox{ for }\, \nu=2.
 \tag{4.4}\]</span></span></p>
-<p>However, we have not yet figured out how to calculate the parameter values <span class="math inline">\(\hat{a}_0,\dots,\hat{a}_{\nu-1},\ \hat{b}_1,\dots,\hat{b}_n\)</span> in <a href="#eq-fhat">Equation&nbsp;<span>4.3</span></a> which optimally fit the data <span class="math inline">\(y_1,\dots,y_n\)</span>. For this, it is convenient to re-express the penalized sum of squared residuals <a href="#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a> in matrix notation.</p>
+<p>However, we have not yet figured out how to calculate the parameter values <span class="math inline">\(\hat{a}_0,\dots,\hat{a}_{\nu-1},\ \hat{b}_1,\dots,\hat{b}_m\)</span> in <a href="#eq-fhat">Equation&nbsp;<span>4.3</span></a> which optimally fit the data <span class="math inline">\(y_1,\dots,y_n\)</span>. For this, it is convenient to re-express the penalized sum of squared residuals <a href="#eq-rlambdaf">Equation&nbsp;<span>4.2</span></a> in matrix notation.</p>
 <div id="prp-roughness" class="proposition theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4.2 </strong></span>The roughness of a natural linear spline (<span class="math inline">\(\nu=1\)</span>, i.e.&nbsp;<span class="math inline">\(p=1\)</span>) is <span id="eq-j1f"><span class="math display">\[
+<p><span class="theorem-title"><strong>Proposition 4.2 </strong></span>The roughness of a natural linear spline <span class="math inline">\((\nu=1\)</span>, i.e.&nbsp;<span class="math inline">\(p=1)\)</span> is <span id="eq-j1f"><span class="math display">\[
 J_1(f)  
-= -2\sum_{i=1}^n \sum_{k=1}^n b_i b_k \left| t_i - t_k \right|
+= -2\sum_{i=1}^n \sum_{k=1}^m b_i b_k \left| t_i - t_k \right|
 = c_1\,{\mathbf b}^T \, K_1 \, {\mathbf b},
 \tag{4.5}\]</span></span> and the roughness of a natural cubic spline (<span class="math inline">\(\nu=2\)</span>, i.e.&nbsp;<span class="math inline">\(p=3\)</span>) is <span id="eq-j2f"><span class="math display">\[
-J_2(f)  = 12\sum_{i=1}^n \sum_{k=1}^n b_i b_k \left| t_i - t_k \right|^3
+J_2(f)  = 12\sum_{i=1}^n \sum_{k=1}^m b_i b_k \left| t_i - t_k \right|^3
 = c_2\,{\mathbf b}^T \, K_2 \, {\mathbf b},
 \tag{4.6}\]</span></span> where the constants are given by <span id="eq-constants"><span class="math display">\[
 c_1=-2, \quad c_2=12.
-\tag{4.7}\]</span></span> Here <span class="math inline">\({\mathbf b}=(b_1,\ldots,b_n)^{T}\)</span> is the vector of spline coefficients and <span class="math inline">\(K_\nu\)</span> is the <span class="math inline">\(n\times n\)</span> matrix whose <span class="math inline">\((i,k)\)</span>th element is <span class="math inline">\(\left| t_i - t_k \right|^p\)</span>, where <span class="math inline">\(p=2\nu-1\)</span> that is <span class="math display">\[
+\tag{4.7}\]</span></span> Here <span class="math inline">\({\mathbf b}=(b_1,\ldots,b_m)^{T}\)</span> is the vector of spline coefficients and <span class="math inline">\(K_\nu\)</span> is the <span class="math inline">\(n\times m\)</span> matrix whose <span class="math inline">\((i,k)\)</span>th element is <span class="math inline">\(\left| t_i - t_k \right|^p\)</span>, where <span class="math inline">\(p=2\nu-1\)</span> that is <span class="math display">\[
 K_\nu
 =
 \begin{bmatrix}
-|t_1-t_1|^p &amp; |t_1-t_2|^p &amp; \dots &amp; |t_1-t_n|^p \\
-|t_2-t_1|^p &amp; |t_2-t_2|^p &amp; \dots &amp; |t_2-t_n|^p \\
+|t_1-t_1|^p &amp; |t_1-t_2|^p &amp; \dots &amp; |t_1-t_m|^p \\
+|t_2-t_1|^p &amp; |t_2-t_2|^p &amp; \dots &amp; |t_2-t_m|^p \\
 \vdots &amp; \vdots &amp;\ddots &amp; \vdots \\
-|t_n-t_1|^p &amp; |t_n-t_2|^p &amp; \dots &amp; |t_n-t_n|^p.
+|t_n-t_1|^p &amp; |t_n-t_2|^p &amp; \dots &amp; |t_n-t_m|^p.
 \end{bmatrix}
 \]</span></p>
 </div>
 <p><strong>Proof:</strong> To be covered later if there is sufficient time.</p>
 <p>From <a href="#prp-roughness">Proposition&nbsp;<span>4.2</span></a> the roughness penalty satisfies: <span class="math display">\[\begin{align}
 J_\nu  (\hat{f}) = c_\nu   \, {\mathbf b}^T K_\nu   {\mathbf b} \label{eq:Jnufhat}
-\end{align}\]</span> where <span class="math inline">\(c_1=-2\)</span>; <span class="math inline">\(c_2= 12\)</span>; <span class="math inline">\({\mathbf b}=(b_1,\ldots,b_n)^T\)</span>; and <span class="math inline">\(K_\nu\)</span> is the <span class="math inline">\(n \times n\)</span> matrix whose <span class="math inline">\((i,k)\)</span>th element is <span class="math inline">\(\left|t_i-t_k\right|^p\)</span>.</p>
+\end{align}\]</span> where <span class="math inline">\(c_1=-2\)</span>; <span class="math inline">\(c_2= 12\)</span>; <span class="math inline">\({\mathbf b}=(b_1,\ldots,b_m)^T\)</span>; and <span class="math inline">\(K_\nu\)</span> is the <span class="math inline">\(n \times m\)</span> matrix whose <span class="math inline">\((i,k)\)</span>th element is <span class="math inline">\(\left|t_i-t_k\right|^p\)</span>.</p>
 <p>From <a href="#eq-fhat">Equation&nbsp;<span>4.3</span></a>, the value of <span class="math inline">\(\hat{f}\)</span> at knot <span class="math inline">\(t_k\)</span> is <span id="eq-fhattk"><span class="math display">\[
-\hat{f}(t_k) = \sum_{i=1}^n b_i\left|t_k-t_i\right|^p + \begin{cases}a_0, &amp;\nu=1\\ a_0 + a_1t_k, &amp;\nu=2 \end{cases}.
+\hat{f}(t_k) = \sum_{i=1}^m b_i\left|t_k-t_i\right|^p + \begin{cases}a_0, &amp;\nu=1\\ a_0 + a_1t_k, &amp;\nu=2 \end{cases}.
 \tag{4.8}\]</span></span></p>
 <p>In matrix form, this is <span id="eq-fhattkmat"><span class="math display">\[
 \mathbf{\hat{f}} = \left[
 \begin{array}{c}\hat{f}(t_1) \\
 \vdots  \\
-\hat{f}(t_n)\end{array}
+\hat{f}(t_m)\end{array}
 \right]
 = K_\nu   {\mathbf b} + L_\nu   \mathbf{a}_{\,\nu}
 \tag{4.9}\]</span></span> where <span class="math display">\[
@@ -466,7 +466,7 @@ L_\nu^T &amp; K_\nu+\lambda^* I_n
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">smooth.spline</span>(x, y, lambda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>where <span class="math inline">\(\texttt{x}\)</span> and <span class="math inline">\(\texttt{y}\)</span> are vectors of data coordinates, and <span class="math inline">\(\texttt{lambda}\)</span> specifies the value of the smoothing parameter to use.</p>
+<p>where <span class="math inline">\(\texttt{x}\)</span> and <span class="math inline">\(\texttt{y}\)</span> are vectors of data coordinates, and <span class="math inline">\(\texttt{lambda}\)</span> specifies the value of the smoothing parameter to use – note that the effect of a given value of <span class="math inline">\(\lambda\)</span> depends on the problem considered.</p>
 <p>For example, consider the synthetic data set which contains a break-point at <span class="math inline">\(x=2/3\)</span> first met in <a href="1_introduction.html#fig-plotpeicewise">Figure&nbsp;<span>1.2</span></a>. Fitted spline curves with <span class="math inline">\(\lambda=0.0001\)</span> and <span class="math inline">\(\lambda=1\)</span>, shown in <a href="#fig-smoothpeicewise">Figure&nbsp;<span>4.4</span></a>, are based on the following commands:</p>
 <div class="cell">
 <details open="">
