@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -120,10 +91,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="webex.css">
@@ -133,11 +106,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_interpolating.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -145,71 +123,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">MATH5824 Generalised Linear and Additive Models</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Weekly schedule</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./0_preface.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="./0_preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></a>
+  <a href="./1_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_basicdefinitions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></a>
+  <a href="./2_basicdefinitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_interpolating.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></a>
+  <a href="./3_interpolating.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></a>
+  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></a>
+  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">3.1</span>  Overview</a></li>
-  <li><a href="#natural-splines" id="toc-natural-splines" class="nav-link" data-scroll-target="#natural-splines"><span class="toc-section-number">3.2</span>  Natural splines</a></li>
-  <li><a href="#properties-of-natural-splines" id="toc-properties-of-natural-splines" class="nav-link" data-scroll-target="#properties-of-natural-splines"><span class="toc-section-number">3.3</span>  Properties of natural splines</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">3.1</span> Overview</a></li>
+  <li><a href="#natural-splines" id="toc-natural-splines" class="nav-link" data-scroll-target="#natural-splines"><span class="header-section-number">3.2</span> Natural splines</a></li>
+  <li><a href="#properties-of-natural-splines" id="toc-properties-of-natural-splines" class="nav-link" data-scroll-target="#properties-of-natural-splines"><span class="header-section-number">3.3</span> Properties of natural splines</a></li>
   <li><a href="#focus-on-natural-splines-quiz" id="toc-focus-on-natural-splines-quiz" class="nav-link" data-scroll-target="#focus-on-natural-splines-quiz">Focus on natural splines quiz</a></li>
-  <li><a href="#roughness-penalties" id="toc-roughness-penalties" class="nav-link" data-scroll-target="#roughness-penalties"><span class="toc-section-number">3.4</span>  Roughness penalties</a></li>
-  <li><a href="#fitting-interpolating-splines-in-r" id="toc-fitting-interpolating-splines-in-r" class="nav-link" data-scroll-target="#fitting-interpolating-splines-in-r"><span class="toc-section-number">3.5</span>  Fitting interpolating splines in R</a></li>
+  <li><a href="#roughness-penalties" id="toc-roughness-penalties" class="nav-link" data-scroll-target="#roughness-penalties"><span class="header-section-number">3.4</span> Roughness penalties</a></li>
+  <li><a href="#fitting-interpolating-splines-in-r" id="toc-fitting-interpolating-splines-in-r" class="nav-link" data-scroll-target="#fitting-interpolating-splines-in-r"><span class="header-section-number">3.5</span> Fitting interpolating splines in R</a></li>
   <li><a href="#focus-on-fitting-splines-quiz" id="toc-focus-on-fitting-splines-quiz" class="nav-link" data-scroll-target="#focus-on-fitting-splines-quiz">Focus on fitting splines quiz</a></li>
-  <li><a href="#sec-exercises2" id="toc-sec-exercises2" class="nav-link" data-scroll-target="#sec-exercises2"><span class="toc-section-number">3.6</span>  Exercises</a></li>
+  <li><a href="#sec-exercises2" id="toc-sec-exercises2" class="nav-link" data-scroll-target="#sec-exercises2"><span class="header-section-number">3.6</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -218,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></h1>
 </div>
 
 
@@ -243,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </iframe>
 <section id="overview" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">3.1</span> Overview</h2>
-<p><a href="#sec-nonparametric"><span class="quarto-unresolved-ref">sec-nonparametric</span></a> considered general limitations of parametric models, and polynomial regression in particular (see <a href="#fig-plotCoalseemregress">Figure&nbsp;<span class="quarto-unresolved-ref">fig-plotCoalseemregress</span></a>), which motivated the use of the more flexible spline models (see <a href="#fig-plotCoalseemspline">Figure&nbsp;<span class="quarto-unresolved-ref">fig-plotCoalseemspline</span></a>) – though at that stage no mathematical details were presented. In <a href="#sec-basicdefinitions"><span class="quarto-unresolved-ref">sec-basicdefinitions</span></a>, basic spline definitions were given, including the notation of smoothness constraints, and these ideas were further explored in the Exercises in <a href="#sec-exercises2"><span class="quarto-unresolved-ref">sec-exercises2</span></a>. This chapter will now give mathematical details of the interpolating spline problem and consider application to data. A feature of all these interpolation methods is that they fit the data exactly and that the fitted functions are smooth. <a href="#fig-plotCoalseemsplinered">Figure&nbsp;<span class="quarto-unresolved-ref">fig-plotCoalseemsplinered</span></a>, is <em>cubic spline interpolation</em>, which fits a cubic polynomial between successive data points such that the function, gradient and the curvature are all continuous at each data point. The solid line shows the fitted values within the range of the data, whereas the dashed line shows the fitted values outside the range of the data – <em>extrapolation</em>.</p>
+<p><a href="1_introduction.html"><span>Chapter&nbsp;1</span></a> considered general limitations of parametric models, and polynomial regression in particular (see <a href="1_introduction.html#fig-plotCoalseemregress">Figure&nbsp;<span>1.1</span></a>), which motivated the use of the more flexible spline models (see <a href="1_introduction.html#fig-plotCoalseemspline">Figure&nbsp;<span>1.3</span></a>) – though at that stage no mathematical details were presented. In <a href="2_basicdefinitions.html"><span>Chapter&nbsp;2</span></a>, basic spline definitions were given, including the notation of smoothness constraints, and these ideas were further explored in the Exercises in <a href="#sec-exercises2"><span>Section&nbsp;3.6</span></a>. This chapter will now give mathematical details of the interpolating spline problem and consider application to data. A feature of all these interpolation methods is that they fit the data exactly and that the fitted functions are smooth. <a href="#fig-plotCoalseemsplinered">Figure&nbsp;<span>3.1</span></a>, is <em>cubic spline interpolation</em>, which fits a cubic polynomial between successive data points such that the function, gradient and the curvature are all continuous at each data point. The solid line shows the fitted values within the range of the data, whereas the dashed line shows the fitted values outside the range of the data – <em>extrapolation</em>.</p>
 <div class="cell" data-fig.asp="0.5">
 <details>
 <summary>Code</summary>
@@ -263,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="fig-plotCoalseemsplinered" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-plotCoalseemsplinered-1.png" class="img-fluid figure-img" width="480"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.1: A cubic interpolating spline fitted to the coal-seam data, with the dashed line showing extrapolation.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.1: A cubic interpolating spline fitted to the coal-seam data, with the dashed line showing extrapolation.</figcaption>
 </figure>
 </div>
 </div>
@@ -271,18 +257,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="natural-splines" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="natural-splines"><span class="header-section-number">3.2</span> Natural splines</h2>
-<p>Suppose we have <span class="math inline">\(n\)</span> observations <span class="math inline">\(\{y_1,\dots,y_m\}\)</span> at locations <span class="math inline">\(\{t_1,\dots,x_m\}.\)</span> We can construct a cubic spline (that is with <span class="math inline">\(p=3\)</span>) to pass through (interpolate) all the points <span class="math inline">\((t_i,y_i),\ i=1,\dots,m\)</span>. In fact, for any given set of points, there is an infinite number of cubic splines which interpolate them, see <a href="#fig-multiSpline">Figure&nbsp;<span class="quarto-unresolved-ref">fig-multiSpline</span></a> for examples. Exactly one of these splines has the property that, in the leftmost and rightmost intervals, it is a straight line. Such a spline is called a <em>natural</em> cubic spline.</p>
+<p>Suppose we have <span class="math inline">\(n\)</span> observations <span class="math inline">\(\{y_1,\dots,y_m\}\)</span> at locations <span class="math inline">\(\{t_1,\dots,x_m\}.\)</span> We can construct a cubic spline (that is with <span class="math inline">\(p=3\)</span>) to pass through (interpolate) all the points <span class="math inline">\((t_i,y_i),\ i=1,\dots,m\)</span>. In fact, for any given set of points, there is an infinite number of cubic splines which interpolate them, see <a href="#fig-multiSpline">Figure&nbsp;<span>3.2</span></a> for examples. Exactly one of these splines has the property that, in the leftmost and rightmost intervals, it is a straight line. Such a spline is called a <em>natural</em> cubic spline.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-multiSpline" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-multiSpline-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Cubic interpolating splines fitted to the coal-seam data, with the dashed lines showing extrapolation – the natural spline is shown in solid black.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.2: Cubic interpolating splines fitted to the coal-seam data, with the dashed lines showing extrapolation – the natural spline is shown in solid black.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Note that natural splines are not the only choice for the spline method – see the R help page for other options – with perhaps the most useful other being <span class="math inline">\(\texttt{periodic}\)</span> which can be considered if we expect the unknown function to also be periodic. <a href="#fig-spline-methods">Figure&nbsp;<span class="quarto-unresolved-ref">fig-spline-methods</span></a> shows the fitted natural and periodic spline fitted to a simulated <em>cosine</em> function. The only noticeable difference is outside the range of the data, that is for extrapolation. Great care should be used, however, as imposing such additional restrictions on the fitted function can lead to unforeseen modelling errors when we do not observe the full range of <span class="math inline">\(\texttt{x}\)</span> values.</p>
+<p>Note that natural splines are not the only choice for the spline method – see the R help page for other options – with perhaps the most useful other being <span class="math inline">\(\texttt{periodic}\)</span> which can be considered if we expect the unknown function to also be periodic. <a href="#fig-spline-methods">Figure&nbsp;<span>3.3</span></a> shows the fitted natural and periodic spline fitted to a simulated <em>cosine</em> function. The only noticeable difference is outside the range of the data, that is for extrapolation. Great care should be used, however, as imposing such additional restrictions on the fitted function can lead to unforeseen modelling errors when we do not observe the full range of <span class="math inline">\(\texttt{x}\)</span> values.</p>
 <div>
 <details>
 <summary>Code</summary>
@@ -318,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="fig-spline-methods-1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-spline-methods-1.png" class="img-fluid figure-img" data-ref-parent="fig-spline-methods" width="672"></p>
-<p></p><figcaption class="figure-caption">(a) Using method=“natural”</figcaption><p></p>
+<figcaption class="figure-caption">(a) Using method=“natural”</figcaption>
 </figure>
 </div>
 </div>
@@ -326,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="fig-spline-methods-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-spline-methods-2.png" class="img-fluid figure-img" data-ref-parent="fig-spline-methods" width="672"></p>
-<p></p><figcaption class="figure-caption">(b) Using method=“periodic”</figcaption><p></p>
+<figcaption class="figure-caption">(b) Using method=“periodic”</figcaption>
 </figure>
 </div>
 </div>
@@ -341,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Natural</em> splines are a special case of polynomial splines of <em>odd</em> order <span class="math inline">\(p\)</span>. Thus we have natural linear splines (<span class="math inline">\(p=1\)</span>), natural cubic splines (<span class="math inline">\(p=3\)</span>), etc. A spline is said to be <em>natural</em> if, beyond the boundary knots <span class="math inline">\(t_1\)</span> and <span class="math inline">\(t_{m}\)</span>, its <span class="math inline">\((p+1)/2\)</span> higher-order derivatives are zero: <span id="eq-natural-spline-property"><span class="math display">\[
 f^{(j)}(t) = 0,  
 \tag{3.1}\]</span></span> for <span class="math inline">\(j={(p+1)}/{2},\ldots,p\)</span> and either <span class="math inline">\(t \leq t_1\)</span> or <span class="math inline">\(t \geq t_m\)</span>.</p>
-<p>Thus a natural spline of order <span class="math inline">\(p\)</span> has the following <span class="math inline">\(p+1\)</span> constraints, in addition to those of <a href="#eq-smoothcons">Equation&nbsp;<span class="quarto-unresolved-ref">eq-smoothcons</span></a> : <span id="eq-natural-spline-constraint"><span class="math display">\[
+<p>Thus a natural spline of order <span class="math inline">\(p\)</span> has the following <span class="math inline">\(p+1\)</span> constraints, in addition to those of <a href="2_basicdefinitions.html#eq-smoothcons">Equation&nbsp;<span>2.2</span></a> : <span id="eq-natural-spline-constraint"><span class="math display">\[
 \lim _{\epsilon\rightarrow 0} f^{(\ell)}(t_1-\epsilon)
 =
 \lim _{\epsilon\rightarrow 0} f^{(\ell)}(t_m+\epsilon) =0,
@@ -359,7 +345,7 @@ f^{(j)}(t) = 0,
 \lim _{\epsilon\rightarrow 0} f^{(3)}(t_1-\epsilon) = \lim _{\epsilon\rightarrow 0} f^{(3)}(t_m+\epsilon) =0,
 \tag{3.4}\]</span></span> implying that <span class="math inline">\(f(t)\)</span> is linear in the outer intervals of a natural cubic spline.</li>
 </ul>
-<p>The total degrees of freedom of a natural spline is, starting from <a href="#eq-df">Equation&nbsp;<span class="quarto-unresolved-ref">eq-df</span></a>, but taking into account the additional <span class="math inline">\(p+1\)</span> additional constraints is <span id="eq-df-natural"><span class="math display">\[
+<p>The total degrees of freedom of a natural spline is, starting from <a href="2_basicdefinitions.html#eq-df">Equation&nbsp;<span>2.3</span></a>, but taking into account the additional <span class="math inline">\(p+1\)</span> additional constraints is <span id="eq-df-natural"><span class="math display">\[
 \text{df}_{\text{nat.spline}} = m+p+1 - (p+1) = m.
 \tag{3.5}\]</span></span> That is the degrees of freedom for natural splines equals <span class="math inline">\(m\)</span> whatever the value of <span class="math inline">\(p\)</span>.</p>
 <div id="prp-naturalSpline" class="proposition theorem proposition">
@@ -396,7 +382,7 @@ f(t) = a_0 + a_1 t + \sum_{i=1}^m b_i \left| t - t_i \right|^3;  \quad  \sum_{i=
 J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 \tag{3.8}\]</span></span> where <span class="math inline">\(\nu\geq 1\)</span> is an integer and <span class="math inline">\(f^{(\nu)}\)</span> denotes the <span class="math inline">\(\nu\)</span>th derivative of <span class="math inline">\(f\)</span>. Thus <span class="math inline">\(f^{(1)}(t)\)</span> denotes the first derivative and <span class="math inline">\(f^{(2)}(t)\)</span> denotes the second derivative of <span class="math inline">\(f\)</span>.</p>
 <p>Intuitively, roughness measures the “wiggliness” of a function.</p>
-<p>Aim might be to find the smoothest function which interpolates the data points. Hence, an alternative approach to that in previous sections is to find the function <span class="math inline">\(f\)</span> which minimizes <a href="#eq-jnuf">Equation&nbsp;<span class="quarto-unresolved-ref">eq-jnuf</span></a> and satisfies <span class="math inline">\(f(t_i)=y_i\)</span> for <span class="math inline">\(i=1,\dots,m\)</span>. We refer to the solutions of this problem as the <em>optimal interpolating function</em>.</p>
+<p>Aim might be to find the smoothest function which interpolates the data points. Hence, an alternative approach to that in previous sections is to find the function <span class="math inline">\(f\)</span> which minimizes <a href="#eq-jnuf">Equation&nbsp;<span>3.8</span></a> and satisfies <span class="math inline">\(f(t_i)=y_i\)</span> for <span class="math inline">\(i=1,\dots,m\)</span>. We refer to the solutions of this problem as the <em>optimal interpolating function</em>.</p>
 <p>It turns out that there is a very close link between <span class="math inline">\(J_\nu(\cdot)\)</span> and <span class="math inline">\(p\)</span>th-order natural splines, where <span class="math inline">\(p=2\nu-1\)</span> (so <span class="math inline">\(p\)</span> is odd). Important special cases are: <span class="math inline">\(\nu=1\)</span> and <span class="math inline">\(p=1\)</span>, and <span class="math inline">\(\nu=2\)</span> and <span class="math inline">\(p=3\)</span>. This relationship is defined in the following proposition.</p>
 <div id="prp-roughness" class="proposition theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 3.2 </strong></span>The optimal interpolating function is a <span class="math inline">\(p\)</span>th-order natural spline, where <span class="math inline">\(p = 2ν − 1\)</span>. That is, the natural spline <span class="math inline">\(f\)</span> is the unique minimizer of <span class="math inline">\(J_\nu(f)\)</span>.</p>
@@ -442,7 +428,7 @@ J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 <div id="fig-spline-commands-1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-spline-commands-1.png" class="img-fluid figure-img" data-ref-parent="fig-spline-commands" width="672"></p>
-<p></p><figcaption class="figure-caption">(a) Using the spline command</figcaption><p></p>
+<figcaption class="figure-caption">(a) Using the spline command</figcaption>
 </figure>
 </div>
 </div>
@@ -450,7 +436,7 @@ J_\nu(f) = \int_{-\infty}^\infty \left[ f^{(\nu)}(t) \right]^2 \text{d}t
 <div id="fig-spline-commands-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-spline-commands-2.png" class="img-fluid figure-img" data-ref-parent="fig-spline-commands" width="672"></p>
-<p></p><figcaption class="figure-caption">(b) Using the splinefun command</figcaption><p></p>
+<figcaption class="figure-caption">(b) Using the splinefun command</figcaption>
 </figure>
 </div>
 </div>
@@ -490,7 +476,7 @@ $y
 </div>
 <p><br>
 </p>
-<p>Before finishing, as we saw in Lecture 2, let us consider the derivatives of the fitted spline function. <a href="#fig-spline-derivatives">Figure&nbsp;<span class="quarto-unresolved-ref">fig-spline-derivatives</span></a> shows (a) the fitted natural spline, along with its first three derivatives in (b)-(d). Note that the function and the first two derivatives are continuous everywhere, but that the third derivatives is not continuous but has jumps at the knot locations. Note also that the first derivative, and higher derivatives, are all constant outside the range of the interior knots.</p>
+<p>Before finishing, as we saw in Lecture 2, let us consider the derivatives of the fitted spline function. <a href="#fig-spline-derivatives">Figure&nbsp;<span>3.5</span></a> shows (a) the fitted natural spline, along with its first three derivatives in (b)-(d). Note that the function and the first two derivatives are continuous everywhere, but that the third derivatives is not continuous but has jumps at the knot locations. Note also that the first derivative, and higher derivatives, are all constant outside the range of the interior knots.</p>
 <div>
 <details open="">
 <summary>Code</summary>
@@ -525,7 +511,7 @@ $y
 <div id="fig-spline-derivatives-1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-spline-derivatives-1.png" class="img-fluid figure-img" data-ref-parent="fig-spline-derivatives" width="672"></p>
-<p></p><figcaption class="figure-caption">(a) Data and spline function</figcaption><p></p>
+<figcaption class="figure-caption">(a) Data and spline function</figcaption>
 </figure>
 </div>
 </div>
@@ -533,7 +519,7 @@ $y
 <div id="fig-spline-derivatives-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-spline-derivatives-2.png" class="img-fluid figure-img" data-ref-parent="fig-spline-derivatives" width="672"></p>
-<p></p><figcaption class="figure-caption">(b) First derivative</figcaption><p></p>
+<figcaption class="figure-caption">(b) First derivative</figcaption>
 </figure>
 </div>
 </div>
@@ -543,7 +529,7 @@ $y
 <div id="fig-spline-derivatives-3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-spline-derivatives-3.png" class="img-fluid figure-img" data-ref-parent="fig-spline-derivatives" width="672"></p>
-<p></p><figcaption class="figure-caption">(c) Second derivative</figcaption><p></p>
+<figcaption class="figure-caption">(c) Second derivative</figcaption>
 </figure>
 </div>
 </div>
@@ -551,7 +537,7 @@ $y
 <div id="fig-spline-derivatives-4" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_interpolating_files/figure-html/fig-spline-derivatives-4.png" class="img-fluid figure-img" data-ref-parent="fig-spline-derivatives" width="672"></p>
-<p></p><figcaption class="figure-caption">(d) Third derivative</figcaption><p></p>
+<figcaption class="figure-caption">(d) Third derivative</figcaption>
 </figure>
 </div>
 </div>
@@ -580,12 +566,12 @@ $y
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-exercises2"><span class="header-section-number">3.6</span> Exercises</h2>
 <p><strong>Hints and solutions will be added next week.</strong></p>
 <div class="exercises">
-<p>3.1 For the situation shown in <a href="#fig-piecewise-cubic">Figure&nbsp;<span class="quarto-unresolved-ref">fig-piecewise-cubic</span></a>, but taking <span class="math inline">\(p=1\)</span>, write-down the linear functions for the three intervals and clearly identify all the <span class="math inline">\(6\)</span> model parameters. Next, write down the constraints required to make the functions pass through the <span class="math inline">\(m=2\)</span> data points, and the two constraints which impose continuity of function. What additional constraints are needed to fix the first derivative at zero for the outer two intervals?</p>
+<p>3.1 For the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1\)</span>, write-down the linear functions for the three intervals and clearly identify all the <span class="math inline">\(6\)</span> model parameters. Next, write down the constraints required to make the functions pass through the <span class="math inline">\(m=2\)</span> data points, and the two constraints which impose continuity of function. What additional constraints are needed to fix the first derivative at zero for the outer two intervals?</p>
 <p>3.2 Continuing the problem described in Exercise 3.1, write the constraints as a system of 6 linear equations in the 6 unknown model parameters. How might you solve this system to give the parameter values which solve the interpolation problem?</p>
 <p>3.3 Continuing the linear system described in Exercise 3.2, create a synthetic problem by choosing two data response values. Then solve the system in <span class="math inline">\({\mathbf R}\)</span>, or otherwise, and plot the fitted spline interpolating function.</p>
-<p>3.4 Again, considering the situation shown in <a href="#fig-piecewise-cubic">Figure&nbsp;<span class="quarto-unresolved-ref">fig-piecewise-cubic</span></a>, but taking <span class="math inline">\(p=1.\)</span> Using the alternative representation in <a href="#eq-naturalSplineLinear">Equation&nbsp;<span class="quarto-unresolved-ref">eq-naturalSplineLinear</span></a>, write down two constraints involving the data points and the additional constraint on the <span class="math inline">\(b_i\)</span> parameters. Write this linear system of 3 equations in three unknowns in matrix form.</p>
+<p>3.4 Again, considering the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1.\)</span> Using the alternative representation in <a href="#eq-naturalSplineLinear">Equation&nbsp;<span>3.6</span></a>, write down two constraints involving the data points and the additional constraint on the <span class="math inline">\(b_i\)</span> parameters. Write this linear system of 3 equations in three unknowns in matrix form.</p>
 <p>3.5 Continuing the linear system described in Exercise 3.4, using the same points created in Exercise 3.4, calculate the parameter values in this new parameterization. Check that your two fitted interpolating spline give the same answers. Which approach do you prefer? Justify you answer.</p>
-<p>3.6 Create you own version of the R code used to produce <a href="#fig-spline-commands">Figure&nbsp;<span class="quarto-unresolved-ref">fig-spline-commands</span></a> and experiment with the two alternative spline fitting commands. Remove the <span class="math inline">\(\texttt{set.seed(15342)}\)</span> command so that you produce different data each time and comment on the similarities and differences when using different data sets.</p>
+<p>3.6 Create you own version of the R code used to produce <a href="#fig-spline-commands">Figure&nbsp;<span>3.4</span></a> and experiment with the two alternative spline fitting commands. Remove the <span class="math inline">\(\texttt{set.seed(15342)}\)</span> command so that you produce different data each time and comment on the similarities and differences when using different data sets.</p>
 <p>3.7 Let <span class="math display">\[\begin{equation*}
      f(t) = 3 + 2t + 4|t|^3 + |t-1|^3.
 \end{equation*}\]</span> Write <span class="math inline">\(f\)</span> as a cubic polynomial in each of the intervals <span class="math inline">\((-\infty,0)\)</span>, <span class="math inline">\((0,1)\)</span> and <span class="math inline">\((1, \infty)\)</span>. Verify that <span class="math inline">\(f\)</span> and its first two derivatives are continuous at the knots.</p>
@@ -836,9 +822,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -903,6 +903,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
