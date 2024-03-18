@@ -531,7 +531,6 @@ L_\nu^T &amp; K_\nu+\lambda^* I_n
 </section>
 <section id="exercies" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="exercies"><span class="header-section-number">4.6</span> Exercies</h2>
-<p>Hints and solutions to be added later.</p>
 <div class="webex-box">
 <p>4.1 Recall, from MATH3823 Chapter 3, the tropical cyclone data recording the number of cyclones in each of 13 seasons:</p>
 <div id="tbl-cyclone-data" class="anchored">
@@ -590,17 +589,40 @@ L_\nu^T &amp; K_\nu+\lambda^* I_n
 </table>
 </div>
 <p>It is reasonable to allow the average number of cyclones to vary with season, rather than assuming a constant rate.</p>
-<p>Fit a cubic smoothing spline to these data, using a range of values for the smoothing parameter <span class="math inline">\(\lambda\)</span> to estimate the time-varying cyclone rate. By eye, suggest a suitable value for <span class="math inline">\(\lambda\)</span> and justify your choice. Compare the smoothed estimate of rate with the value obtain by assuing a constant rate.</p>
+Fit a cubic smoothing spline to these data, using a range of values for the smoothing parameter <span class="math inline">\(\lambda\)</span> to estimate the time-varying cyclone rate. By eye, suggest a suitable value for <span class="math inline">\(\lambda\)</span> and justify your choice. Compare the smoothed estimate of rate with the value obtain by assuming a constant rate.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>Follow the R code used in Section 4.5 but don’t worry about finding an exact value for the smoothing parameter, only the order of magnitude.</p>
+</div>
 <p>4.2 Consider the <em>Old Faithful</em> data set on geyser eruptions available in R. Use the following commands to learn more about and visualize the data:</p>
 <pre><code>data(faithful)   
 help(faithful)  
 plot(faithful) </code></pre>
 <p>Fit a cubic smoothing spline to these data, using a range of values for the smoothing parameter <span class="math inline">\(\lambda\)</span>. By eye, suggest a suitable value for <span class="math inline">\(\lambda\)</span>.</p>
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>Taking waiting as the explanatory and eruption as the response, follow the R code used in Section 4.5 but don’t worry about finding an exact value for the smoothing parameter, only the order of magnitude.</p>
 </div>
-<!--
-::: {.callout-note appearance="default"}
-[Exercise 4 Solutions can be found here.](https://rgaykroyd.github.io/MATH5824/Solutions_4.html)
--->
+</div>
+<p><br>
+</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://rgaykroyd.github.io/MATH5824/Solutions_4.html">Exercise 4 Solutions can be found here.</a></p>
+</div>
+</div>
 
 
 </section>
