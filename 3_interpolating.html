@@ -564,25 +564,87 @@ $y
 </section>
 <section id="sec-exercises2" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-exercises2"><span class="header-section-number">3.6</span> Exercises</h2>
-<p><strong>Hints and solutions will be added next week.</strong></p>
 <div class="exercises">
-<p>3.1 For the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1\)</span>, write-down the linear functions for the three intervals and clearly identify all the <span class="math inline">\(6\)</span> model parameters. Next, write down the constraints required to make the functions pass through the <span class="math inline">\(m=2\)</span> data points, and the two constraints which impose continuity of function. What additional constraints are needed to fix the first derivative at zero for the outer two intervals?</p>
-<p>3.2 Continuing the problem described in Exercise 3.1, write the constraints as a system of 6 linear equations in the 6 unknown model parameters. How might you solve this system to give the parameter values which solve the interpolation problem?</p>
-<p>3.3 Continuing the linear system described in Exercise 3.2, create a synthetic problem by choosing two data response values. Then solve the system in <span class="math inline">\({\mathbf R}\)</span>, or otherwise, and plot the fitted spline interpolating function.</p>
-<p>3.4 Again, considering the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1.\)</span> Using the alternative representation in <a href="#eq-naturalSplineLinear">Equation&nbsp;<span>3.6</span></a>, write down two constraints involving the data points and the additional constraint on the <span class="math inline">\(b_i\)</span> parameters. Write this linear system of 3 equations in three unknowns in matrix form.</p>
-<p>3.5 Continuing the linear system described in Exercise 3.4, using the same points created in Exercise 3.4, calculate the parameter values in this new parameterization. Check that your two fitted interpolating spline give the same answers. Which approach do you prefer? Justify you answer.</p>
-<p>3.6 Create you own version of the R code used to produce <a href="#fig-spline-commands">Figure&nbsp;<span>3.4</span></a> and experiment with the two alternative spline fitting commands. Remove the <span class="math inline">\(\texttt{set.seed(15342)}\)</span> command so that you produce different data each time and comment on the similarities and differences when using different data sets.</p>
+3.1 For the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1\)</span>, write-down the linear functions for the three intervals and clearly identify all the <span class="math inline">\(6\)</span> model parameters. Next, write down the constraints required to make the functions pass through the <span class="math inline">\(m=2\)</span> data points, and the two constraints which impose continuity of function. What additional constraints are needed to fix the first derivative at zero for the outer two intervals?
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>You might get two redundant constraints but think carefully about which can be removed.</p>
+</div>
+3.2 Continuing the problem described in Exercise 3.1, write the constraints as a system of 6 linear equations in the 6 unknown model parameters. How might you solve this system to give the parameter values which solve the interpolation problem?
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>You need to write the six equations as a set of simultaneous equations. A simple matrix inversion is all that is needed for the solution – but don’t try to actually do the inversion!</p>
+</div>
+3.3 Continuing the linear system described in Exercise 3.2, create a synthetic problem by choosing two data response values. Then solve the system in <span class="math inline">\({\mathbf R}\)</span>, or otherwise, and plot the fitted spline interpolating function.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>The choice of the two data point locations (x-values) and function value (y-value) is completely your choice. Then, define the two vectors and the matrix defined in the previous question. R has a function “solve” which will invert the design matrix – look at “help(solve)”</p>
+</div>
+3.4 Again, considering the situation shown in <a href="2_basicdefinitions.html#fig-piecewise-cubic">Figure&nbsp;<span>2.2</span></a>, but taking <span class="math inline">\(p=1.\)</span> Using the alternative representation in <a href="#eq-naturalSplineLinear">Equation&nbsp;<span>3.6</span></a>, write down two constraints involving the data points and the additional constraint on the <span class="math inline">\(b_i\)</span> parameters. Write this linear system of 3 equations in three unknowns in matrix form.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>The first part only requires checking the definition of the alternative form in the notes. Then, write it in vector/matrix form.</p>
+</div>
+3.5 Continuing the linear system described in Exercise 3.4, using the same points created in Exercise 3.4, calculate the parameter values in this new parameterization. Check that your two fitted interpolating spline give the same answers. Which approach do you prefer? Justify you answer.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>Again, in R, define the vectors and matrix, and use “solve” to find the parameter estimates. You can check for equality by any approach, for example just plot both solutions and see if they match. The choice of which it preferable is yours, no wrong answer, but it’s the justification that matters.</p>
+</div>
+3.6 Create you own version of the R code used to produce <a href="#fig-spline-commands">Figure&nbsp;<span>3.4</span></a> and experiment with the two alternative spline fitting commands. Remove the <span class="math inline">\(\texttt{set.seed(15342)}\)</span> command so that you produce different data each time and comment on the similarities and differences when using different data sets.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>Simply copy the code from the referred to figure and remove the set.seed command. Then, each time you run the code you will get a different answer.</p>
+</div>
 <p>3.7 Let <span class="math display">\[\begin{equation*}
      f(t) = 3 + 2t + 4|t|^3 + |t-1|^3.
 \end{equation*}\]</span> Write <span class="math inline">\(f\)</span> as a cubic polynomial in each of the intervals <span class="math inline">\((-\infty,0)\)</span>, <span class="math inline">\((0,1)\)</span> and <span class="math inline">\((1, \infty)\)</span>. Verify that <span class="math inline">\(f\)</span> and its first two derivatives are continuous at the knots.</p>
-<p>Is <span class="math inline">\(f\)</span> a spline? Is <span class="math inline">\(f\)</span> a natural spline?</p>
+Is <span class="math inline">\(f\)</span> a spline? Is <span class="math inline">\(f\)</span> a natural spline?
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>To show this is a spline, you need to re-write the equations as polynomials. That is consider what happens to the absolute values in each interval. Then, substitute in the knot locations (0 and 1) into the equations for function, derivative and second derivative and make sure all matches. There is also a solution based on the equation of the alternative form – see if you can argue it this way also.</p>
+</div>
 <p>3.8 Let <span class="math display">\[\begin{equation*}
      f(t) = 3 + |t| - |t-2|.
 \end{equation*}\]</span></p>
 <p>Show by direct calculation that <span class="math display">\[\begin{equation*}
      \int_{-\infty}^{\infty} \{f'(t)\}^2 \, dt = 8.
    \end{equation*}\]</span></p>
-<p>Show that this integral can also be written in the form <span class="math inline">\(-2 \mathbf b^T K \mathbf b\)</span>, where you should define <span class="math inline">\(\mathbf b\)</span> and <span class="math inline">\(K\)</span>.</p>
+Show that this integral can also be written in the form <span class="math inline">\(-2 \mathbf b^T K \mathbf b\)</span>, where you should define <span class="math inline">\(\mathbf b\)</span> and <span class="math inline">\(K\)</span>.
+<div class="webex-solution">
+<button>
+Click here to see hints.
+</button>
+<p>Use a similar approach as in the previous equation to “remove” the absolute value. You should then see that the integral is trivial. For the matrix form, go back to the definitions of each part. Multiplying out will then give the same answer as the integral.</p>
+</div>
+</div>
+<p><br>
+</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://rgaykroyd.github.io/MATH5824/Solutions_3.html">Exercise 3 Solutions can be found here.</a></p>
+</div>
 </div>
 
 
