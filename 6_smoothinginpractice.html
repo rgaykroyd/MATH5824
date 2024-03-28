@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -90,7 +90,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -112,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./6_smoothinginpractice.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -219,6 +220,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<p><br>
+</p>
+<p>Here is a short video [4 mins] to introduce the chapter.</p>
+<iframe title="MATH5824 Chapter 6 video" width="450" height="253" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" src="https://mymedia.leeds.ac.uk/Mediasite/Play/7dfb19bf80f74269bace12b71d88d7041d" allowfullscreen="" msallowfullscreen="" allow="fullscreen">
+</iframe>
 <section id="overview" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">6.1</span> Overview</h2>
 <p>So far, we have considered the modelling of a response variable <span class="math inline">\(y\)</span> in terms of a single response variable <span class="math inline">\(x\)</span>. In particular, we have assumed that the form of this relationship is unknown but can be written as <span class="math display">\[
@@ -298,11 +304,13 @@ D({\mathbf y}, {\mathbf f}, \boldsymbol{\beta})  + \sum_{h=1}^m \lambda_h J_\nu(
 </section>
 <section id="coronary-heart-disease-chd-in-south-africa" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="coronary-heart-disease-chd-in-south-africa"><span class="header-section-number">6.4</span> Coronary heart disease (CHD) in South Africa</h2>
-<p>The textbook <em>Elements of Statistical Learning</em>, by Hastie, Tibshirani and Friedman (2nd Edn, 2011), refers to a case–control study of coronary heart disease (CHD) in South Africa. The data are available from the authors’ website, and may be read directly into <strong>R</strong> with the command:</p>
+<p>The textbook <em>Elements of Statistical Learning</em>, by Hastie, Tibshirani and Friedman (2nd Edn, 2011), refers to a case–control study of coronary heart disease (CHD) in South Africa. <!--
+The data are available from the authors' website, and may be read directly into **R** with the command:
+---></p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hr <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"http://www-stat.stanford.edu/~tibs/ElemStatLearn/datasets/SAheart.data"</span>, <span class="at">sep=</span><span class="st">","</span>,<span class="at">head=</span>T,<span class="at">row.names=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hr <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"https://rgaykroyd.github.io/MATH5824/Datasets/SAheart.txt"</span>, <span class="at">sep=</span><span class="st">","</span>,<span class="at">head=</span>T,<span class="at">row.names=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <table class="table">
@@ -353,10 +361,6 @@ D({\mathbf y}, {\mathbf f}, \boldsymbol{\beta})  + \sum_{h=1}^m \lambda_h J_\nu(
 Call:
 glm(formula = "chd~tobacco+age+famhist", family = "binomial")
 
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--1.8399  -0.8784  -0.4705   0.9698   2.3876  
-
 Coefficients:
                 Estimate Std. Error z value Pr(&gt;|z|)    
 (Intercept)    -3.620593   0.444576  -8.144 3.83e-16 ***
@@ -385,7 +389,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <pre><code>Loading required package: nlme</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>This is mgcv 1.8-41. For overview type 'help("mgcv-package")'.</code></pre>
+<pre><code>This is mgcv 1.9-0. For overview type 'help("mgcv-package")'.</code></pre>
 </div>
 <details open="">
 <summary>Code</summary>
@@ -458,6 +462,20 @@ UBRE = 0.083268  Scale est. = 1         n = 462</code></pre>
 </div>
 </div>
 <p>The predicted dependence of the logit probability of CHD on smooth functions of age and tobacco consumption is shown above. We see an almost linear predicted age-dependence, in agreement with its edf. The curious predicted dependence on tobacco consumption might be explained by other factors correlated with tobacco consumption.</p>
+<!--
+## Exercise
+
+
+::: {.webex-box}
+6.1
+
+:::
+
+
+
+::: {.callout-note appearance="default"}
+[Exercise 6 Solutions can be found here.](https://rgaykroyd.github.io/MATH5824/Solutions_6.html)
+-->
 
 
 </section>

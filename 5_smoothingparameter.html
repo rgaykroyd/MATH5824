@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./6_smoothinginpractice.html" rel="next">
 <link href="./4_smoothing.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -141,6 +142,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6_smoothinginpractice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span></a>
   </div>
 </li>
     </ul>
@@ -312,15 +319,15 @@ Q_{GCV}(\lambda) = \frac{ \frac{1}{n} \sum_{j=1}^n \left(y_j - \hat{f}_{\lambda}
 \tag{5.7}\]</span></span> Thus <a href="#eq-gcv">Equation&nbsp;<span>5.7</span></a> replaces <span class="math inline">\(s_{jj}\)</span> in <a href="#eq-ocv">Equation&nbsp;<span>5.6</span></a> with the average of the diagonal elements of <span class="math inline">\(S_\lambda\)</span>, which equals <span class="math inline">\(\tfrac{1}{n}\text{edf}_\lambda\)</span>. Thus a low value of <span class="math inline">\(\text{edf}_\lambda\)</span> will deflate <span class="math inline">\(Q_{GCV}(\lambda)\)</span>, making that value of <span class="math inline">\(\lambda\)</span> more favourable.</p>
 <p>In principle, OCV supplants GCV, but GCV is still used as it is numerically more stable. In particular, GCV is used in the <span class="math inline">\(\texttt{mgcv}\)</span> package – this will be discussed in the next chapter.</p>
 <!--
-## Exercies
-
-To be added later.
+## Exercise
 
 ::: {.webex-box}
 5.1
+
 :::
--->
-<!--
+
+
+
 ::: {.callout-note appearance="default"}
 [Exercise 5 Solutions can be found here.](https://rgaykroyd.github.io/MATH5824/Solutions_5.html)
 -->
@@ -775,6 +782,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./6_smoothinginpractice.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
