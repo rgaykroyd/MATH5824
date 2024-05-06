@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MATH3823 Generalized Linear Models - Overview</title>
+<title>MATH5824 Generalised Linear and Additive Models - Overview</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./1_intro.html" rel="next">
+<link href="./1_introduction.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">MATH3823 Generalized Linear Models</a> 
+      <a href="./">MATH5824 Generalised Linear and Additive Models</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -114,44 +114,38 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  <a href="./1_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_linearmodels.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Essentials of Normal Linear Models</span></span></a>
+  <a href="./2_basicdefinitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Splines</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_GLM-Theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">GLM Theory</span></span></a>
+  <a href="./3_interpolating.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interpolating Splines</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_GLM-Fitting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">GLM Estimation</span></span></a>
+  <a href="./4_smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Smoothing Splines</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_logisticmodel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modelling Proportions</span></span></a>
+  <a href="./5_smoothingparameter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choosing the Smoothing Parameter</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_loglinearmodel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Loglinear Models</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./7_extendedloglinearmodel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Extensions to Loglinear models</span></span></a>
+  <a href="./6_smoothinginpractice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">General Additive Models</span></span></a>
   </div>
 </li>
     </ul>
@@ -164,8 +158,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a></li>
-  <li><a href="#preface" id="toc-preface" class="nav-link" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
   <li><a href="#changes-since-last-year" id="toc-changes-since-last-year" class="nav-link" data-scroll-target="#changes-since-last-year">Changes since last year</a></li>
   <li><a href="#generative-ai-usage-within-this-module" id="toc-generative-ai-usage-within-this-module" class="nav-link" data-scroll-target="#generative-ai-usage-within-this-module">Generative AI usage within this module</a></li>
   <li><a href="#official-module-description" id="toc-official-module-description" class="nav-link" data-scroll-target="#official-module-description">Official Module Description</a>
@@ -183,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-preface" class="quarto-section-identifier">Overview</span></h1>
+<h1 class="title">Overview</h1>
 </div>
 
 
@@ -198,16 +191,10 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="welcome" class="level2">
-<h2 class="anchored" data-anchor-id="welcome">Welcome!</h2>
-<p>Here is a short video [4 mins] to introduce the module.</p>
-<iframe title="MATH3823 Welcome video" width="450" height="253" frameborder="0" scrolling="auto" marginheight="0" marginwidth="0" src="https://mymedia.leeds.ac.uk/Mediasite/Play/88bb4f7ae4bd4a75980c59fead11e8f11d" allowfullscreen="" msallowfullscreen="" allow="fullscreen">
-</iframe>
-</section>
 <section id="preface" class="level2">
 <h2 class="anchored" data-anchor-id="preface">Preface</h2>
-<p>These lecture notes are produced for the University of Leeds module <em>MATH3823 - Generalized Linear Models</em> for the academic year 2023-24. Please note that this material also forms part of the module <em>MATH5824 - Generalized Linear and Additive Models</em>. They are based on the lecture notes used previously for this module and I am grateful to previous module lecturers for their considerable effort: Lanpeng Ji, Amanda Minter, John Kent, Wally Gilks, and Stuart Barber. This year, again, I am using <a href="https://quarto.org/docs/tools/rstudio.html">Quarto</a> (a successor to RMarkdown) from <a href="https://posit.co/">RStudio</a> to produce both the html and PDF, and then <a href="https://github.com/">GitHub</a> to create the website which can be accessed at <a href="rgaykroyd.github.io/MATH3823/">rgaykroyd.github.io/MATH3823/</a>. Please note that the PDF versions will only be made available on the University of Leeds Minerva system. Although I am a long-term user of RStudio, I am a novice at Quarto/RMarkdown and a complete beginner using Github and hence please be patient if there are hitches along the way.</p>
-<p>RG Aykroyd, Leeds, January 3, 2024</p>
+<p>These lecture notes are produced for the University of Leeds module “MATH5824 - Generalized Linear and Additive Models” for the academic year 2023-24. They are based on the lecture notes used previously for this module and I am grateful to previous module lecturers for their considerable effort: Lanpeng Ji, Amanda Minter, John Kent, Wally Gilks, and Stuart Barber. This year, again, I am using <a href="https://quarto.org/docs/tools/rstudio.html">Quarto</a> (a successor to RMarkdown) from <a href="https://posit.co/">RStudio</a> to produce both the html and PDF, and then <a href="https://github.com/">GitHub</a> to create the website which can be accessed at <a href="rgaykroyd.github.io/MATH5824/">rgaykroyd.github.io/MATH5824/</a>. Please note that the PDF versions will only be made available on the University of Leeds Minerva system. Although I am a long-term user of RStudio, I am a novice at Quarto/RMarkdown and a complete beginner using Github and hence please be patient if there are hitches along the way.</p>
+<p>RG Aykroyd, Leeds, January 22, 2024</p>
 <p><br>
 </p>
 </section>
@@ -243,26 +230,27 @@ Warning
 <h1 class="unnumbered">Official Module Description</h1>
 <section id="module-summary" class="level2">
 <h2 class="anchored" data-anchor-id="module-summary">Module summary</h2>
-<p>Linear regression is a tremendously useful statistical technique but is very limited. Generalised linear models extend linear regression in many ways - allowing us to analyse more complex data sets. In this module we will see how to combine continuous and categorical predictors, analyse binomial response data and model count data.</p>
+<p>Linear regression is a tremendously useful statistical technique but is limited to normally distributed responses. Generalised linear models extend linear regression in many ways - allowing us to analyse more complex data sets. In this module we will see how to combine continuous and categorical predictors, analyse binomial response data and model count data.A further extension is the generalised additive model. Here, we no longer insist on the predictor variables affecting the response via a linear function of the predictors, but allow the response to depend on a more general smooth function of the predictor.</p>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>On completion of this module, students should be able to:</p>
-<ol type="a">
-<li>carry out regression analysis with generalised linear models including the use of link functions;</li>
-<li>understand the use of deviance in model selection;</li>
-<li>appreciate the problems caused by overdispersion;</li>
+<ul>
+<li>carry out regression analysis with generalised linear models including the use of link functions, deviance and overdispersion;</li>
 <li>fit and interpret the special cases of log linear models and logistic regression;</li>
+<li>compare a number of methods for scatterpot smoothing suitable for use in a generalised additive model;</li>
+<li>use a backfitting algorithm to estimate the parameters of a generalised additive model;</li>
+<li>interpret a fitted generalised additive model;</li>
 <li>use a statistical package with real data to fit these models to data and to write a report giving and interpreting the results.</li>
-</ol>
+</ul>
 </section>
 <section id="syllabus" class="level2">
 <h2 class="anchored" data-anchor-id="syllabus">Syllabus</h2>
-<p>Generalised linear model; probit model; logistic regression; log linear models.</p>
+<p>Generalised linear model; probit model; logistic regression; log linear models; scatterplot smoothers; generalised additive model.</p>
 </section>
 <section id="university-module-catalogue" class="level2">
 <h2 class="anchored" data-anchor-id="university-module-catalogue">University Module Catalogue</h2>
-<p>For any further details, please see <a href="https://webprod3.leeds.ac.uk/catalogue/dynmodules.asp?Y=202324&amp;M=MATH-3823">MATH3823 Module Catalogue page</a></p>
+<p>For any further details, please see <a href="https://webprod3.leeds.ac.uk/catalogue/dynmodules.asp?Y=202324&amp;M=MATH-5824M">MATH5824 Module Catalogue page</a></p>
 
 
 </section>
@@ -715,8 +703,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./1_intro.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./1_introduction.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Non-parametric Modelling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
